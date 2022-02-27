@@ -26,8 +26,7 @@ Forgot password: (harder)
 
 ### [Widget Tests:](https://docs.flutter.dev/testing#widget-tests)
 - Test for all the social buttons, textboxes, our own sign-in, sign-up/ create account, forgot password
-- ![Screenshot 2022-02-27 at 11.55.13 AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/bb2486ca-1de8-4869-808a-5ed0feeb093c/Screenshot_2022-02-27_at_11.55.13_AM.png)
-- ![Screenshot 2022-02-27 at 11.55.33 AM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d925d865-eb9b-4760-b779-0a941b048710/Screenshot_2022-02-27_at_11.55.33_AM.png)
+- Example Screenshots on Notion
 
 
 
