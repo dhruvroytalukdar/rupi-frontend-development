@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+// A single widget that implements the social login button
 class SocialButton extends StatelessWidget {
 
+  // Class Attributes
   final String text;
   final String iconAddr;
   final Color primaryColor;
