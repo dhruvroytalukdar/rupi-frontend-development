@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/components/welcome_screen/social_button.dart';
 
 // Login Section is the outer wrapper of all the text widgets, textfields and buttons
 class LoginSection extends StatelessWidget {

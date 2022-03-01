@@ -33,9 +33,9 @@ class ContentSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height:45),
-          const SocialButton(text: "Login with Facebook", iconAddr: "assets/icons/facebook.png", primaryColor: Color(0xff3b5998), textColor: Colors.white),
+          const SocialButton(button_key:Key("facebook_login_button"),text: "Login with Facebook", iconAddr: "assets/icons/facebook.png", primaryColor: Color(0xff3b5998), textColor: Colors.white),
           const SizedBox(height:20),
-          const SocialButton(text: "Login with Google", iconAddr: "assets/icons/google.jpg", primaryColor: Colors.white, textColor: Colors.black),
+          const SocialButton(button_key:Key("google_login_button"),text: "Login with Google", iconAddr: "assets/icons/google.jpg", primaryColor: Colors.white, textColor: Colors.black),
           const SizedBox(height:20),
           OutlinedButton(
             key: const Key("email_password_button"),
@@ -64,6 +64,7 @@ class ContentSection extends StatelessWidget {
             ),
           ),
           TextButton(
+            key:const Key("create_account_button"),
             child: const Text("Create Account",
               style: TextStyle(
                 color:Colors.white,

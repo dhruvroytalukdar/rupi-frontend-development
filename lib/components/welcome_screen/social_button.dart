@@ -8,17 +8,19 @@ class SocialButton extends StatelessWidget {
   final String iconAddr;
   final Color primaryColor;
   final Color textColor;
+  final Key button_key;
 
-  const SocialButton({Key? key,required this.text,required this.iconAddr,required this.primaryColor,required this.textColor}) : super(key:key);
+  const SocialButton({Key? key,required this.button_key,required this.text,required this.iconAddr,required this.primaryColor,required this.textColor}) : super(key:key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width:double.infinity,
       height:40,
       child:Padding(
         padding: const EdgeInsets.symmetric(horizontal: 60.0),
         child: ElevatedButton.icon(
+          key: button_key,
           label:Padding(
             padding: const EdgeInsets.only(left:15.0),
             child: Text(text,
