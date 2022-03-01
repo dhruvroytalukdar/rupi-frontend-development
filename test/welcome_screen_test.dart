@@ -5,7 +5,7 @@ import 'package:frontend/components/welcome_screen/content_section.dart';
 void main(){
   testWidgets('Welcome text widget are showing correctly or not.', (WidgetTester tester) async {
     // Get the widget
-    final welcomeText = find.text("Welcome");
+    final welcomeText = find.byKey(const Key("email_password_button"));
 
     // Execute the tests
     await tester.pumpWidget(const MaterialApp(home:ContentSection()));

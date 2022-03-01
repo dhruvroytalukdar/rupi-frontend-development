@@ -38,6 +38,7 @@ class ContentSection extends StatelessWidget {
           const SocialButton(text: "Login with Google", iconAddr: "assets/icons/google.jpg", primaryColor: Colors.white, textColor: Colors.black),
           const SizedBox(height:20),
           OutlinedButton(
+            key: const Key("email_password_button"),
               onPressed: (){},
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: Colors.white),
