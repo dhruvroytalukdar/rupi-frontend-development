@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/components/welcome_screen/social_button.dart';
 
-// Content Section is the outer wrapper of all the text widgets and buttons
+// Login Section is the outer wrapper of all the text widgets and buttons
 class LoginSection extends StatelessWidget {
   const LoginSection({Key? key}) : super(key: key);
 
