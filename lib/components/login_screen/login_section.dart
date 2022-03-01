@@ -49,6 +49,7 @@ class LoginSection extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15.0),
                     child: TextField(
+                      key: Key('email'),
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         hintText: 'abc@example.com',
@@ -68,6 +69,7 @@ class LoginSection extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15.0),
                     child: TextField(
+                      key: Key('password'),
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
                       decoration: InputDecoration(
