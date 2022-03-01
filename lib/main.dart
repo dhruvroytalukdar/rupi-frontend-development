@@ -19,7 +19,11 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Roboto',
         primarySwatch: Colors.blue,
       ),
-      home: const LoginScreen(),
+      initialRoute: '/home',
+      routes: {
+        '/home': (context) => const WelcomeScreen(),
+        '/login':(context)=> const LoginScreen(),
+      },
     );
   }
 }

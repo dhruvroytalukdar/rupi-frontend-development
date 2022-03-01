@@ -5,8 +5,13 @@ import 'package:frontend/components/welcome_screen/social_button.dart';
 class ContentSection extends StatelessWidget {
   const ContentSection({Key? key}) : super(key: key);
 
+  void changeScreen(BuildContext context,String routeName){
+    Navigator.pushNamed(context, routeName);
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return SizedBox(
 
       // This will make the sizedBox extend upto 100% of screen width and height
@@ -39,7 +44,9 @@ class ContentSection extends StatelessWidget {
           const SizedBox(height:20),
           OutlinedButton(
             key: const Key("email_password_button"),
-              onPressed: (){},
+              onPressed: (){
+                changeScreen(context, '/login');
+              },
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: Colors.white),
                 shape:RoundedRectangleBorder(
