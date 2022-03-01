@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/components/welcome_screen/social_button.dart';
 
-// Login Section is the outer wrapper of all the text widgets and buttons
+// Login Section is the outer wrapper of all the text widgets, textfields and buttons
 class LoginSection extends StatelessWidget {
   const LoginSection({Key? key}) : super(key: key);
 
@@ -49,6 +49,7 @@ class LoginSection extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15.0),
                     child: TextField(
+                      key: Key('email'),
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         hintText: 'abc@example.com',
@@ -68,6 +69,7 @@ class LoginSection extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15.0),
                     child: TextField(
+                      key: Key('password'),
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
                       decoration: InputDecoration(
