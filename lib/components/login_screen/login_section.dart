@@ -76,6 +76,7 @@ class LoginSection extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
+                    key: const Key('continue_test'),
                     onTap: (){},
                     child: Container(
                       decoration: const BoxDecoration(
