@@ -55,7 +55,7 @@ class ContentSection extends StatelessWidget {
               ),
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.0),
-                child: Text("Login using email/phone number",
+                child: Text("Login using email",
                   style: TextStyle(
                     color:Colors.white,
                     fontSize: 14.5,

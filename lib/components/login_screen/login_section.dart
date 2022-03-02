@@ -73,7 +73,7 @@ class LoginSection extends StatelessWidget {
                       const Padding(
                         padding: EdgeInsets.fromLTRB(15,8,15,2),
                         child: Text(
-                          "EMAIL/PHONE NUMBER",
+                          "EMAIL",
                           style: TextStyle(
                             fontSize: 17.0,
                             color: Colors.grey,
