@@ -32,7 +32,7 @@ Forgot password: (harder)
 
 ## Welcome Screen
 
-![WhatsApp Image 2022-03-02 at 9.56.14 PM.jpeg](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4b9a4f21-6b48-4f5a-b94d-1a8890fb3f54/WhatsApp_Image_2022-03-02_at_9.56.14_PM.jpeg)
+![WhatsApp Image 2022-03-02 at 9 56 14 PM](https://user-images.githubusercontent.com/64345884/156404903-03a374aa-66c0-49d9-87c1-de02ab31a0aa.jpeg)
 
 ### Testing the Widgets:
 
@@ -48,7 +48,7 @@ Forgot password: (harder)
 
 ## Login Screen
 
-![WhatsApp Image 2022-03-02 at 9.40.18 PM (1).jpeg](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/382940ec-32a9-41a0-990c-8c6712e48e70/WhatsApp_Image_2022-03-02_at_9.40.18_PM_(1).jpeg)
+![WhatsApp Image 2022-03-02 at 9 40 18 PM (1)](https://user-images.githubusercontent.com/64345884/156405846-dec55e2e-8030-49b7-99c2-6b8e2b191e72.jpeg)
 
 ### Testing the Widgets:
 
