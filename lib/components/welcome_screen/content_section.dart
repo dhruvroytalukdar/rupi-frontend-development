@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/components/welcome_screen/social_button.dart';
+import 'package:frontend/utils/login_utils.dart';
 
 // Content Section is the outer wrapper of all the text widgets and buttons
 class ContentSection extends StatelessWidget {
@@ -11,6 +13,8 @@ class ContentSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    FirebaseAuth auth = FirebaseAuth.instance;
 
     return SizedBox(
 
@@ -38,9 +42,9 @@ class ContentSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height:45),
-          const SocialButton(button_key:Key("facebook_login_button"),text: "Login with Facebook", iconAddr: "assets/icons/facebook.png", primaryColor: Color(0xff3b5998), textColor: Colors.white),
+          const SocialButton(login_function:signInWithFacebook,button_key:Key("facebook_login_button"),text: "Login with Facebook", iconAddr: "assets/icons/facebook.png", primaryColor: Color(0xff3b5998), textColor: Colors.white),
           const SizedBox(height:20),
-          const SocialButton(button_key:Key("google_login_button"),text: "Login with Google", iconAddr: "assets/icons/google.jpg", primaryColor: Colors.white, textColor: Colors.black),
+          const SocialButton(login_function:signInWithGoogle,button_key:Key("google_login_button"),text: "Login with Google", iconAddr: "assets/icons/google.jpg", primaryColor: Colors.white, textColor: Colors.black),
           const SizedBox(height:20),
           OutlinedButton(
             key: const Key("email_password_button"),
