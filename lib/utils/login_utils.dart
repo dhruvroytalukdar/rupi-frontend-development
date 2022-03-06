@@ -29,3 +29,10 @@ Future<UserCredential> signInWithFacebook() async {
   // Once signed in, return the UserCredential
   return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
 }
+
+Future<UserCredential> signInWithEmail(String email, String password) async {
+  return FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email,
+      password: password
+  );
+}

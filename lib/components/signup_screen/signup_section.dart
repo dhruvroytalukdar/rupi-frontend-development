@@ -2,47 +2,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/utils/login_utils.dart';
 
-// Login Section is the outer wrapper of all the text widgets, textfields and buttons
-class LoginSection extends StatefulWidget {
-  const LoginSection({Key? key}) : super(key: key);
+// Signup Section is the outer wrapper of all the text widgets, textfields and buttons
+class SignupSection extends StatefulWidget {
+  const SignupSection({Key? key}) : super(key: key);
 
   @override
-  State<LoginSection> createState() => _LoginSectionState();
+  State<SignupSection> createState() => _SignupSectionState();
 }
 
-class _LoginSectionState extends State<LoginSection> {
+class _SignupSectionState extends State<SignupSection> {
 
-  bool _isSigningIn = false;
+  bool _isSigningUp = false;
   String email = "";
   String password = "";
 
-  void signIn() async
-  {
-    UserCredential cred;
-    try {
-      setState(() {
-        _isSigningIn = true;
-      });
-      cred = await signInWithEmail(email, password);
-      setState(() {
-        _isSigningIn = false;
-      });
-      Navigator.pushReplacementNamed(context, '/home');
-    }on FirebaseAuthException catch (e) {
-      setState(() {
-        _isSigningIn = false;
-      });
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      }
-    }catch (e){
-      setState(() {
-        _isSigningIn = false;
-      });
-      print(e.toString());
-    }
+  void signUp() async{
+    //signup code goes here
   }
 
   @override
@@ -94,9 +69,9 @@ class _LoginSectionState extends State<LoginSection> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text(
-                  "Login",
+                  "Sign Up",
                   style: TextStyle(
-                    fontSize: 28.0,
+                    fontSize: 26.0,
                     color: Colors.white,
                   ),
                 ),
@@ -115,6 +90,29 @@ class _LoginSectionState extends State<LoginSection> {
                         const Padding(
                           padding: EdgeInsets.fromLTRB(15,8,15,2),
                           child: Text(
+                            "FULL NAME",
+                            style: TextStyle(
+                              fontSize: 17.0,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: TextField(
+                            key: const Key('full_name'),
+                            onChanged: (text){
+                              // email = text;
+                            },
+                            keyboardType: TextInputType.name,
+                            decoration: const InputDecoration(
+                              hintText: 'John Doe',
+                            ),
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(15,8,15,2),
+                          child: Text(
                             "EMAIL",
                             style: TextStyle(
                               fontSize: 17.0,
@@ -122,8 +120,8 @@ class _LoginSectionState extends State<LoginSection> {
                             ),
                           ),
                         ),
-                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15.0),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
                           child: TextField(
                             key: const Key('email'),
                             onChanged: (text){
@@ -140,12 +138,12 @@ class _LoginSectionState extends State<LoginSection> {
                           child: Text(
                             "PASSWORD",
                             style: TextStyle(
-                            fontSize: 17.0,
-                            color: Colors.grey,
+                              fontSize: 17.0,
+                              color: Colors.grey,
                             ),
                           ),
                         ),
-                         Padding(
+                        Padding(
                           padding: EdgeInsets.symmetric(horizontal: 15.0),
                           child: TextField(
                             key: const Key('password'),
@@ -159,10 +157,35 @@ class _LoginSectionState extends State<LoginSection> {
                             ),
                           ),
                         ),
-                        (!_isSigningIn)?GestureDetector(
-                          key: const Key('continue_test'),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(15,8,15,2),
+                          child: Text(
+                            "CONFIRM PASSWORD",
+                            style: TextStyle(
+                              fontSize: 17.0,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: TextField(
+                            key: const Key('confirm_password'),
+                            onChanged: (text){
+                              // password = text;
+                            },
+                            keyboardType: TextInputType.visiblePassword,
+                            obscureText: true,
+                            decoration: const InputDecoration(
+                              hintText: '************',
+                            ),
+                          ),
+                        ),
+
+                        (!_isSigningUp)?GestureDetector(
+                          key: const Key('getStarted_test'),
                           onTap: (){
-                            signIn();
+                            signUp();
                           },
                           child: Container(
                             decoration: const BoxDecoration(
@@ -175,7 +198,7 @@ class _LoginSectionState extends State<LoginSection> {
                               children: const [
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(15.0,8.0,15.0,8.0),
-                                  child: Text('Continue',style: TextStyle(fontSize: 20, color: Colors.white),),
+                                  child: Text('Get Started',style: TextStyle(fontSize: 20, color: Colors.white),),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(right: 12.0),
@@ -190,10 +213,28 @@ class _LoginSectionState extends State<LoginSection> {
                             ),
                           ),
                         ):const CircularProgressIndicator(),
+
                       ],
                     ),
                   ),
-                )
+                ),
+                const SizedBox(height: 70),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10,80,0,0),
+                  child: GestureDetector(
+                    key: const Key('terms_conditions_test'),
+                    onTap: (){
+                      //link to terms and conditions
+                    },
+                    child: Text(
+                      'By proceeding, you agree with our Terms & Conditions',
+                      style: TextStyle(
+                          backgroundColor: Colors.white.withOpacity(0.0),
+                          color: Colors.indigo,
+                          fontSize: 14),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

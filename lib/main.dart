@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/home_screen.dart';
+import 'package:frontend/screens/signup_screen.dart';
 import 'package:frontend/screens/welcome_screen.dart';
 import 'package:frontend/screens/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         '/welcome': (context) => const WelcomeScreen(),
         '/login':(context)=> const LoginScreen(),
         '/home':(context) => const HomeScreen(),
+        '/signup':(context) => const SignupScreen(),
       },
     );
   }

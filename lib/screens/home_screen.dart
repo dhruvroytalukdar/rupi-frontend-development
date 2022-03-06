@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
       body: SafeArea(
           child: Column(
             children: [
-              Text("Home ${auth.currentUser?.displayName}"),
+              Text("Home ${auth.currentUser?.email}"),
               ElevatedButton(onPressed: () async {
                 await auth.signOut();
                 Navigator.pushReplacementNamed(context, '/welcome');

@@ -82,7 +82,9 @@ class ContentSection extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
-            onPressed: () { },
+            onPressed: () {
+              changeScreen(context, '/signup');
+            },
           ),
         ],
       ),
