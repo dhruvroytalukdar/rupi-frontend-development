@@ -22,45 +22,51 @@ class _SignupSectionState extends State<SignupSection> {
 
   @override
   Widget build(BuildContext context) {
+
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              GestureDetector(
-                // Go back
-                onTap: (){
-                  Navigator.pop(context);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(top:30.0,left: 20.0),
-                  child: Row(
-                    children: const [
-                      Icon(
-                        Icons.arrow_back,
-                        color: Colors.white,
-                        size: 25.0,
-                        semanticLabel: 'Go back',
-                      ),
-                      SizedBox(
-                        width:12,
-                      ),
-                      Text(
-                        "Back",
-                        style: TextStyle(
+      child: SizedBox(
+        height: height-30,
+        width: width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                GestureDetector(
+                  // Go back
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top:15,left: 20.0),
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Icons.arrow_back,
                           color: Colors.white,
-                          fontSize: 16,
+                          size: 25.0,
+                          semanticLabel: 'Go back',
                         ),
-                      ),
-                    ],
+                        SizedBox(
+                          width:12,
+                        ),
+                        Text(
+                          "Back",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0,78,0,82),
-            child: Column(
+              ],
+            ),
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -215,33 +221,35 @@ class _SignupSectionState extends State<SignupSection> {
                 ),
               ],
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              GestureDetector(
-                key: const Key('terms_conditions_test'),
-                onTap: (){
-                  //link to terms and conditions
-                },
-                child: SizedBox(
-                  width: 350,
-                  child: Text(
-                    'By proceeding, you agree with our Terms & Conditions',
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    style: TextStyle(
-                      backgroundColor: Colors.white.withOpacity(0.0),
-                      color: Colors.indigo,
-                      fontSize: 14,
+            Padding(
+              padding: const EdgeInsets.only(bottom:12.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    key: const Key('terms_conditions_test'),
+                    onTap: (){
+                      //link to terms and conditions
+                    },
+                    child: SizedBox(
+                      width: width*0.932,
+                      child: Text(
+                        'By proceeding, you agree with our Terms & Conditions',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          backgroundColor: Colors.white.withOpacity(0.0),
+                          color: Colors.indigo,
+                          fontSize: 14,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

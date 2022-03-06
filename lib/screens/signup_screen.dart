@@ -2,11 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/components/signup_screen/signup_section.dart';
 
+import '../utils/interpolate.dart';
+
 class SignupScreen extends StatelessWidget {
   const SignupScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    double height = MediaQuery.of(context).size.height;
+
+    double min_y_outer = -492;
+    double max_y_outer = -345;
+    double min_height_outer = 590;
+    double max_height_outer = 830;
+
+    double min_y_inner = -485;
+    double max_y_inner = -335;
+    double min_height_inner = 590;
+    double max_height_inner = 830;
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
         statusBarColor: Color(0xff68458b),
@@ -33,7 +48,7 @@ class SignupScreen extends StatelessWidget {
                     //The outer circle
                     Positioned(
                       left:-190,
-                      top:-385,
+                      top:interpolate_value(min_y_outer, max_y_outer, min_height_outer, max_height_outer, height),
                       child: Container(
                         width:1140.32,
                         height:1050,
@@ -53,7 +68,7 @@ class SignupScreen extends StatelessWidget {
                     //The inner circle
                     Positioned(
                       left:-175,
-                      top:-375,
+                      top:interpolate_value(min_y_inner, max_y_inner, min_height_inner, max_height_inner, height),
                       child: Container(
                         width:963.32,
                         height:1016,

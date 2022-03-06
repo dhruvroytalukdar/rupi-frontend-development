@@ -63,7 +63,7 @@ class _LoginSectionState extends State<LoginSection> {
                   Navigator.pop(context);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.only(top:30.0,left: 20.0),
+                  padding: const EdgeInsets.only(top:15.0,left: 20.0),
                   child: Row(
                     children: const [
                       Icon(
@@ -94,7 +94,7 @@ class _LoginSectionState extends State<LoginSection> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text(
-                  "Login",
+                  "LogIn",
                   style: TextStyle(
                     fontSize: 28.0,
                     color: Colors.white,
@@ -146,7 +146,7 @@ class _LoginSectionState extends State<LoginSection> {
                           ),
                         ),
                          Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
                           child: TextField(
                             key: const Key('password'),
                             onChanged: (text){

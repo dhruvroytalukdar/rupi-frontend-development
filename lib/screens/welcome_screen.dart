@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/components/welcome_screen/content_section.dart';
+import 'package:frontend/utils/interpolate.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    double height = MediaQuery.of(context).size.height;
+
+    double min_y_outer = -492;
+    double max_y_outer = -345;
+    double min_height_outer = 590;
+    double max_height_outer = 830;
+
+    double min_y_inner = -485;
+    double max_y_inner = -335;
+    double min_height_inner = 590;
+    double max_height_inner = 830;
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
         statusBarColor: Color(0xff68458b),
@@ -33,7 +47,7 @@ class WelcomeScreen extends StatelessWidget {
                       //The outer circle
                       Positioned(
                         left:-190,
-                        top:-385,
+                        top:interpolate_value(min_y_outer, max_y_outer, min_height_outer, max_height_outer, height),
                         child: Container(
                           width:1140.32,
                           height:1050,
@@ -52,9 +66,9 @@ class WelcomeScreen extends StatelessWidget {
 
                       //The inner circle
                       Positioned(
-                          left:-175,
-                          top:-375,
-                          child: Container(
+                        left:-175,
+                        top:interpolate_value(min_y_inner, max_y_inner, min_height_inner, max_height_inner, height),
+                        child: Container(
                             width:963.32,
                             height:1016,
                             decoration: const BoxDecoration(
@@ -78,6 +92,6 @@ class WelcomeScreen extends StatelessWidget {
           ),
           ),
         ),
-    );
+      );
     }
 }
