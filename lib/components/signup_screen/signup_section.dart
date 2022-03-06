@@ -59,7 +59,7 @@ class _SignupSectionState extends State<SignupSection> {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical:105.0),
+            padding: const EdgeInsets.fromLTRB(0,78,0,82),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
