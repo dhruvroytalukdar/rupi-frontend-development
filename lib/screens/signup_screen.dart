@@ -32,11 +32,11 @@ class SignupScreen extends StatelessWidget {
                     
                     //The outer circle
                     Positioned(
-                      left:-210,
-                      top:-405,
+                      left:-190,
+                      top:-385,
                       child: Container(
                         width:1140.32,
-                        height:1025,
+                        height:1050,
                         decoration: const BoxDecoration(
                           gradient: LinearGradient(
                               begin: Alignment.topCenter,
@@ -52,11 +52,11 @@ class SignupScreen extends StatelessWidget {
 
                     //The inner circle
                     Positioned(
-                      left:-170,
-                      top:-395,
+                      left:-175,
+                      top:-375,
                       child: Container(
                         width:963.32,
-                        height:1000,
+                        height:1016,
                         decoration: const BoxDecoration(
                           gradient: LinearGradient(
                               begin: Alignment.topCenter,

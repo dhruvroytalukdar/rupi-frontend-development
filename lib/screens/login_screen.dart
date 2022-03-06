@@ -33,7 +33,7 @@ class LoginScreen extends StatelessWidget {
                     //The outer circle
                     Positioned(
                       left:-190,
-                      top:-400,
+                      top:-385,
                       child: Container(
                         width:1140.32,
                         height:1050,
@@ -53,7 +53,7 @@ class LoginScreen extends StatelessWidget {
                     //The inner circle
                     Positioned(
                       left:-175,
-                      top:-390,
+                      top:-375,
                       child: Container(
                         width:963.32,
                         height:1016,
