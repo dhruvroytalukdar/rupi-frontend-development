@@ -15,33 +15,25 @@ class _LoginSectionState extends State<LoginSection> {
   bool _isSigningIn = false;
   String email = "";
   String password = "";
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   void signIn() async
   {
-    UserCredential cred;
-    try {
-      setState(() {
-        _isSigningIn = true;
-      });
-      cred = await signInWithEmail(email, password);
-      setState(() {
-        _isSigningIn = false;
-      });
+    String? status;
+    setState(() {
+      _isSigningIn = true;
+    });
+
+    status = await Auth(authInstance: auth).signInWithEmail(email, password);
+
+    setState(() {
+      _isSigningIn = false;
+    });
+
+    if(status == "Success") {
       Navigator.pushReplacementNamed(context, '/home');
-    }on FirebaseAuthException catch (e) {
-      setState(() {
-        _isSigningIn = false;
-      });
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      }
-    }catch (e){
-      setState(() {
-        _isSigningIn = false;
-      });
-      print(e.toString());
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error : ${status ?? "Something went wrong"}')));
     }
   }
 
@@ -189,7 +181,18 @@ class _LoginSectionState extends State<LoginSection> {
                               ],
                             ),
                           ),
-                        ):const CircularProgressIndicator(),
+                        ):Container(
+                          color: const Color(0xff554099),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical:8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                CircularProgressIndicator(color: Colors.white),
+                              ],
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
