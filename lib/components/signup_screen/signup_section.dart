@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/utils/auth_utils.dart';
 
 // Signup Section is the outer wrapper of all the text widgets, textfields and buttons
 class SignupSection extends StatefulWidget {

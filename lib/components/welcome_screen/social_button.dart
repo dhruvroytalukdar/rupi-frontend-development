@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../utils/login_utils.dart';
+import '../../utils/auth_utils.dart';
 
 // A single widget that implements the social login button
 class SocialButton extends StatefulWidget {

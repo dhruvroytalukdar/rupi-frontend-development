@@ -63,4 +63,16 @@ class Auth {
       return e.code;
     }
   }
+
+  Future<String?> signUpWithEmail(String email, String password) async {
+    try {
+      await authInstance.createUserWithEmailAndPassword(
+          email: email,
+          password: password
+      );
+      return "Success";
+    }on FirebaseAuthException catch(e){
+      return e.code;
+    }
+  }
 }

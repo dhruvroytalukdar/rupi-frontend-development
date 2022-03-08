@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/utils/login_utils.dart';
+import 'package:frontend/utils/auth_utils.dart';
 
 // Login Section is the outer wrapper of all the text widgets, textfields and buttons
 class LoginSection extends StatefulWidget {

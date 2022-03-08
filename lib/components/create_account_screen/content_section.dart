@@ -28,31 +28,23 @@ class ContentSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
-              "Welcome",
+              "Create Account",
               style: TextStyle(
-                  fontSize: 28.0,
-                  color: Colors.white,
-              ),
-            ),
-            const SizedBox(height:12),
-            const Text(
-              "Login to proceed",
-              style: TextStyle(
-                fontSize: 18.0,
+                fontSize: 28.0,
                 color: Colors.white,
               ),
             ),
             const SizedBox(height:45),
-            const SocialButton(login_provider: "facebook",button_key:Key("facebook_login_button"),text: "Login with Facebook", iconAddr: "assets/icons/facebook.png", primaryColor: Color(0xff3b5998), textColor: Colors.white),
+            const SocialButton(login_provider: "facebook",button_key:Key("facebook_signup_button"),text: "Sign up with Facebook", iconAddr: "assets/icons/facebook.png", primaryColor: Color(0xff3b5998), textColor: Colors.white),
             const SizedBox(height:20),
-            const SocialButton(login_provider: "google",button_key:Key("google_login_button"),text: "Login with Google", iconAddr: "assets/icons/google.jpg", primaryColor: Colors.white, textColor: Colors.black),
+            const SocialButton(login_provider: "google",button_key:Key("google_signup_button"),text: "Sign up with Google", iconAddr: "assets/icons/google.jpg", primaryColor: Colors.white, textColor: Colors.black),
             const SizedBox(height:20),
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
-                key: const Key("email_password_button"),
+                key: const Key("email_password_signup_button"),
                 onPressed: (){
-                  changeScreen(context, '/login');
+                  changeScreen(context, '/signup');
                 },
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(color: Colors.white),
@@ -60,7 +52,7 @@ class ContentSection extends StatelessWidget {
                     borderRadius: BorderRadius.circular(25.0),
                   ),
                 ),
-                child: const Text("Login using Email",
+                child: const Text("Sign up using Email",
                   style: TextStyle(
                     color:Colors.white,
                     fontSize: 14.5,
@@ -76,15 +68,15 @@ class ContentSection extends StatelessWidget {
               ),
             ),
             TextButton(
-              key:const Key("create_account_button"),
-              child: const Text("Create Account",
+              key:const Key("already_have_account_button"),
+              child: const Text("LogIn",
                 style: TextStyle(
                   color:Colors.white,
                   fontSize: 18,
                 ),
               ),
               onPressed: () {
-                changeScreen(context, '/create-account');
+                changeScreen(context, '/welcome');
               },
             ),
           ],
