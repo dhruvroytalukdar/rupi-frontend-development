@@ -43,7 +43,7 @@ class _SocialButtonState extends State<SocialButton> {
 
     if(status == "Success") {
       if(auth.currentUser?.emailVerified == true) {
-        print("In home screen ${auth.currentUser?.emailVerified}");
+        //print("In home screen ${auth.currentUser?.emailVerified}");
         Navigator.pushReplacementNamed(context, '/home');
       } else {
         Navigator.pushReplacementNamed(context, '/verify');
