@@ -1,8 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/components/welcome_screen/content_section.dart';
+import 'mock.dart';
 
 void main(){
+
+  setupCloudFirestoreMocks();
+  setUpAll(() async {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+  });
+
   testWidgets('Check whether the "Login with email/phone number" button is loaded correctly', (WidgetTester tester) async {
     // Get the widget
     final email_pass_login_button = find.byKey(const Key("email_password_button"));

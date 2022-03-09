@@ -7,6 +7,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FirebaseAuth auth = FirebaseAuth.instance;
+    print(auth.currentUser?.emailVerified);
     return Scaffold(
       body: SafeArea(
           child: Column(

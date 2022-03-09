@@ -31,7 +31,12 @@ class _LoginSectionState extends State<LoginSection> {
     });
 
     if(status == "Success") {
-      Navigator.pushReplacementNamed(context, '/home');
+      if(auth.currentUser?.emailVerified == true) {
+        print("In home screen ${auth.currentUser?.emailVerified}");
+        Navigator.pushReplacementNamed(context, '/home');
+      } else {
+        Navigator.pushReplacementNamed(context, '/verify');
+      }
     }else{
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error : ${status ?? "Something went wrong"}')));
     }
