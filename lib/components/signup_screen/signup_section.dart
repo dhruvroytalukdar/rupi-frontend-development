@@ -13,11 +13,34 @@ class SignupSection extends StatefulWidget {
 class _SignupSectionState extends State<SignupSection> {
 
   bool _isSigningUp = false;
+  String full_name = "";
   String email = "";
-  String password = "";
+  String password_text = "";
+  String confirm_password_text = "";
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String errorMessage = "";
+  var normalBorder = const UnderlineInputBorder(
+    borderSide: BorderSide(color: Colors.red),
+  );
 
   void signUp() async{
     //signup code goes here
+    String? status;
+    setState(() {
+      _isSigningUp = true;
+    });
+
+    status = await Auth(authInstance: auth).signUpWithEmail(email, password_text);
+
+    setState(() {
+      _isSigningUp = false;
+    });
+
+    if(status == "Success") {
+      Navigator.pushReplacementNamed(context, '/home');
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error : ${status ?? "Something went wrong"}')));
+    }
   }
 
   @override
@@ -104,7 +127,7 @@ class _SignupSectionState extends State<SignupSection> {
                           child: TextField(
                             key: const Key('full_name'),
                             onChanged: (text){
-                              // email = text;
+                              full_name = text;
                             },
                             keyboardType: TextInputType.name,
                             decoration: const InputDecoration(
@@ -146,11 +169,11 @@ class _SignupSectionState extends State<SignupSection> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
                           child: TextField(
                             key: const Key('password'),
                             onChanged: (text){
-                              password = text;
+                              password_text = text;
                             },
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: true,
@@ -174,13 +197,35 @@ class _SignupSectionState extends State<SignupSection> {
                           child: TextField(
                             key: const Key('confirm_password'),
                             onChanged: (text){
-                              // password = text;
+                              confirm_password_text = text;
+                              if (confirm_password_text!=password_text)
+                                {
+                                  setState(() {
+                                    errorMessage = "Both passwords must be same.";
+                                    normalBorder = const UnderlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.red),
+                                    );
+                                  });
+                                  // print("PASSWORD MISMATCH");
+                                }
+                              else
+                                {
+                                  setState(() {
+                                    errorMessage = "";
+                                    normalBorder = const UnderlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.green),
+                                    );
+                                  });
+                                }
                             },
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: true,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               hintText: '************',
+                              errorText: errorMessage,
+                              focusedErrorBorder: normalBorder,
                             ),
+
                           ),
                         ),
 
@@ -214,7 +259,10 @@ class _SignupSectionState extends State<SignupSection> {
                               ],
                             ),
                           ),
-                        ):const CircularProgressIndicator(),
+                        ):const Center(child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: CircularProgressIndicator(),
+                        )),
                       ],
                     ),
                   ),

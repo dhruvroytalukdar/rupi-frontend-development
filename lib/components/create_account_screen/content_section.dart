@@ -61,7 +61,7 @@ class ContentSection extends StatelessWidget {
               ),
             ),
             const SizedBox(height:25),
-            const Text("Don't have an account?",
+            const Text("Already have an account?",
               style: TextStyle(
                 color:Colors.white,
                 fontSize: 17,
