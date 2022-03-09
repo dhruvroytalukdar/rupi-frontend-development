@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/utils/auth_utils.dart';
+import 'package:frontend/utils/alert_utils.dart';
 
 // Signup Section is the outer wrapper of all the text widgets, textfields and buttons
 class SignupSection extends StatefulWidget {
@@ -193,7 +194,7 @@ class _SignupSectionState extends State<SignupSection> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          padding: const EdgeInsets.fromLTRB(15,0,15,10),
                           child: TextField(
                             key: const Key('confirm_password'),
                             onChanged: (text){
@@ -232,7 +233,14 @@ class _SignupSectionState extends State<SignupSection> {
                         (!_isSigningUp)?GestureDetector(
                           key: const Key('getStarted_test'),
                           onTap: (){
-                            signUp();
+                            if (confirm_password_text==password_text)
+                            {signUp();}
+                            else
+                              {
+                                String messageText = "'Password' and 'Confirm Password' must have same value.";
+                                String titleText = "Invalid Input!";
+                                showAlertDialog(context,titleText,messageText);
+                              }
                           },
                           child: Container(
                             decoration: const BoxDecoration(
