@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/components/welcome_screen/social_button.dart';
+import 'package:frontend/components/create_account_screen/social_button.dart';
 
 // Content Section is the outer wrapper of all the text widgets and buttons
 class ContentSection extends StatelessWidget {

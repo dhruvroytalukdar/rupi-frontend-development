@@ -148,23 +148,50 @@ class _VerifyScreenState extends State<VerifyScreen> {
                             ),
                           ),
                           const SizedBox(height: 15.0,),
-                          OutlinedButton(
-                            key: const Key("change_email_button_on_verify_screen"),
-                            onPressed: () async {
-                              await logoutAndDeleteUser();
-                              Navigator.pushReplacementNamed(context, '/create-account');
-                            },
-                            style: OutlinedButton.styleFrom(
-                              side: const BorderSide(color: Colors.white),
-                              shape:RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25.0),
-                              ),
-                            ),
-                            child: const Text("Change email",
-                              style: TextStyle(
-                                color:Colors.white,
-                                fontSize: 14.5,
-                              ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                OutlinedButton(
+                                  key: const Key("skip_email_verification"),
+                                  onPressed: () {
+                                    timer.cancel();
+                                    Navigator.pushReplacementNamed(context, '/home');
+                                  },
+                                  style: OutlinedButton.styleFrom(
+                                    side: const BorderSide(color: Colors.white),
+                                    shape:RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25.0),
+                                    ),
+                                  ),
+                                  child: const Text("Skip for now",
+                                    style: TextStyle(
+                                      color:Colors.white,
+                                      fontSize: 14.5,
+                                    ),
+                                  ),
+                                ),
+                                OutlinedButton(
+                                  key: const Key("change_email_button_on_verify_screen"),
+                                  onPressed: () async {
+                                    await logoutAndDeleteUser();
+                                    Navigator.pushReplacementNamed(context, '/create-account');
+                                  },
+                                  style: OutlinedButton.styleFrom(
+                                    side: const BorderSide(color: Colors.white),
+                                    shape:RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25.0),
+                                    ),
+                                  ),
+                                  child: const Text("Change email",
+                                    style: TextStyle(
+                                      color:Colors.white,
+                                      fontSize: 14.5,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],

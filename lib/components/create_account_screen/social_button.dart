@@ -42,7 +42,12 @@ class _SocialButtonState extends State<SocialButton> {
     });
 
     if(status == "Success") {
-      Navigator.pushReplacementNamed(context, '/home');
+      if(auth.currentUser?.emailVerified == true) {
+        //print("In home screen ${auth.currentUser?.emailVerified}");
+        Navigator.pushReplacementNamed(context, '/home');
+      } else {
+        Navigator.pushReplacementNamed(context, '/verify');
+      }
     }else{
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(status ?? "Something went wrong")));
     }

@@ -70,6 +70,7 @@ class Auth {
           email: email,
           password: password
       );
+      // Send user id so user can be created by the backend.
       return "Success";
     }on FirebaseAuthException catch(e){
       return e.code;

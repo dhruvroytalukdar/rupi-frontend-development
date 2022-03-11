@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Roboto',
         primarySwatch: Colors.blue,
       ),
-      initialRoute: auth.currentUser == null ? '/welcome' : auth.currentUser?.emailVerified == true ? '/home':'/verify',
+      initialRoute: auth.currentUser == null ? '/welcome' : '/home',
       routes: {
         '/welcome': (context) => const WelcomeScreen(),
         '/login':(context)=> const LoginScreen(),
