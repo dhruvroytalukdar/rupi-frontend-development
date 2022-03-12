@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/components/signup_screen/signup_section.dart';
-
-import '../utils/interpolate.dart';
+import '../constants/index.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -12,19 +11,9 @@ class SignupScreen extends StatelessWidget {
 
     double height = MediaQuery.of(context).size.height;
 
-    double min_y_outer = -492;
-    double max_y_outer = -345;
-    double min_height_outer = 590;
-    double max_height_outer = 830;
-
-    double min_y_inner = -485;
-    double max_y_inner = -335;
-    double min_height_inner = 590;
-    double max_height_inner = 830;
-
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
-        statusBarColor: Color(0xff68458b),
+        statusBarColor: AppColors.uiStatusBarColor,
         systemNavigationBarColor: Colors.white,
         systemNavigationBarIconBrightness: Brightness.dark,
         // For Android.
@@ -44,11 +33,12 @@ class SignupScreen extends StatelessWidget {
                 flex:1,
                 child: Stack(
                   children: [
-                    
+
                     //The outer circle
                     Positioned(
                       left:-190,
-                      top:interpolate_value(min_y_outer, max_y_outer, min_height_outer, max_height_outer, height),
+                      // top:interpolate_value(min_y_outer, max_y_outer, min_height_outer, max_height_outer, height),
+                      top:AppConstants.interpolateValue("outer",height),
                       child: Container(
                         width:1140.32,
                         height:1050,
@@ -57,8 +47,8 @@ class SignupScreen extends StatelessWidget {
                               begin: Alignment.topCenter,
                               end:Alignment.bottomCenter,
                               colors: [
-                                Color(0x702c37bf),
-                                Color(0x70d35e2a),
+                                AppColors.outerCircleTopGradient,
+                                AppColors.outerCircleDownGradient,
                               ]),
                           shape: BoxShape.circle,
                         ),
@@ -68,7 +58,8 @@ class SignupScreen extends StatelessWidget {
                     //The inner circle
                     Positioned(
                       left:-175,
-                      top:interpolate_value(min_y_inner, max_y_inner, min_height_inner, max_height_inner, height),
+                      // top:interpolate_value(min_y_inner, max_y_inner, min_height_inner, max_height_inner, height),
+                      top:AppConstants.interpolateValue("inner",height),
                       child: Container(
                         width:963.32,
                         height:1016,
@@ -77,8 +68,8 @@ class SignupScreen extends StatelessWidget {
                               begin: Alignment.topCenter,
                               end:Alignment.bottomCenter,
                               colors: [
-                                Color(0xff2c37bf),
-                                Color(0xffd35e2a),
+                                AppColors.innerCircleTopGradient,
+                                AppColors.innerCircleDownGradient,
                               ]),
                           shape: BoxShape.circle,
                         ),

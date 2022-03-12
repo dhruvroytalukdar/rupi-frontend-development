@@ -1,12 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/screens/home_screen.dart';
-import 'package:frontend/utils/interpolate.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../constants/index.dart';
 
-import '../utils/auth_utils.dart';
 
 class VerifyScreen extends StatefulWidget {
   const VerifyScreen({Key? key}) : super(key: key);
@@ -60,19 +58,9 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
     double height = MediaQuery.of(context).size.height;
 
-    double min_y_outer = -492;
-    double max_y_outer = -345;
-    double min_height_outer = 590;
-    double max_height_outer = 830;
-
-    double min_y_inner = -485;
-    double max_y_inner = -335;
-    double min_height_inner = 590;
-    double max_height_inner = 830;
-
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
-        statusBarColor: Color(0xff68458b),
+        statusBarColor: AppColors.uiStatusBarColor,
         systemNavigationBarColor: Colors.white,
         systemNavigationBarIconBrightness: Brightness.dark,
         // For Android.
@@ -96,7 +84,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
                     //The outer circle
                     Positioned(
                       left:-190,
-                      top:interpolate_value(min_y_outer, max_y_outer, min_height_outer, max_height_outer, height),
+                      // top:interpolate_value(min_y_outer, max_y_outer, min_height_outer, max_height_outer, height),
+                      top:AppConstants.interpolateValue("outer",height),
                       child: Container(
                         width:1140.32,
                         height:1050,
@@ -105,8 +94,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
                               begin: Alignment.topCenter,
                               end:Alignment.bottomCenter,
                               colors: [
-                                Color(0x702c37bf),
-                                Color(0x70d35e2a),
+                                AppColors.outerCircleTopGradient,
+                                AppColors.outerCircleDownGradient,
                               ]),
                           shape: BoxShape.circle,
                         ),
@@ -116,7 +105,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
                     //The inner circle
                     Positioned(
                       left:-175,
-                      top:interpolate_value(min_y_inner, max_y_inner, min_height_inner, max_height_inner, height),
+                      // top:interpolate_value(min_y_inner, max_y_inner, min_height_inner, max_height_inner, height),
+                      top:AppConstants.interpolateValue("inner",height),
                       child: Container(
                         width:963.32,
                         height:1016,
@@ -125,8 +115,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
                               begin: Alignment.topCenter,
                               end:Alignment.bottomCenter,
                               colors: [
-                                Color(0xff2c37bf),
-                                Color(0xffd35e2a),
+                                AppColors.innerCircleTopGradient,
+                                AppColors.innerCircleDownGradient,
                               ]),
                           shape: BoxShape.circle,
                         ),

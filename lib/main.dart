@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/providers/user_provider.dart';
 import 'package:frontend/screens/create_account_screen.dart';
 import 'package:frontend/screens/home_screen.dart';
 import 'package:frontend/screens/signup_screen.dart';
@@ -7,6 +8,7 @@ import 'package:frontend/screens/verify_screen.dart';
 import 'package:frontend/screens/welcome_screen.dart';
 import 'package:frontend/screens/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -14,7 +16,13 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+      ],
+      child: const MyApp(),
+  ),);
 }
 
 class MyApp extends StatelessWidget {
