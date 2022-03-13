@@ -7,8 +7,9 @@ import 'package:frontend/utils/auth_utils.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'login_screen_test.mocks.dart';
+import 'signup_screen_test.mocks.dart';
 import 'mock.dart';
+
 //class MockFirebaseAuth extends Mock implements FirebaseAuth {}
 class MockAuthResult extends Mock implements UserCredential {}
 

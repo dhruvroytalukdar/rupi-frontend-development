@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
       (){
         // Setting the user values temporarily according to the firebase user values
         // Do API calls here
-        context.read<UserProvider>().setUser(auth.currentUser?.email ?? "", auth.currentUser?.displayName ?? "", auth.currentUser?.phoneNumber ?? "");
+        context.read<UserProvider>().setUserFromUserPassword(auth.currentUser?.email ?? "", auth.currentUser?.displayName ?? "", auth.currentUser?.phoneNumber ?? "");
         return "Data Loaded";
       },
     );

@@ -11,8 +11,14 @@ class UserProvider extends ChangeNotifier{
   bool get isUserLoggedIn => _isUserLoggedIn;
 
   // Setters
-  void setUser(String email,String fullName,String phoneNumber){
+  void setUserFromUserPassword(String email,String fullName,String phoneNumber){
     _user = User(email:email,fullName: fullName,phoneNumber: phoneNumber);
+    _isUserLoggedIn = true;
+    notifyListeners();
+  }
+
+  void setUserFromUserObject(User user){
+    _user = user;
     _isUserLoggedIn = true;
     notifyListeners();
   }
