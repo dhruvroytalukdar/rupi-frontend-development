@@ -69,7 +69,7 @@ class ErrorComponent extends StatelessWidget {
     return const Scaffold(
       body: SafeArea(
         child: Center(
-          child: Text("Some error occured"),
+          child: Text("Some error occurred"),
         ),
       ),
     );

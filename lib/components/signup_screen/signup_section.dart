@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/utils/auth_utils.dart';
 import 'package:frontend/utils/alert_utils.dart';
+// import 'package:intl_phone_field/intl_phone_field.dart';
 
 // Signup Section is the outer wrapper of all the text widgets, textfields and buttons
 class SignupSection extends StatefulWidget {
@@ -161,6 +162,41 @@ class _SignupSectionState extends State<SignupSection> {
                             keyboardType: TextInputType.emailAddress,
                             decoration: const InputDecoration(
                               hintText: 'abc@example.com',
+                            ),
+                          ),
+                        ),
+
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(15,8,15,2),
+                          child: Text(
+                            "MOBILE NUMBER",
+                            style: TextStyle(
+                              fontSize: 17.0,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                        //   IntlPhoneField(
+                        //     disableLengthCheck: true,
+                        //     decoration: const InputDecoration(
+                        //       labelText: 'Phone Number',
+                        //       // alignLabelWithHint: true,
+                        //     ),
+                        //     initialCountryCode: 'IN',
+                        //     onChanged: (phone) {
+                        //       print(phone.completeNumber);
+                        //     },
+                        // ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: TextField(
+                            key: const Key('mobile'),
+                            onChanged: (text){
+                              //mobile number logic
+                            },
+                            keyboardType: TextInputType.phone,
+                            decoration: const InputDecoration(
+                              hintText: 'Enter mobile number here',
                             ),
                           ),
                         ),

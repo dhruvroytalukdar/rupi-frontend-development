@@ -25,60 +25,72 @@ void main(){
 
   testWidgets('Get Started button is showing correctly or not.', (WidgetTester tester) async {
     // Get the widget
-    final getStarted_button = find.byKey(const Key('getStarted_test'));
+    final getStartedButton = find.byKey(const Key('getStarted_test'));
 
     // Start the app for testing
     await tester.pumpWidget(const MaterialApp(home:SignupScreen()));
 
     // Test Results
-    expect(getStarted_button,findsOneWidget);
+    expect(getStartedButton,findsOneWidget);
   });
 
   testWidgets('Email Text field is showing correctly or not.', (WidgetTester tester) async {
     // Get the widget
-    final textfield_email = find.byKey(const Key('email'));
+    final textfieldEmail = find.byKey(const Key('email'));
 
     // Start the app for testing
     await tester.pumpWidget(const MaterialApp(home:SignupScreen()));
-    await tester.enterText(textfield_email, 'abc@xyz.com');
+    await tester.enterText(textfieldEmail, 'abc@xyz.com');
 
     // Test Results
-    expect(textfield_email,findsOneWidget);
+    expect(textfieldEmail,findsOneWidget);
   });
 
   testWidgets('Password Text field is showing correctly or not.', (WidgetTester tester) async {
     // Get the widget
-    final textfield_password = find.byKey(const Key('password'));
+    final textfieldPassword = find.byKey(const Key('password'));
 
     // Start the app for testing
     await tester.pumpWidget(const MaterialApp(home:SignupScreen()));
-    await tester.enterText(textfield_password, 'password123');
+    await tester.enterText(textfieldPassword, 'password123');
 
     // Test Results
-    expect(textfield_password,findsOneWidget);
+    expect(textfieldPassword,findsOneWidget);
   });
 
   testWidgets('Confirm Password Text field is showing correctly or not.', (WidgetTester tester) async {
     // Get the widget
-    final textfield_confirmPassword = find.byKey(const Key('confirm_password'));
+    final textfieldConfirmPassword = find.byKey(const Key('confirm_password'));
 
     // Start the app for testing
     await tester.pumpWidget(const MaterialApp(home:SignupScreen()));
-    await tester.enterText(textfield_confirmPassword, 'password123');
+    await tester.enterText(textfieldConfirmPassword, 'password123');
 
     // Test Results
-    expect(textfield_confirmPassword,findsOneWidget);
+    expect(textfieldConfirmPassword,findsOneWidget);
+  });
+
+  testWidgets('Mobile Number Text field is showing correctly or not.', (WidgetTester tester) async {
+    // Get the widget
+    final textfieldMobile = find.byKey(const Key('mobile'));
+
+    // Start the app for testing
+    await tester.pumpWidget(const MaterialApp(home:SignupScreen()));
+    await tester.enterText(textfieldMobile, '9876543210');
+
+    // Test Results
+    expect(textfieldMobile,findsOneWidget);
   });
 
   testWidgets('Error Text is showing correctly or not.', (WidgetTester tester) async {
     // Get the widget
-    final textfield_password = find.byKey(const Key('password'));
-    final textfield_confirmPassword = find.byKey(const Key('confirm_password'));
+    final textfieldPassword = find.byKey(const Key('password'));
+    final textfieldConfirmPassword = find.byKey(const Key('confirm_password'));
 
     // Start the app for testing
     await tester.pumpWidget(const MaterialApp(home:SignupScreen()));
-    await tester.enterText(textfield_password, '123abc');
-    await tester.enterText(textfield_confirmPassword, '123xyz');
+    await tester.enterText(textfieldPassword, '123abc');
+    await tester.enterText(textfieldConfirmPassword, '123xyz');
     await tester.pump(const Duration(seconds: 2));
 
     // Test Results
