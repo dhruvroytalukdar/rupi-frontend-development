@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:frontend/components/home_screen/more_card.dart';
+import 'package:frontend/components/home_screen/support_card.dart';
 import 'package:frontend/providers/user_provider.dart';
 import 'package:frontend/utils/auth_utils.dart';
 import 'package:provider/provider.dart';
+import '../components/home_screen/holdings_card.dart';
 import '../constants/index.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -97,16 +100,45 @@ class RootComponent extends StatelessWidget {
         statusBarBrightness: Brightness.dark,
       ),
       child:Scaffold(
+        appBar: AppBar(
+          flexibleSpace: Container(
+            // decoration: const BoxDecoration(
+            //   gradient: LinearGradient(
+            //       begin: Alignment.bottomRight,
+            //       end: Alignment.topLeft,
+            //       colors: <Color>[Colors.white,Colors.white70,Colors.white60,Colors.white38, Colors.orangeAccent,Colors.deepOrangeAccent,Colors.deepOrange]),
+            // ),
+          ),
+            backgroundColor: Colors.white70,
+            toolbarOpacity: 0.8,
+            elevation: 0,
+            leading: const Icon(Icons.menu, color: Colors.black87,size: 30),
+            title: const Text('Home Screen',style: TextStyle(color: Colors.black87)),
+            centerTitle: true,
+        ),
         body: SafeArea(
-            child: Column(
-              children: [
-                context.watch<UserProvider>().isUserLoggedIn ? Text("Home ${context.watch<UserProvider>().loggedInUser?.fullName}") : const Text("You are logged out"),
-                ElevatedButton(onPressed: () async {
-                  await Auth(authInstance: auth).logoutUser();
-                  context.read<UserProvider>().resetUser();
-                  Navigator.pushReplacementNamed(context, '/welcome');
-                }, child: const Text('Logout')),
-              ],
+            child: Container(
+              decoration: const BoxDecoration(gradient: LinearGradient(colors: [Colors.orangeAccent,Color(0xFFCA436B),Color(0xFF915FB5),Colors.indigoAccent],
+                    begin: FractionalOffset.topLeft,
+                    end: FractionalOffset.bottomRight,
+              ),),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Holdings(),
+                    const Support(),
+                    const More(),
+                    // context.watch<UserProvider>().isUserLoggedIn ? Text("Home ${context.watch<UserProvider>().loggedInUser?.fullName}") : const Text("You are logged out"),
+                    ElevatedButton(onPressed: () async {
+                      await Auth(authInstance: auth).logoutUser();
+                      context.read<UserProvider>().resetUser();
+                      Navigator.pushReplacementNamed(context, '/welcome');
+                    }, child: const Text('Logout')),
+                  ],
+                ),
+              ),
             )
         ),
       ),
