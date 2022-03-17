@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
 import 'package:frontend/components/home_screen/more_card.dart';
 import 'package:frontend/components/home_screen/support_card.dart';
 import 'package:frontend/providers/user_provider.dart';
@@ -102,6 +103,10 @@ class RootComponent extends StatelessWidget {
       child:Scaffold(
         appBar: AppBar(
           flexibleSpace: Container(
+            decoration: const BoxDecoration(gradient: LinearGradient(
+                colors: GradientColors.japanBlush,
+            )
+            ),
             // decoration: const BoxDecoration(
             //   gradient: LinearGradient(
             //       begin: Alignment.bottomRight,
@@ -113,7 +118,7 @@ class RootComponent extends StatelessWidget {
             toolbarOpacity: 0.8,
             elevation: 0,
             leading: const Icon(Icons.menu, color: Colors.black87,size: 30),
-            title: const Text('Home Screen',style: TextStyle(color: Colors.black87)),
+            title: const Text('Home Screen',style: TextStyle(color: Colors.black)),
             centerTitle: true,
         ),
         body: SafeArea(

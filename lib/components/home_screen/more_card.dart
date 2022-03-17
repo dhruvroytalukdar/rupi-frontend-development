@@ -12,14 +12,16 @@ class _MoreState extends State<More> {
 
   @override
   Widget build(BuildContext context) {
-    String link = 'https://www.onlazer.com';
+    String faqLink = 'https://www.onlazer.com';
+    String settingsLink = 'https://www.onlazer.com';
+    String aboutLink = 'https://www.onlazer.com';
     //add more links and change accordingly
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 10.0),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(width: 0.6, color: Colors.black),
+          borderRadius: BorderRadius.circular(5),backgroundBlendMode: BlendMode.luminosity,
+          border: Border.all(width: 0.7, color: Colors.grey),
           // gradient: LinearGradient(colors: [Colors.orangeAccent,Color(0xFFCA436B),Color(0xFF915FB5),Colors.indigoAccent],
           //     begin: FractionalOffset.topLeft,
           //     end: FractionalOffset.bottomRight,
@@ -28,31 +30,57 @@ class _MoreState extends State<More> {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.end,
           children:  [
             const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.0,horizontal: 10),
+              padding: EdgeInsets.symmetric(vertical: 8.0,horizontal: 12),
               child: Text('More',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(12.0,0,0,2),
+              padding: const EdgeInsets.fromLTRB(12.0,0,0,0),
               child: TextButton(
-                onPressed: (){launch(link);},
-                child: Text('FAQs',style: const TextStyle(fontSize: 16),textAlign: TextAlign.left,)
+                  key: const Key('FAQButton'),
+                  onPressed: (){launch(faqLink);},
+                  child: Container(
+                      alignment: Alignment.centerLeft,
+                      child: const Text('FAQs',
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            fontSize: 16,
+                            decorationThickness: 2),
+                      )
+                  )
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(12.0,0,0,2),
+              padding: const EdgeInsets.fromLTRB(12.0,0,0,0),
               child: TextButton(
-                  onPressed: (){launch(link);},
-                  child: Text('Settings',style: const TextStyle(fontSize: 16),)
+                  key: const Key('settingsButton'),
+                  onPressed: (){launch(settingsLink);},
+                  child: Container(
+                      alignment: Alignment.centerLeft,
+                      child: const Text('Settings',
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            fontSize: 16,
+                            decorationThickness: 2),
+                      )
+                  )
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(12.0,0,0,2),
+              padding: const EdgeInsets.fromLTRB(12.0,0,0,0),
               child: TextButton(
-                  onPressed: (){launch(link);},
-                  child: Text('About',style: const TextStyle(fontSize: 16),)
+                  key: const Key('aboutButton'),
+                  onPressed: (){launch(aboutLink);},
+                  child: Container(
+                      alignment: Alignment.centerLeft,
+                      child: const Text('About',
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            fontSize: 16,
+                            decorationThickness: 2),
+                        )
+                  )
               ),
             ),
           ],

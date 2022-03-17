@@ -18,8 +18,8 @@ class _SupportState extends State<Support> {
       padding: const EdgeInsets.symmetric(horizontal: 15.0,vertical: 5.0),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(width: 0.6, color: Colors.black),
+          borderRadius: BorderRadius.circular(5),backgroundBlendMode: BlendMode.luminosity,
+          border: Border.all(width: 0.7, color: Colors.grey),
           // gradient: LinearGradient(colors: [Colors.orangeAccent,Color(0xFFCA436B),Color(0xFF915FB5),Colors.indigoAccent],
           //     begin: FractionalOffset.topLeft,
           //     end: FractionalOffset.bottomRight,
@@ -39,14 +39,19 @@ class _SupportState extends State<Support> {
             ),
             const Padding(
               padding: EdgeInsets.only(top:8),
-              child: Icon(Icons.whatsapp,color: Colors.green,size: 30,),
+              child: Icon(Icons.whatsapp,color: Colors.green,size: 30,key: Key('whatsappIcon'),),
             ),
             OutlinedButton(
                 onPressed: (){debugPrint('Received click');},
                 style: OutlinedButton.styleFrom(
                 side: const BorderSide(width: 0.0, color: Colors.white),
               ),
-                child: const Text('Talk Now',style: TextStyle(fontSize: 16),textAlign: TextAlign.center),),
+                child: const Text('Talk Now',
+                    style: TextStyle(fontSize: 16),
+                    textAlign: TextAlign.center,
+                    key: Key('talkNowButton'),
+                ),
+            ),
           ],
         ),
       ),
