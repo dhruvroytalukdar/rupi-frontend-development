@@ -47,7 +47,11 @@ class _SupportState extends State<Support> {
                 side: const BorderSide(width: 0.0, color: Colors.white),
               ),
                 child: const Text('Talk Now',
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(
+                        fontSize: 16,
+                        decoration: TextDecoration.underline,
+                        decorationThickness: 2
+                    ),
                     textAlign: TextAlign.center,
                     key: Key('talkNowButton'),
                 ),

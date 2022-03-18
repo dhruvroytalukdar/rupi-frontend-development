@@ -56,7 +56,7 @@ class _HoldingsState extends State<Holdings> {
                 ),
                  Padding(
                   padding: EdgeInsets.fromLTRB(10.0,0.0,0.0,8.0),
-                  child: Text('INR. $investedAmount',
+                  child: Text('INR. '+investedAmount.toStringAsFixed(2),
                       style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold)),
                 ),
                 Padding(
@@ -74,8 +74,8 @@ class _HoldingsState extends State<Holdings> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('INR. $overallReturns',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.green)),
-                      Text('INR. $currentValue',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+                      Text('INR. '+overallReturns.toStringAsFixed(2),style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.green)),
+                      Text('INR. '+currentValue.toStringAsFixed(2),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
                     ],
                   ),
                 ),
