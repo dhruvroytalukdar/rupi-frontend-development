@@ -1,14 +1,33 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:frontend/components/welcome_screen/content_section.dart';
+import 'package:frontend/components/otp_screen/content_section.dart';
+import 'package:frontend/models/otf_verification_model.dart';
+import 'package:frontend/utils/auth_utils.dart';
 import '../constants/index.dart';
 
-class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+class OTPScreen extends StatelessWidget {
+  const OTPScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    FirebaseAuth auth = FirebaseAuth.instance;
+    OTPModel otpdetails =
+        ModalRoute.of(context)!.settings.arguments as OTPModel;
+
+    print("ID ${otpdetails.verificationId}");
+
+    void signIn() async {
+      String? status = await Auth(authInstance: auth)
+          .signInWithPhoneNumber(otpdetails.verificationId, "123456");
+      if (status == "Success") {
+        Navigator.pushReplacementNamed(context, '/home');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text('Error : ${status ?? "Something went wrong"}')));
+      }
+    }
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
@@ -72,8 +91,7 @@ class WelcomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-
-                    const ContentSection(),
+                    ContentSection(signIn: signIn),
                   ],
                 ),
               ),
