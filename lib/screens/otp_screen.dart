@@ -18,15 +18,25 @@ class OTPScreen extends StatelessWidget {
 
     print("ID ${otpdetails.verificationId}");
 
-    void signIn() async {
+    Future<void> signIn(String smscode) async {
       String? status = await Auth(authInstance: auth)
-          .signInWithPhoneNumber(otpdetails.verificationId, "123456");
+          .signInWithPhoneNumber(otpdetails.verificationId, smscode);
       if (status == "Success") {
         Navigator.pushReplacementNamed(context, '/home');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('Error : ${status ?? "Something went wrong"}')));
       }
+    }
+
+    Future<void> resendOTPWrapper() async {
+      await Auth(authInstance: auth)
+          .sendOTPAgain(otpdetails.phoneNumber, otpdetails.resendToken);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('OTP resent successfully'),
+        ),
+      );
     }
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -91,7 +101,7 @@ class OTPScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    ContentSection(signIn: signIn),
+                    ContentSection(signIn: signIn, resendOTP: resendOTPWrapper),
                   ],
                 ),
               ),

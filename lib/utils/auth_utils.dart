@@ -79,6 +79,21 @@ class Auth {
     }
   }
 
+  Future<void> sendOTPAgain(String phoneNumber, int? resendToken) async {
+    try {
+      await authInstance.verifyPhoneNumber(
+        phoneNumber: phoneNumber,
+        verificationCompleted: (PhoneAuthCredential phoneCreds) {},
+        verificationFailed: (FirebaseAuthException authException) {},
+        codeSent: (String verificationId, int? resendToken) {},
+        codeAutoRetrievalTimeout: (String verificationId) {},
+        forceResendingToken: resendToken,
+      );
+    } catch (e) {
+      print("Error in sendOTPAgain ${e.toString()}");
+    }
+  }
+
   Future<void> verifyPhoneNumber(String phoneNumber,
       Function onVerficationComplete, Function onCodeSent) async {
     try {
