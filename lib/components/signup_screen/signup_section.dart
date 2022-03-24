@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/utils/auth_utils.dart';
 import 'package:frontend/utils/alert_utils.dart';
+
+import '../../models/otf_verification_model.dart';
 // import 'package:intl_phone_field/intl_phone_field.dart';
 
 // Signup Section is the outer wrapper of all the text widgets, textfields and buttons
@@ -13,7 +15,6 @@ class SignupSection extends StatefulWidget {
 }
 
 class _SignupSectionState extends State<SignupSection> {
-
   bool _isSigningUp = false;
   String full_name = "";
   String email = "";
@@ -25,40 +26,62 @@ class _SignupSectionState extends State<SignupSection> {
     borderSide: BorderSide(color: Colors.red),
   );
 
-  void signUp() async{
+  void signUp() async {
     //signup code goes here
     String? status;
     setState(() {
       _isSigningUp = true;
     });
 
-    status = await Auth(authInstance: auth).signUpWithEmail(email, password_text);
+    status =
+        await Auth(authInstance: auth).signUpWithEmail(email, password_text);
 
     setState(() {
       _isSigningUp = false;
     });
 
-    if(status == "Success") {
-      if(auth.currentUser?.emailVerified == true) {
+    if (status == "Success") {
+      if (auth.currentUser?.emailVerified == true) {
         //print("In home screen ${auth.currentUser?.emailVerified}");
         Navigator.pushReplacementNamed(context, '/home');
       } else {
         Navigator.pushReplacementNamed(context, '/verify');
       }
-    }else{
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error : ${status ?? "Something went wrong"}')));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Error : ${status ?? "Something went wrong"}')));
     }
+  }
+
+  void signUpWithPhone() async {
+    await Auth(authInstance: auth).verifyPhoneNumber(
+      "+91 9876543210",
+      () {
+        print("Inside onVerificationComplete");
+      },
+      (id, resendToken) {
+        print("Inside onCodeSent $id");
+        Navigator.pushNamed(
+          context,
+          '/otpverify',
+          arguments: OTPModel(
+            resendToken: resendToken,
+            phoneNumber: '+91 9876543210',
+            verificationId: id,
+          ),
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
     return SingleChildScrollView(
       child: SizedBox(
-        height: height-30,
+        height: height - 30,
         width: width,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,11 +90,11 @@ class _SignupSectionState extends State<SignupSection> {
               children: [
                 GestureDetector(
                   // Go back
-                  onTap: (){
+                  onTap: () {
                     Navigator.pop(context);
                   },
                   child: Padding(
-                    padding: const EdgeInsets.only(top:15,left: 20.0),
+                    padding: const EdgeInsets.only(top: 15, left: 20.0),
                     child: Row(
                       children: const [
                         Icon(
@@ -81,7 +104,7 @@ class _SignupSectionState extends State<SignupSection> {
                           semanticLabel: 'Go back',
                         ),
                         SizedBox(
-                          width:12,
+                          width: 12,
                         ),
                         Text(
                           "Back",
@@ -109,7 +132,7 @@ class _SignupSectionState extends State<SignupSection> {
                 ),
                 const SizedBox(height: 15),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(30.0,10.0,30.0,5.0),
+                  padding: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 5.0),
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
@@ -118,9 +141,9 @@ class _SignupSectionState extends State<SignupSection> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children:  [
+                      children: [
                         const Padding(
-                          padding: EdgeInsets.fromLTRB(15,8,15,2),
+                          padding: EdgeInsets.fromLTRB(15, 8, 15, 2),
                           child: Text(
                             "FULL NAME",
                             style: TextStyle(
@@ -133,7 +156,7 @@ class _SignupSectionState extends State<SignupSection> {
                           padding: const EdgeInsets.symmetric(horizontal: 15.0),
                           child: TextField(
                             key: const Key('full_name'),
-                            onChanged: (text){
+                            onChanged: (text) {
                               full_name = text;
                             },
                             keyboardType: TextInputType.name,
@@ -143,9 +166,9 @@ class _SignupSectionState extends State<SignupSection> {
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.fromLTRB(15,8,15,2),
+                          padding: EdgeInsets.fromLTRB(15, 8, 15, 2),
                           child: Text(
-                            "EMAIL",
+                            "EMAIL/MOBILE NUMBER",
                             style: TextStyle(
                               fontSize: 17.0,
                               color: Colors.grey,
@@ -156,52 +179,17 @@ class _SignupSectionState extends State<SignupSection> {
                           padding: const EdgeInsets.symmetric(horizontal: 15.0),
                           child: TextField(
                             key: const Key('email'),
-                            onChanged: (text){
+                            onChanged: (text) {
                               email = text;
                             },
                             keyboardType: TextInputType.emailAddress,
                             decoration: const InputDecoration(
-                              hintText: 'abc@example.com',
-                            ),
-                          ),
-                        ),
-
-                        const Padding(
-                          padding: EdgeInsets.fromLTRB(15,8,15,2),
-                          child: Text(
-                            "MOBILE NUMBER",
-                            style: TextStyle(
-                              fontSize: 17.0,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ),
-                        //   IntlPhoneField(
-                        //     disableLengthCheck: true,
-                        //     decoration: const InputDecoration(
-                        //       labelText: 'Phone Number',
-                        //       // alignLabelWithHint: true,
-                        //     ),
-                        //     initialCountryCode: 'IN',
-                        //     onChanged: (phone) {
-                        //       print(phone.completeNumber);
-                        //     },
-                        // ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                          child: TextField(
-                            key: const Key('mobile'),
-                            onChanged: (text){
-                              //mobile number logic
-                            },
-                            keyboardType: TextInputType.phone,
-                            decoration: const InputDecoration(
-                              hintText: 'Enter mobile number here',
+                              hintText: 'abc@example.com/+91 9876543210',
                             ),
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.fromLTRB(15,8,15,2),
+                          padding: EdgeInsets.fromLTRB(15, 8, 15, 2),
                           child: Text(
                             "PASSWORD",
                             style: TextStyle(
@@ -214,7 +202,7 @@ class _SignupSectionState extends State<SignupSection> {
                           padding: const EdgeInsets.symmetric(horizontal: 15.0),
                           child: TextField(
                             key: const Key('password'),
-                            onChanged: (text){
+                            onChanged: (text) {
                               password_text = text;
                             },
                             keyboardType: TextInputType.visiblePassword,
@@ -225,7 +213,7 @@ class _SignupSectionState extends State<SignupSection> {
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.fromLTRB(15,8,15,2),
+                          padding: EdgeInsets.fromLTRB(15, 8, 15, 2),
                           child: Text(
                             "CONFIRM PASSWORD",
                             style: TextStyle(
@@ -235,30 +223,27 @@ class _SignupSectionState extends State<SignupSection> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(15,0,15,10),
+                          padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
                           child: TextField(
                             key: const Key('confirm_password'),
-                            onChanged: (text){
+                            onChanged: (text) {
                               confirm_password_text = text;
-                              if (confirm_password_text!=password_text)
-                                {
-                                  setState(() {
-                                    errorMessage = "Both passwords must be same.";
-                                    normalBorder = const UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.red),
-                                    );
-                                  });
-                                  // print("PASSWORD MISMATCH");
-                                }
-                              else
-                                {
-                                  setState(() {
-                                    errorMessage = "";
-                                    normalBorder = const UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.green),
-                                    );
-                                  });
-                                }
+                              if (confirm_password_text != password_text) {
+                                setState(() {
+                                  errorMessage = "Both passwords must be same.";
+                                  normalBorder = const UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.red),
+                                  );
+                                });
+                                // print("PASSWORD MISMATCH");
+                              } else {
+                                setState(() {
+                                  errorMessage = "";
+                                  normalBorder = const UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.green),
+                                  );
+                                });
+                              }
                             },
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: true,
@@ -267,51 +252,65 @@ class _SignupSectionState extends State<SignupSection> {
                               errorText: errorMessage,
                               focusedErrorBorder: normalBorder,
                             ),
-
                           ),
                         ),
-
-                        (!_isSigningUp)?GestureDetector(
-                          key: const Key('getStarted_test'),
-                          onTap: (){
-                            if (confirm_password_text==password_text)
-                            {signUp();}
-                            else
-                              {
-                                String messageText = "'Password' and 'Confirm Password' must have same value.";
-                                String titleText = "Invalid Input!";
-                                showAlertDialog(context,titleText,messageText);
-                              }
-                          },
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5),bottomRight: Radius.circular(5)),
-                              color: Color(0xff554099),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const [
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(15.0,8.0,15.0,8.0),
-                                  child: Text('Get Started',style: TextStyle(fontSize: 20, color: Colors.white),),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(right: 12.0),
-                                  child: Icon(
-                                    Icons.arrow_forward,
-                                    color: Colors.white,
-                                    size: 28.0,
-                                    semanticLabel: 'Text to announce in accessibility modes',
+                        (!_isSigningUp)
+                            ? GestureDetector(
+                                key: const Key('getStarted_test'),
+                                onTap: () {
+                                  if (confirm_password_text == password_text) {
+                                    //signUp();
+                                    signUpWithPhone();
+                                  } else {
+                                    String messageText =
+                                        "'Password' and 'Confirm Password' must have same value.";
+                                    String titleText = "Invalid Input!";
+                                    showAlertDialog(
+                                        context, titleText, messageText);
+                                  }
+                                },
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(5),
+                                        bottomRight: Radius.circular(5)),
+                                    color: Color(0xff554099),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: const [
+                                      Padding(
+                                        padding: EdgeInsets.fromLTRB(
+                                            15.0, 8.0, 15.0, 8.0),
+                                        child: Text(
+                                          'Get Started',
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.only(right: 12.0),
+                                        child: Icon(
+                                          Icons.arrow_forward,
+                                          color: Colors.white,
+                                          size: 28.0,
+                                          semanticLabel:
+                                              'Text to announce in accessibility modes',
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ):const Center(child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: CircularProgressIndicator(),
-                        )),
+                              )
+                            : const Center(
+                                child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: CircularProgressIndicator(),
+                              )),
                       ],
                     ),
                   ),
@@ -319,18 +318,18 @@ class _SignupSectionState extends State<SignupSection> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom:12.0),
+              padding: const EdgeInsets.only(bottom: 12.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   GestureDetector(
                     key: const Key('terms_conditions_test'),
-                    onTap: (){
+                    onTap: () {
                       //link to terms and conditions
                     },
                     child: SizedBox(
-                      width: width*0.932,
+                      width: width * 0.932,
                       child: Text(
                         'By proceeding, you agree with our Terms & Conditions',
                         textAlign: TextAlign.center,
