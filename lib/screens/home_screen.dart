@@ -158,18 +158,12 @@ class RootComponent extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Holdings(),
-                const Support(),
-                const More(),
+              children: const [
+                Holdings(),
+                Support(),
+                More(),
                 // context.watch<UserProvider>().isUserLoggedIn ? Text("Home ${context.watch<UserProvider>().loggedInUser?.fullName}") : const Text("You are logged out"),
-                ElevatedButton(
-                    onPressed: () async {
-                      await Auth(authInstance: auth).logoutUser();
-                      context.read<UserProvider>().resetUser();
-                      Navigator.pushReplacementNamed(context, '/welcome');
-                    },
-                    child: const Text('Logout')),
+
               ],
             ),
           ),
