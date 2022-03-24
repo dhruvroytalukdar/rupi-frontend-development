@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/utils/auth_utils.dart';
+import 'package:frontend/utils/verify_input.dart';
 
 // Login Section is the outer wrapper of all the text widgets, textfields and buttons
 class LoginSection extends StatefulWidget {
@@ -12,6 +13,7 @@ class LoginSection extends StatefulWidget {
 
 class _LoginSectionState extends State<LoginSection> {
 
+  bool usingEmail = true;
   bool _isSigningIn = false;
   String email = "";
   String password = "";
@@ -107,7 +109,7 @@ class _LoginSectionState extends State<LoginSection> {
                         const Padding(
                           padding: EdgeInsets.fromLTRB(15,8,15,2),
                           child: Text(
-                            "EMAIL",
+                            "EMAIL/MOBILE NUMBER",
                             style: TextStyle(
                               fontSize: 17.0,
                               color: Colors.grey,
@@ -120,6 +122,10 @@ class _LoginSectionState extends State<LoginSection> {
                             key: const Key('email'),
                             onChanged: (text){
                               email = text;
+                              setState(() {
+                                // print(isUsingEmail(text));
+                                usingEmail = isUsingEmail(text);
+                              });
                             },
                             keyboardType: TextInputType.emailAddress,
                             decoration: const InputDecoration(
@@ -127,29 +133,36 @@ class _LoginSectionState extends State<LoginSection> {
                             ),
                           ),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.fromLTRB(15,8,15,2),
-                          child: Text(
-                            "PASSWORD",
-                            style: TextStyle(
-                            fontSize: 17.0,
-                            color: Colors.grey,
+                        if(usingEmail)
+                          Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.fromLTRB(15,8,15,2),
+                              child: Text(
+                                "PASSWORD",
+                                style: TextStyle(
+                                fontSize: 17.0,
+                                color: Colors.grey,
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                          child: TextField(
-                            key: const Key('password'),
-                            onChanged: (text){
-                              password = text;
-                            },
-                            keyboardType: TextInputType.visiblePassword,
-                            obscureText: true,
-                            decoration: const InputDecoration(
-                              hintText: '************',
+                             Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                              child: TextField(
+                                key: const Key('password'),
+                                onChanged: (text){
+                                  password = text;
+                                },
+                                keyboardType: TextInputType.visiblePassword,
+                                obscureText: true,
+                                decoration: const InputDecoration(
+                                  hintText: '************',
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                         (!_isSigningIn)?GestureDetector(
                           key: const Key('continue_test'),

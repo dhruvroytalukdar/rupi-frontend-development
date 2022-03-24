@@ -52,7 +52,7 @@ class ContentSection extends StatelessWidget {
                     borderRadius: BorderRadius.circular(25.0),
                   ),
                 ),
-                child: const Text("Sign up using Email",
+                child: const Text("Sign up using Email/Mobile Number",
                   style: TextStyle(
                     color:Colors.white,
                     fontSize: 14.5,
