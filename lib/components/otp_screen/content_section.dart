@@ -18,8 +18,6 @@ class ContentSection extends StatefulWidget {
 
 class _ContentSectionState extends State<ContentSection> {
   bool _isSigningIn = false;
-  String email = "";
-  String password = "";
   FirebaseAuth auth = FirebaseAuth.instance;
   OtpFieldController otpController = OtpFieldController();
   String smsCode = "";
@@ -84,6 +82,7 @@ class _ContentSectionState extends State<ContentSection> {
                     height: 20,
                   ),
                   OTPTextField(
+                    key: const Key("otp_text_field"),
                     controller: otpController,
                     length: 6,
                     width: MediaQuery.of(context).size.width * (4 / 5),
@@ -101,9 +100,7 @@ class _ContentSectionState extends State<ContentSection> {
                     onCompleted: (pin) {
                       smsCode = pin;
                     },
-                    onChanged: (pin) {
-                      print(pin);
-                    },
+                    onChanged: (_) {},
                   ),
                   const SizedBox(
                     height: 20,
@@ -119,6 +116,7 @@ class _ContentSectionState extends State<ContentSection> {
                         ),
                       ),
                       TextButton(
+                        key: const Key("resend_otp_button"),
                         onPressed: () async {
                           await widget.resendOTP();
                         },
@@ -136,7 +134,7 @@ class _ContentSectionState extends State<ContentSection> {
                     height: 8,
                   ),
                   GestureDetector(
-                    key: const Key('otpcontinuebutton'),
+                    key: const Key('otp_continue_button'),
                     onTap: () async {
                       if (smsCode != "") {
                         await widget.signIn(smsCode);

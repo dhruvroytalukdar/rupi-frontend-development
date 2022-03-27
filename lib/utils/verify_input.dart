@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-
-bool isUsingEmail(String s)
-{
+bool isUsingEmail(String s) {
   if (s == "") {
     return true;
   }
