@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/utils/auth_utils.dart';
 import 'package:frontend/utils/alert_utils.dart';
@@ -57,6 +56,9 @@ class _SignupSectionState extends State<SignupSection> {
   }
 
   void signUpWithPhone() async {
+    setState(() {
+      _isSigningUp = true;
+    });
     await Auth(authInstance: auth).verifyPhoneNumber(
       "+91 9876543210",
       () {
@@ -64,6 +66,9 @@ class _SignupSectionState extends State<SignupSection> {
       },
       (id, resendToken) {
         print("Inside onCodeSent $id");
+        setState(() {
+          _isSigningUp = false;
+        });
         Navigator.pushNamed(
           context,
           '/otpverify',
@@ -182,6 +187,9 @@ class _SignupSectionState extends State<SignupSection> {
                           padding: const EdgeInsets.symmetric(horizontal: 15.0),
                           child: TextField(
                             key: const Key('email'),
+                            toolbarOptions: const ToolbarOptions(
+                                paste: true,
+                            ),
                             onChanged: (text) {
                               email = text;
                               // print(isUsingEmail(text));
