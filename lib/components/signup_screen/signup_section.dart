@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/utils/auth_utils.dart';
 import 'package:frontend/utils/alert_utils.dart';
-
 import '../../models/otf_verification_model.dart';
 import '../../utils/verify_input.dart';
 // import 'package:intl_phone_field/intl_phone_field.dart';
@@ -19,7 +18,7 @@ class _SignupSectionState extends State<SignupSection> {
   bool usingEmail = true;
   bool _isSigningUp = false;
   String full_name = "";
-  String email = "";
+  String emailOrPhoneNumber = "";
   String password_text = "";
   String confirm_password_text = "";
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -35,8 +34,8 @@ class _SignupSectionState extends State<SignupSection> {
       _isSigningUp = true;
     });
 
-    status =
-        await Auth(authInstance: auth).signUpWithEmail(email, password_text);
+    status = await Auth(authInstance: auth)
+        .signUpWithEmail(emailOrPhoneNumber, password_text);
 
     setState(() {
       _isSigningUp = false;
@@ -60,7 +59,7 @@ class _SignupSectionState extends State<SignupSection> {
       _isSigningUp = true;
     });
     await Auth(authInstance: auth).verifyPhoneNumber(
-      "+91 9876543210",
+      emailOrPhoneNumber,
       () {
         print("Inside onVerificationComplete");
       },
@@ -74,7 +73,7 @@ class _SignupSectionState extends State<SignupSection> {
           '/otpverify',
           arguments: OTPModel(
             resendToken: resendToken,
-            phoneNumber: '+91 9876543210',
+            phoneNumber: emailOrPhoneNumber,
             verificationId: id,
           ),
         );
@@ -191,7 +190,7 @@ class _SignupSectionState extends State<SignupSection> {
                                 paste: true,
                             ),
                             onChanged: (text) {
-                              email = text;
+                              emailOrPhoneNumber = text;
                               // print(isUsingEmail(text));
                               setState(() {
                                 // print(isUsingEmail(text));
@@ -204,88 +203,95 @@ class _SignupSectionState extends State<SignupSection> {
                             ),
                           ),
                         ),
-
-                        if(usingEmail) Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Padding(
-                              padding: EdgeInsets.fromLTRB(15, 8, 15, 2),
-                              child: Text(
-                                "PASSWORD",
-                                style: TextStyle(
-                                  fontSize: 17.0,
-                                  color: Colors.grey,
+                        if (usingEmail)
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.fromLTRB(15, 8, 15, 2),
+                                child: Text(
+                                  "PASSWORD",
+                                  style: TextStyle(
+                                    fontSize: 17.0,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                              child: TextField(
-                                key: const Key('password'),
-                                onChanged: (text) {
-                                  password_text = text;
-                                },
-                                keyboardType: TextInputType.visiblePassword,
-                                obscureText: true,
-                                decoration: const InputDecoration(
-                                  hintText: '************',
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 15.0),
+                                child: TextField(
+                                  key: const Key('password'),
+                                  onChanged: (text) {
+                                    password_text = text;
+                                  },
+                                  keyboardType: TextInputType.visiblePassword,
+                                  obscureText: true,
+                                  decoration: const InputDecoration(
+                                    hintText: '************',
+                                  ),
                                 ),
                               ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.fromLTRB(15, 8, 15, 2),
-                              child: Text(
-                                "CONFIRM PASSWORD",
-                                style: TextStyle(
-                                  fontSize: 17.0,
-                                  color: Colors.grey,
+                              const Padding(
+                                padding: EdgeInsets.fromLTRB(15, 8, 15, 2),
+                                child: Text(
+                                  "CONFIRM PASSWORD",
+                                  style: TextStyle(
+                                    fontSize: 17.0,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
-                              child: TextField(
-                                key: const Key('confirm_password'),
-                                onChanged: (text) {
-                                  confirm_password_text = text;
-                                  if (confirm_password_text != password_text) {
-                                    setState(() {
-                                      errorMessage = "Both passwords must be same.";
-                                      normalBorder = const UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.red),
-                                      );
-                                    });
-                                    // print("PASSWORD MISMATCH");
-                                  } else {
-                                    setState(() {
-                                      errorMessage = "";
-                                      normalBorder = const UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.green),
-                                      );
-                                    });
-                                  }
-                                },
-                                keyboardType: TextInputType.visiblePassword,
-                                obscureText: true,
-                                decoration: InputDecoration(
-                                  hintText: '************',
-                                  errorText: errorMessage,
-                                  focusedErrorBorder: normalBorder,
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(15, 0, 15, 10),
+                                child: TextField(
+                                  key: const Key('confirm_password'),
+                                  onChanged: (text) {
+                                    confirm_password_text = text;
+                                    if (confirm_password_text !=
+                                        password_text) {
+                                      setState(() {
+                                        errorMessage =
+                                            "Both passwords must be same.";
+                                        normalBorder =
+                                            const UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.red),
+                                        );
+                                      });
+                                      // print("PASSWORD MISMATCH");
+                                    } else {
+                                      setState(() {
+                                        errorMessage = "";
+                                        normalBorder =
+                                            const UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.green),
+                                        );
+                                      });
+                                    }
+                                  },
+                                  keyboardType: TextInputType.visiblePassword,
+                                  obscureText: true,
+                                  decoration: InputDecoration(
+                                    hintText: '************',
+                                    errorText: errorMessage,
+                                    focusedErrorBorder: normalBorder,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          ),
                         (!_isSigningUp)
                             ? GestureDetector(
                                 key: const Key('getStarted_test'),
                                 onTap: () {
                                   if (confirm_password_text == password_text) {
-                                    if(usingEmail) {
+                                    if (usingEmail) {
                                       signUp();
-                                    }
-                                    else {
+                                    } else {
                                       signUpWithPhone();
                                     }
                                   } else {

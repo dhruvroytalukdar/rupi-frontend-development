@@ -1,13 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/models/otf_verification_model.dart';
 import 'package:frontend/screens/otp_screen.dart';
+import 'package:frontend/utils/verify_input.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'mock.dart';
 
-class OTPModelMock extends Mock implements OTPModel {}
+class MockAuthResult extends Mock implements UserCredential {}
 
+class MockAuthCredential extends Mock implements AuthCredential {}
+
+@GenerateMocks([FirebaseAuth])
 void main() {
   setupCloudFirestoreMocks();
 
@@ -24,16 +30,18 @@ void main() {
         OTPModel(resendToken: 0, phoneNumber: "", verificationId: "");
 
     // Show the widget
-    await tester.pumpWidget(MaterialApp(
-      home: Navigator(
-        onGenerateRoute: (_) {
-          return MaterialPageRoute<Widget>(
-            builder: (_) => const OTPScreen(),
-            settings: RouteSettings(arguments: mock),
-          );
-        },
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Navigator(
+          onGenerateRoute: (_) {
+            return MaterialPageRoute<Widget>(
+              builder: (_) => const OTPScreen(),
+              settings: RouteSettings(arguments: mock),
+            );
+          },
+        ),
       ),
-    ));
+    );
 
     // Test Results
     expect(resendButton, findsOneWidget);
@@ -60,5 +68,12 @@ void main() {
 
     // Test Results
     expect(continueButton, findsOneWidget);
+  });
+
+  test("Check if the isUsingEmail function works", () {
+    expect(isUsingEmail("dhruv@lazer.com"), isNotNull);
+    expect(isUsingEmail("dhruv@lazer.com"), true);
+    expect(isUsingEmail("9876543210"), isNotNull);
+    expect(isUsingEmail("9876543210"), false);
   });
 }
