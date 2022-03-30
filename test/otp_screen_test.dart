@@ -5,15 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/models/otf_verification_model.dart';
 import 'package:frontend/screens/otp_screen.dart';
 import 'package:frontend/utils/verify_input.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 import 'mock.dart';
 
-class MockAuthResult extends Mock implements UserCredential {}
-
-class MockAuthCredential extends Mock implements AuthCredential {}
-
-@GenerateMocks([FirebaseAuth])
 void main() {
   setupCloudFirestoreMocks();
 
