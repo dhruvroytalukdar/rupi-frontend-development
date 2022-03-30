@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/utils/auth_utils.dart';
 import 'package:frontend/utils/alert_utils.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import '../../models/otf_verification_model.dart';
 import '../../utils/verify_input.dart';
-// import 'package:intl_phone_field/intl_phone_field.dart';
 
 // Signup Section is the outer wrapper of all the text widgets, textfields and buttons
 class SignupSection extends StatefulWidget {
@@ -15,10 +15,12 @@ class SignupSection extends StatefulWidget {
 }
 
 class _SignupSectionState extends State<SignupSection> {
+
+  TextEditingController emailOrPhoneController = TextEditingController();
   bool usingEmail = true;
   bool _isSigningUp = false;
   String full_name = "";
-  String emailOrPhoneNumber = "";
+  String emailOrPhone = "";
   String password_text = "";
   String confirm_password_text = "";
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -35,7 +37,7 @@ class _SignupSectionState extends State<SignupSection> {
     });
 
     status = await Auth(authInstance: auth)
-        .signUpWithEmail(emailOrPhoneNumber, password_text);
+        .signUpWithEmail(emailOrPhone, password_text);
 
     setState(() {
       _isSigningUp = false;
@@ -55,19 +57,25 @@ class _SignupSectionState extends State<SignupSection> {
   }
 
   void signUpWithPhone() async {
+    setState(() {
+      _isSigningUp = true;
+    });
     await Auth(authInstance: auth).verifyPhoneNumber(
-      emailOrPhoneNumber,
+      emailOrPhone,
       () {
         print("Inside onVerificationComplete");
       },
       (id, resendToken) {
         print("Inside onCodeSent $id");
+        setState(() {
+          _isSigningUp = false;
+        });
         Navigator.pushNamed(
           context,
           '/otpverify',
           arguments: OTPModel(
             resendToken: resendToken,
-            phoneNumber: emailOrPhoneNumber,
+            phoneNumber: emailOrPhone,
             verificationId: id,
           ),
         );
@@ -178,10 +186,17 @@ class _SignupSectionState extends State<SignupSection> {
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                          child: TextField(
+                          child:
+                          (usingEmail)?
+                          TextField(
+                            controller: emailOrPhoneController,
+                            autofocus: true,
                             key: const Key('email'),
+                            toolbarOptions: const ToolbarOptions(
+                                paste: true,
+                            ),
                             onChanged: (text) {
-                              emailOrPhoneNumber = text;
+                              emailOrPhone = text;
                               // print(isUsingEmail(text));
                               setState(() {
                                 // print(isUsingEmail(text));
@@ -192,6 +207,27 @@ class _SignupSectionState extends State<SignupSection> {
                             decoration: const InputDecoration(
                               hintText: 'abc@example.com/+91 9876543210',
                             ),
+                          ):
+                          IntlPhoneField(
+                            initialCountryCode: 'IN',
+                            controller: emailOrPhoneController,
+                            autofocus: true,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(),
+                              ),
+                            ),
+                            onChanged: (phone) {
+                              print(phone.completeNumber);
+                              emailOrPhone = phone.completeNumber;
+                              setState(() {
+                                usingEmail = isUsingEmail(emailOrPhone);
+                              });
+                              print(usingEmail);
+                            },
+                            onCountryChanged: (country) {
+                              print('Country changed to: ' + country.name);
+                            },
                           ),
                         ),
                         if (usingEmail)

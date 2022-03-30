@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:frontend/utils/auth_utils.dart';
 import 'package:frontend/utils/verify_input.dart';
 
+import '../../models/otf_verification_model.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
+
 // Login Section is the outer wrapper of all the text widgets, textfields and buttons
 class LoginSection extends StatefulWidget {
   const LoginSection({Key? key}) : super(key: key);
@@ -15,9 +18,10 @@ class _LoginSectionState extends State<LoginSection> {
 
   bool usingEmail = true;
   bool _isSigningIn = false;
-  String email = "";
+  String emailOrPhone = "";
   String password = "";
   FirebaseAuth auth = FirebaseAuth.instance;
+  TextEditingController emailOrPhoneController = TextEditingController();
 
   void signIn() async
   {
@@ -26,7 +30,7 @@ class _LoginSectionState extends State<LoginSection> {
       _isSigningIn = true;
     });
 
-    status = await Auth(authInstance: auth).signInWithEmail(email, password);
+    status = await Auth(authInstance: auth).signInWithEmail(emailOrPhone, password);
 
     setState(() {
       _isSigningIn = false;
@@ -37,6 +41,34 @@ class _LoginSectionState extends State<LoginSection> {
     }else{
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error : ${status ?? "Something went wrong"}')));
     }
+  }
+
+  void signInWithPhone() async {
+    print("sign in with phone called with phone: $emailOrPhone");
+    setState(() {
+      _isSigningIn = true;
+    });
+    await Auth(authInstance: auth).verifyPhoneNumber(
+      emailOrPhone,
+          () {
+        print("Inside onVerificationComplete");
+      },
+          (id, resendToken) {
+        print("Inside onCodeSent $id");
+        setState(() {
+          _isSigningIn = false;
+        });
+        Navigator.pushNamed(
+          context,
+          '/otpverify',
+          arguments: OTPModel(
+            resendToken: resendToken,
+            phoneNumber: emailOrPhone,
+            verificationId: id,
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -105,7 +137,7 @@ class _LoginSectionState extends State<LoginSection> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children:  [
+                      children: [
                         const Padding(
                           padding: EdgeInsets.fromLTRB(15,8,15,2),
                           child: Text(
@@ -118,20 +150,48 @@ class _LoginSectionState extends State<LoginSection> {
                         ),
                          Padding(
                           padding: EdgeInsets.symmetric(horizontal: 15.0),
-                          child: TextField(
-                            key: const Key('email'),
-                            onChanged: (text){
-                              email = text;
-                              setState(() {
-                                // print(isUsingEmail(text));
-                                usingEmail = isUsingEmail(text);
-                              });
-                            },
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: const InputDecoration(
-                              hintText: 'abc@example.com',
-                            ),
-                          ),
+                          child:
+                          (usingEmail)?
+                              TextField(
+                                controller: emailOrPhoneController,
+                                key: const Key('email'),
+                                autofocus: true,
+                                toolbarOptions: const ToolbarOptions(
+                                  paste: true,
+                                ),
+                                onChanged: (text){
+                                  emailOrPhone = text;
+                                  setState(() {
+                                    // print(isUsingEmail(text));
+                                    usingEmail = isUsingEmail(text);
+                                  });
+                                },
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: const InputDecoration(
+                                  hintText: 'abc@example.com',
+                                ),
+                              ):
+                              IntlPhoneField(
+                                initialCountryCode: 'IN',
+                                controller: emailOrPhoneController,
+                                autofocus: true,
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(),
+                                  ),
+                                ),
+                                onChanged: (phone) {
+                                  print(phone.completeNumber);
+                                    emailOrPhone = phone.completeNumber;
+                                    setState(() {
+                                      usingEmail = isUsingEmail(emailOrPhone);
+                                    });
+                                    print(usingEmail);
+                                },
+                                onCountryChanged: (country) {
+                                  print('Country changed to: ' + country.name);
+                                },
+                              ),
                         ),
                         if(usingEmail)
                           Column(
@@ -167,7 +227,13 @@ class _LoginSectionState extends State<LoginSection> {
                         (!_isSigningIn)?GestureDetector(
                           key: const Key('continue_test'),
                           onTap: (){
-                            signIn();
+                            if (usingEmail) {
+                              signIn();
+                            }
+                            else{
+                              //signin with phone number here
+                              signInWithPhone();
+                            }
                           },
                           child: Container(
                             decoration: const BoxDecoration(
