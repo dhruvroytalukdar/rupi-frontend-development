@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
+import 'package:frontend/components/background/background_design.dart';
 import 'package:frontend/components/home_screen/more_card.dart';
 import 'package:frontend/components/home_screen/support_card.dart';
 import 'package:frontend/providers/user_provider.dart';
@@ -141,33 +142,33 @@ class RootComponent extends StatelessWidget {
           centerTitle: true,
         ),
         body: SafeArea(
-            child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.orangeAccent,
-                Color(0xFFCA436B),
-                Color(0xFF915FB5),
-                Colors.indigoAccent
-              ],
-              begin: FractionalOffset.topLeft,
-              end: FractionalOffset.bottomRight,
+          child: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.orangeAccent,
+                  Color(0xFFCA436B),
+                  Color(0xFF915FB5),
+                  Colors.indigoAccent
+                ],
+                begin: FractionalOffset.topLeft,
+                end: FractionalOffset.bottomRight,
+              ),
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  Holdings(),
+                  Support(),
+                  More(),
+                  // context.watch<UserProvider>().isUserLoggedIn ? Text("Home ${context.watch<UserProvider>().loggedInUser?.fullName}") : const Text("You are logged out"),
+                ],
+              ),
             ),
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
-                Holdings(),
-                Support(),
-                More(),
-                // context.watch<UserProvider>().isUserLoggedIn ? Text("Home ${context.watch<UserProvider>().loggedInUser?.fullName}") : const Text("You are logged out"),
-
-              ],
-            ),
-          ),
-        )),
+        ),
       ),
     );
   }

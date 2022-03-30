@@ -12,8 +12,6 @@ class ContentSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FirebaseAuth auth = FirebaseAuth.instance;
-
     return SizedBox(
       // This will make the sizedBox extend upto 100% of screen width and height
       height: double.infinity,
