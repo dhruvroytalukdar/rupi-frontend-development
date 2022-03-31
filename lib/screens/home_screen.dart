@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
-import 'package:frontend/components/background/background_design.dart';
 import 'package:frontend/components/home_screen/more_card.dart';
 import 'package:frontend/components/home_screen/support_card.dart';
 import 'package:frontend/providers/user_provider.dart';
