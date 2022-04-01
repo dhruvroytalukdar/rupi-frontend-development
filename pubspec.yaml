@@ -68,6 +68,7 @@ flutter:
   assets:
     - assets/icons/google.jpg
     - assets/icons/facebook.png
+    - assets/icons/rupeeicon.png
 
   fonts:
     - family: Roboto

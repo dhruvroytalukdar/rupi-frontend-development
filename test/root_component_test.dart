@@ -49,4 +49,11 @@ void main() {
       expect(currentBalance.data, "0.0");
     });
   });
+
+  group("UI checks", () {
+    testWidgets("Check if the hamburger button is showing correctly or not",
+        (WidgetTester tester) async {
+          
+        });
+  });
 }
