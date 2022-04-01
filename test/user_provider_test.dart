@@ -12,8 +12,7 @@ void main() async {
       _userModel = User(
           fullName: 'Dhruv Roy',
           email: 'dhruv@gmail.com',
-          phoneNumber: '1234567890'
-      );
+          phoneNumber: '1234567890');
 
       // BEGIN TESTS....
       expect(_userModel.fullName, matches('Dhruv Roy'));
@@ -25,44 +24,42 @@ void main() async {
     });
 
     test('Check values from user provider', () {
-
-      auth = UserProvider();
+      auth = UserProvider(null);
 
       // check setUserFromUserPassword method
-      auth.setUserFromUserPassword("test@email.com", "test_name", "1234567890");
+      auth.setUserFromUserPassword(
+          "test@email.com", "test_name", "1234567890", 0, 0);
 
       expect(auth.isUserLoggedIn, true);
       expect(auth.loggedInUser, isNotNull);
-      expect(auth.loggedInUser?.fullName.isNotEmpty, true);
-      expect(auth.loggedInUser?.fullName, matches("test_name"));
-      expect(auth.loggedInUser?.email.isNotEmpty, true);
-      expect(auth.loggedInUser?.email, matches("test@email.com"));
-      expect(auth.loggedInUser?.phoneNumber.isNotEmpty, true);
+      expect(auth.loggedInUser?.fullName!.isNotEmpty, true);
+      expect(auth.loggedInUser?.fullName!, matches("test_name"));
+      expect(auth.loggedInUser?.email!.isNotEmpty, true);
+      expect(auth.loggedInUser?.email!, matches("test@email.com"));
+      expect(auth.loggedInUser?.phoneNumber!.isNotEmpty, true);
       expect(auth.loggedInUser?.phoneNumber, matches("1234567890"));
 
       _userModel = User(
           fullName: 'Dhruv Roy',
           email: 'dhruv@gmail.com',
-          phoneNumber: '1234567890'
-      );
+          phoneNumber: '1234567890');
 
       // check setUserFromUserObject method
       auth.setUserFromUserObject(_userModel);
 
       expect(auth.isUserLoggedIn, true);
       expect(auth.loggedInUser, isNotNull);
-      expect(auth.loggedInUser?.fullName.isNotEmpty, true);
+      expect(auth.loggedInUser?.fullName!.isNotEmpty, true);
       expect(auth.loggedInUser?.fullName, matches("Dhruv Roy"));
-      expect(auth.loggedInUser?.email.isNotEmpty, true);
+      expect(auth.loggedInUser?.email!.isNotEmpty, true);
       expect(auth.loggedInUser?.email, matches("dhruv@gmail.com"));
-      expect(auth.loggedInUser?.phoneNumber.isNotEmpty, true);
+      expect(auth.loggedInUser?.phoneNumber!.isNotEmpty, true);
       expect(auth.loggedInUser?.phoneNumber, matches("1234567890"));
 
       // check resetUser method
       auth.resetUser();
-      expect(auth.isUserLoggedIn,false);
+      expect(auth.isUserLoggedIn, false);
       expect(auth.loggedInUser, isNull);
-
     });
   });
 }
