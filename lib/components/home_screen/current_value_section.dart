@@ -7,11 +7,12 @@ class CurrentValueSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text(
           "Current Value",
           style: TextStyle(
-            fontSize: 20.0,
+            fontSize: 17.0,
             color: Colors.white,
           ),
         ),
@@ -21,15 +22,15 @@ class CurrentValueSection extends StatelessWidget {
           children: const [
             Image(
               image: AssetImage("assets/icons/rupeeicon.png"),
-              width: 45,
-              height: 45,
+              width: 48,
+              height: 48,
               fit: BoxFit.scaleDown,
               alignment: Alignment.center,
             ),
             Text(
               "6,000",
               style: TextStyle(
-                fontSize: 28.0,
+                fontSize: 36.0,
                 color: Colors.white,
               ),
             ),
