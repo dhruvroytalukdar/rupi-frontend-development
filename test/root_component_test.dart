@@ -29,7 +29,7 @@ void main() {
         title: 'Flutter Demo',
         home: ChangeNotifierProvider<UserProvider>(
           create: (_) => UserProvider(_user),
-          child: RootComponent(),
+          child: const RootComponent(),
         ),
       ),
     );
