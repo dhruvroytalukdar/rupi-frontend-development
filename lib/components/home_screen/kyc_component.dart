@@ -33,9 +33,15 @@ class _KYC_ComponentState extends State<KYC_Component> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
+                 Padding(
                   padding: EdgeInsets.only(bottom:10.0),
-                  child: Text('KYC',style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal),),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text('KYC',style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal),),
+                      Icon(Icons.close,size: 20,),
+                    ],
+                  ),
                 ),
                 const Text('Let\'s get started! Enter your PAN number:'),
                 const TextField(
