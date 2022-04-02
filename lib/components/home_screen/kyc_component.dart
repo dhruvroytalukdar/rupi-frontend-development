@@ -26,20 +26,25 @@ class _KYC_ComponentState extends State<KYC_Component> {
         elevation: 0.1,
         child: SizedBox(
           width: double.infinity,
-          height: getDeviceHeight(context) * 0.25,
+          height: getDeviceHeight(context) * 0.28,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(10.0,8.0,10.0,5.0),
+            padding: const EdgeInsets.fromLTRB(10.0,6.0,10.0,5.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                  Padding(
-                  padding: EdgeInsets.only(bottom:10.0),
+                  padding: EdgeInsets.only(bottom:9.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       Text('KYC',style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal),),
-                      Icon(Icons.close,size: 20,),
+                      IconButton(
+                          onPressed: (){
+                            //kyc card gets closed
+                          },
+                          icon: Icon(Icons.close,size: 20,)
+                      ),
                     ],
                   ),
                 ),
