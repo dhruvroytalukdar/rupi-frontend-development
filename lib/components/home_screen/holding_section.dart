@@ -33,7 +33,7 @@ class HoldingSection extends StatelessWidget {
             elevation: 0.1,
             child: SizedBox(
               width: double.infinity,
-              height: getDeviceHeight(context) * 0.23,
+              height: getDeviceHeight(context) * 0.24,
               child: const Text("Hello"),
             ),
           ),

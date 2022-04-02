@@ -9,15 +9,8 @@ import 'package:provider/provider.dart';
 
 import '../../utils/auth_utils.dart';
 
-class RootComponent extends StatefulWidget {
+class RootComponent extends StatelessWidget {
   const RootComponent({Key? key}) : super(key: key);
-
-  @override
-  State<RootComponent> createState() => _RootComponentState();
-}
-
-class _RootComponentState extends State<RootComponent> {
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +29,9 @@ class _RootComponentState extends State<RootComponent> {
       ),
       child: SafeArea(
         child: Scaffold(
-          key: scaffoldKey,
+          resizeToAvoidBottomInset: false, //not ideal, will work on later
+          //case: keyboard opens, widgets resizes
+          //SingleChildScrollView is a solution, but issues exist, need to figure out
           appBar: AppBar(
             backgroundColor: AppColors.homeScreenUpperBackground,
             elevation: 0.0,

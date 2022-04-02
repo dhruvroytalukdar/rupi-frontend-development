@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/components/home_screen/holding_section.dart';
+import 'package:frontend/components/home_screen/kyc_component.dart';
 import 'package:frontend/components/home_screen/transaction_section.dart';
 
 class HoldingTransactionWrapper extends StatelessWidget {
@@ -10,7 +11,8 @@ class HoldingTransactionWrapper extends StatelessWidget {
     return Column(
       children: [
         HoldingSection(),
-        TransactionSection(),
+        // TransactionSection(),
+        KYC_Component(),
       ],
     );
   }
