@@ -9,8 +9,15 @@ import 'package:provider/provider.dart';
 
 import '../../utils/auth_utils.dart';
 
-class RootComponent extends StatelessWidget {
+class RootComponent extends StatefulWidget {
   const RootComponent({Key? key}) : super(key: key);
+
+  @override
+  State<RootComponent> createState() => _RootComponentState();
+}
+
+class _RootComponentState extends State<RootComponent> {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +36,7 @@ class RootComponent extends StatelessWidget {
       ),
       child: SafeArea(
         child: Scaffold(
+          key: scaffoldKey,
           appBar: AppBar(
             backgroundColor: AppColors.homeScreenUpperBackground,
             elevation: 0.0,

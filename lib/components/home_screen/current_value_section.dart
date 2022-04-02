@@ -29,6 +29,7 @@ class CurrentValueSection extends StatelessWidget {
             ),
             Text(
               "6,000",
+              key: Key("user_current_value"),
               style: TextStyle(
                 fontSize: 36.0,
                 color: Colors.white,

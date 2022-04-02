@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       future: _getUserDetailsFromAPI,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
-          return const RootComponent();
+          return RootComponent();
         } else if (snapshot.hasError) {
           return const ErrorComponent();
         } else {
