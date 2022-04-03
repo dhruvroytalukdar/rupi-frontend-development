@@ -13,7 +13,7 @@ class HoldingTransactionWrapper extends StatelessWidget {
       children: const [
         HoldingSection(),
         TransactionSection(),
-        //KYC_Component(),
+
       ],
     );
   }

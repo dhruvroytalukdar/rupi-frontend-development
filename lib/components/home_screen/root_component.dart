@@ -25,7 +25,7 @@ class RootComponent extends StatelessWidget {
       ),
       child: SafeArea(
         child: Scaffold(
-          //resizeToAvoidBottomInset: false, //not ideal, will work on later
+          resizeToAvoidBottomInset: false, //not ideal, will work on later
           //case: keyboard opens, widgets resizes
           //SingleChildScrollView is a solution, but issues exist, need to figure out
           appBar: AppBar(

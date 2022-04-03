@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 
 import '../../constants/index.dart';
 
-class KYC_Component extends StatefulWidget {
-  const KYC_Component({Key? key}) : super(key: key);
+class BankDetailsComponent extends StatefulWidget {
+  const BankDetailsComponent({Key? key}) : super(key: key);
 
   @override
-  State<KYC_Component> createState() => _KYC_ComponentState();
+  State<BankDetailsComponent> createState() => _BankDetailsComponentState();
 }
 
-class _KYC_ComponentState extends State<KYC_Component> {
+class _BankDetailsComponentState extends State<BankDetailsComponent> {
 
-  bool isPANsubmitted = false;
-  bool showKYCcard = true;
-  TextEditingController panNumber = TextEditingController();
+  bool showBankDetailsCard = true;
+  bool bankDetailsVerified = false;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class _KYC_ComponentState extends State<KYC_Component> {
           ),
         ],
       ),
-      child: (showKYCcard)?Card(
+      child: (showBankDetailsCard)?Card(
         color: Colors.amberAccent,
         elevation: 0.1,
         child: SizedBox(
@@ -34,7 +33,7 @@ class _KYC_ComponentState extends State<KYC_Component> {
           height: getDeviceHeight(context) * 0.28,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 5.0),
-            child: (!isPANsubmitted)?Column(
+            child: (!bankDetailsVerified)?Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -44,7 +43,7 @@ class _KYC_ComponentState extends State<KYC_Component> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'KYC',
+                        'Add Bank Details',
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.normal),
                       ),
@@ -52,7 +51,7 @@ class _KYC_ComponentState extends State<KYC_Component> {
                         onPressed: () {
                           //kyc card gets closed
                           setState(() {
-                            showKYCcard = false;
+                            showBankDetailsCard = false;
                           });
                         },
                         icon: const Icon(
@@ -63,35 +62,14 @@ class _KYC_ComponentState extends State<KYC_Component> {
                     ],
                   ),
                 ),
-                const Text('Let\'s get started! Enter your PAN number:'),
-                TextField(
-                  key: const Key('panField'),
-                  controller: panNumber,
-                  style: const TextStyle(
-                    height: 0.8,
-                  ),
-                  // maxLength: 10, //PAN Number is of 10 digits in India
-                  expands: false,
-                  decoration: const InputDecoration(
-                    labelText: 'PAN Number',
-                    labelStyle: TextStyle(fontSize: 14),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 7.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      Icon(
-                        Icons.lock_rounded,
-                        size: 20,
-                      ),
-                      Text(
-                        ' 100 % Secure ',
-                        style: TextStyle(fontSize: 14),
-                      ),
-                    ],
-                  ),
+                Form(
+                    child: Column(
+                      children: [
+                        TextFormField(
+
+                        )
+                      ],
+                    ),
                 ),
                 Container(
                   alignment: Alignment.center,
@@ -100,7 +78,6 @@ class _KYC_ComponentState extends State<KYC_Component> {
                     key: const Key('kycContinueState1'),
                     onPressed: () {
                       setState(() {
-                        isPANsubmitted = true;
                       });
                     },
                     child: const Text('Continue'),
@@ -120,10 +97,10 @@ class _KYC_ComponentState extends State<KYC_Component> {
                     size: 45,
                   ),
                 ),
-                Text(panNumber.text,
+                Text('Hello',
                   style: const TextStyle(
-                      fontSize: 20,
-                      backgroundColor: Colors.white,
+                    fontSize: 20,
+                    backgroundColor: Colors.white,
                   ),
                 ),
                 const Padding(
@@ -154,3 +131,4 @@ class _KYC_ComponentState extends State<KYC_Component> {
     );
   }
 }
+
