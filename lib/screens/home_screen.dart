@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/components/home_screen/root_component.dart';
 import 'package:frontend/providers/user_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:frontend/constants/index.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -21,12 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
       () {
         // Setting the user values temporarily according to the firebase user values
         // Do API calls here
-        context.read<UserProvider>().setUserFromUserPassword(
-            auth.currentUser?.email ?? "",
-            auth.currentUser?.displayName ?? "",
-            auth.currentUser?.phoneNumber ?? "",
-            0,
-            0);
+        context.read<UserProvider>().setUserFromUserObject(testUser);
         return "Data Loaded";
       },
     );
@@ -35,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
       future: _getUserDetailsFromAPI,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
-          return RootComponent();
+          return const RootComponent();
         } else if (snapshot.hasError) {
           return const ErrorComponent();
         } else {

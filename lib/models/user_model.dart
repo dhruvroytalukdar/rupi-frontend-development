@@ -1,3 +1,4 @@
+import 'package:frontend/models/transaction_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'user_model.g.dart';
 
@@ -17,6 +18,8 @@ class User {
   double? totalReturns;
   @JsonKey(name: 'pan_number')
   String? panNumber;
+  @JsonKey(name: 'transaction_list')
+  List<TransactionModel> transactionList;
 
   User(
       {this.fullName,
@@ -25,7 +28,8 @@ class User {
       this.currentBalance,
       this.investedAmount,
       this.totalReturns,
-      this.panNumber});
+      this.panNumber,
+      this.transactionList = const []});
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);

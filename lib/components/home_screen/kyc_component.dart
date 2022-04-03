@@ -55,12 +55,6 @@ class _KYC_ComponentState extends State<KYC_Component> {
                     ],
                   ),
                 ),
-                const Text('Let\'s get started! Enter your PAN number:'),
-                const TextField(
-                  style: TextStyle(
-                    height: 0.8,
-                  ),
-                ),
                 Text('Let\'s get started! Enter your PAN number:'),
                 TextField(
                   style: TextStyle(
