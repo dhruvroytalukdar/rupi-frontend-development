@@ -32,6 +32,7 @@ class TransactionList extends StatelessWidget {
         children: [
           Text(
             DateFormat.yMMMd('en_US').format(time),
+            key: const Key("transaction_dates"),
             style: TextStyle(
               fontSize: 15.0,
               color: Colors.grey[700],

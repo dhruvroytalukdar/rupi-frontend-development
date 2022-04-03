@@ -52,6 +52,7 @@ class HoldingSection extends StatelessWidget {
                         const Expanded(child: Text("")),
                         Text(
                           "as of ${DateFormat.yMMMMd('en_US').format(DateTime.now())}",
+                          key: const Key("current_date"),
                           style: TextStyle(
                             fontSize: 15,
                             color: Colors.grey[600],
@@ -78,6 +79,7 @@ class HoldingSection extends StatelessWidget {
                                     .loggedInUser!
                                     .investedAmount,
                               ),
+                              key: const Key("user_invested_money"),
                               style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w500,
@@ -106,6 +108,7 @@ class HoldingSection extends StatelessWidget {
                                     .loggedInUser!
                                     .totalReturns,
                               ),
+                              key: const Key("user_total_returns"),
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w500,
