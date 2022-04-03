@@ -9,10 +9,11 @@ class HoldingTransactionWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: const [
         HoldingSection(),
-        // TransactionSection(),
-        KYC_Component(),
+        TransactionSection(),
+        //KYC_Component(),
       ],
     );
   }

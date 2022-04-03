@@ -8,15 +8,17 @@ class ContentSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Container(
-          height: getDeviceHeight(context) * 0.19,
-          child: const CurrentValueSection(),
-        ),
-        const HoldingTransactionWrapper(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          SizedBox(
+            height: getDeviceHeight(context) * 0.21,
+            child: const CurrentValueSection(),
+          ),
+          const HoldingTransactionWrapper(),
+        ],
+      ),
     );
   }
 }

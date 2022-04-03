@@ -17,12 +17,13 @@ class UserProvider extends ChangeNotifier {
   void setUserFromUserPassword(String email, String fullName,
       String phoneNumber, double currentValue, double investedAmount) {
     _user = User(
-        email: email,
-        fullName: fullName,
-        phoneNumber: phoneNumber,
-        currentBalance: currentValue,
-        investedAmount: investedAmount,
-        totalReturns: (currentValue - investedAmount));
+      email: email,
+      fullName: fullName,
+      phoneNumber: phoneNumber,
+      currentBalance: currentValue,
+      investedAmount: investedAmount,
+      totalReturns: (currentValue - investedAmount),
+    );
     _isUserLoggedIn = true;
     notifyListeners();
   }

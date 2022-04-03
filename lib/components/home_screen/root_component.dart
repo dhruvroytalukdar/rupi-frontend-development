@@ -4,10 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:frontend/components/home_screen/content_section.dart';
 import 'package:frontend/components/home_screen/dual_background.dart';
 import 'package:frontend/constants/index.dart';
-import 'package:frontend/providers/user_provider.dart';
-import 'package:provider/provider.dart';
-
-import '../../utils/auth_utils.dart';
 
 class RootComponent extends StatelessWidget {
   const RootComponent({Key? key}) : super(key: key);
@@ -29,7 +25,7 @@ class RootComponent extends StatelessWidget {
       ),
       child: SafeArea(
         child: Scaffold(
-          resizeToAvoidBottomInset: false, //not ideal, will work on later
+          //resizeToAvoidBottomInset: false, //not ideal, will work on later
           //case: keyboard opens, widgets resizes
           //SingleChildScrollView is a solution, but issues exist, need to figure out
           appBar: AppBar(

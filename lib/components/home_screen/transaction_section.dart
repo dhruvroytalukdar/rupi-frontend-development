@@ -10,19 +10,31 @@ class TransactionSection extends StatelessWidget {
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 15.0),
-            child: Text(
-              "Transactions",
-              style: TextStyle(
-                fontSize: 28.0,
-                color: Colors.black,
-                fontWeight: FontWeight.w600,
-              ),
+            padding: const EdgeInsets.symmetric(vertical: 15.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Transactions",
+                  style: TextStyle(
+                    fontSize: 28.0,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.filter_alt_sharp,
+                    size: 30.0,
+                  ),
+                ),
+              ],
             ),
           ),
-          TransactionList(),
+          const TransactionList(),
         ],
       ),
     );

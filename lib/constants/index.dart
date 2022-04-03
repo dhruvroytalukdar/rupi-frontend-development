@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/transaction_model.dart';
+import 'package:frontend/models/user_model.dart';
 
 double getDeviceHeight(BuildContext context) {
   return MediaQuery.of(context).size.height;
@@ -7,6 +9,45 @@ double getDeviceHeight(BuildContext context) {
 double getDeviceWidth(BuildContext context) {
   return MediaQuery.of(context).size.width;
 }
+
+List<TransactionModel> list = [
+  TransactionModel(
+    message: "Deposit",
+    amount: 500,
+    dateTime: DateTime.utc(2021, 1, 30),
+  ),
+  TransactionModel(
+    message: "Deposit",
+    amount: 200,
+    dateTime: DateTime.utc(2021, 1, 30),
+  ),
+  TransactionModel(
+    message: "Withdraw",
+    amount: 600,
+    dateTime: DateTime.utc(2021, 1, 30),
+  ),
+  TransactionModel(
+    message: "Transfer",
+    amount: 550,
+    dateTime: DateTime.utc(2022, 2, 19),
+  ),
+  TransactionModel(
+    message: "Interest",
+    amount: 20.36,
+    dateTime: DateTime.utc(2022, 2, 19),
+  ),
+];
+
+User testUser = User(
+  email: "dhruvroy8@gmail.com",
+  fullName: "Dhruv Roy Talukdar",
+  phoneNumber: "+91 9876543210",
+  currentBalance: 6000,
+  investedAmount: 4000,
+  totalReturns: 2000,
+  panNumber: "ABQPT12348",
+  transactionList: list,
+);
 
 class AppColors {
   static const Color outerCircleTopGradient = Color(0x702c37bf);

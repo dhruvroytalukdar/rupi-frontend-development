@@ -32,28 +32,35 @@ class _KYC_ComponentState extends State<KYC_Component> {
           width: double.infinity,
           height: getDeviceHeight(context) * 0.28,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(10.0,6.0,10.0,5.0),
+            padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 5.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 Padding(
-                  padding: EdgeInsets.only(bottom:9.0),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 9.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('KYC',style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal),),
+                      Text(
+                        'KYC',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.normal),
+                      ),
                       IconButton(
-                          onPressed: (){
-                            //kyc card gets closed
-                          },
-                          icon: Icon(Icons.close,size: 20,)
+                        onPressed: () {
+                          //kyc card gets closed
+                        },
+                        icon: Icon(
+                          Icons.close,
+                          size: 20,
+                        ),
                       ),
                     ],
                   ),
                 ),
-                const Text('Let\'s get started! Enter your PAN number:'),
-                const TextField(
+                Text('Let\'s get started! Enter your PAN number:'),
+                TextField(
                   style: TextStyle(
                     height: 0.8,
                   ),
@@ -61,16 +68,22 @@ class _KYC_ComponentState extends State<KYC_Component> {
                   expands: false,
                   decoration: InputDecoration(
                     labelText: 'PAN Number',
-                    labelStyle: TextStyle(fontSize: 14)
+                    labelStyle: TextStyle(fontSize: 14),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top:7.0),
+                  padding: EdgeInsets.only(top: 7.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      Icon(Icons.lock_rounded,size: 20,),
-                      Text(' 100 % Secure ',style: TextStyle(fontSize: 14),),
+                    children: [
+                      Icon(
+                        Icons.lock_rounded,
+                        size: 20,
+                      ),
+                      Text(
+                        ' 100 % Secure ',
+                        style: TextStyle(fontSize: 14),
+                      ),
                     ],
                   ),
                 ),
@@ -78,10 +91,10 @@ class _KYC_ComponentState extends State<KYC_Component> {
                   alignment: Alignment.center,
                   height: 24,
                   child: ElevatedButton(
-                    onPressed: (){
+                    onPressed: () {
                       //continue to next step
                     },
-                    child: const Text('Continue'),
+                    child: Text('Continue'),
                   ),
                 ),
               ],

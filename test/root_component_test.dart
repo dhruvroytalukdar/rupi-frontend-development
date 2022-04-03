@@ -4,19 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:frontend/components/home_screen/holding_section.dart';
 import 'package:frontend/components/home_screen/root_component.dart';
 import 'package:frontend/components/home_screen/transaction_section.dart';
-import 'package:frontend/models/user_model.dart';
+import 'package:frontend/constants/index.dart';
 import 'package:frontend/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'mock.dart';
 
 void main() {
-  User _user = User(
-    email: "dhruv@lazer.com",
-    fullName: "Dhruv Roy",
-    phoneNumber: "+919876543210",
-    currentBalance: 0,
-  );
-
   setupCloudFirestoreMocks();
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
@@ -28,8 +21,8 @@ void main() {
       MaterialApp(
         title: 'Flutter Demo',
         home: ChangeNotifierProvider<UserProvider>(
-          create: (_) => UserProvider(_user),
-          child: RootComponent(),
+          create: (_) => UserProvider(testUser),
+          child: const RootComponent(),
         ),
       ),
     );
