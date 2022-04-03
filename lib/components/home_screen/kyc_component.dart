@@ -10,6 +10,10 @@ class KYC_Component extends StatefulWidget {
 }
 
 class _KYC_ComponentState extends State<KYC_Component> {
+
+  bool isPANsubmitted = false;
+  bool showKYCcard = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
