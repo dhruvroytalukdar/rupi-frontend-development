@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/components/home_screen/content_section.dart';
 import 'package:frontend/components/home_screen/drawer_component/drawer_component.dart';
-import 'package:frontend/components/home_screen/dual_background.dart';
+import 'package:frontend/components/home_screen/background_component/dual_background.dart';
 import 'package:frontend/constants/index.dart';
 
 class RootComponent extends StatelessWidget {
@@ -30,6 +30,31 @@ class RootComponent extends StatelessWidget {
             backgroundColor: AppColors.homeScreenUpperBackground,
             elevation: 0.0,
           ),
+          floatingActionButton: FloatingActionButton.extended(
+            backgroundColor: AppColors.homeScreenUpperBackground,
+            onPressed: () {},
+            label: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const [
+                Text(
+                  "+",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                Text(
+                  " Deposit",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
           endDrawer: const DrawerComponent(),
           body: Stack(
             children: const [

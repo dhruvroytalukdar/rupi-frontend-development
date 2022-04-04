@@ -2,11 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/components/home_screen/drawer_component/drawer_footer.dart';
-import 'package:frontend/components/home_screen/holding_section.dart';
+import 'package:frontend/components/home_screen/holding_component/holding_section.dart';
 import 'package:frontend/components/home_screen/root_component.dart';
-import 'package:frontend/components/home_screen/transaction_item.dart';
-import 'package:frontend/components/home_screen/transaction_list.dart';
-import 'package:frontend/components/home_screen/transaction_section.dart';
+import 'package:frontend/components/home_screen/transaction_component/transaction_item.dart';
+import 'package:frontend/components/home_screen/transaction_component/transaction_list.dart';
+import 'package:frontend/components/home_screen/transaction_component/transaction_section.dart';
 import 'package:frontend/constants/index.dart';
 import 'package:frontend/providers/user_provider.dart';
 import 'package:intl/intl.dart';
@@ -122,6 +122,13 @@ void main() {
   });
 
   group("UI checks", () {
+    testWidgets("Check if FloatingActionButton is showing correctly or not.",
+        (WidgetTester tester) async {
+      await _pumpWidget(tester);
+
+      expect(find.byType(FloatingActionButton), findsOneWidget);
+    });
+
     testWidgets("Check if the drawer component is showing correctly or not.",
         (WidgetTester tester) async {
       final drawerIcon = find.ancestor(

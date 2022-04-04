@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/components/home_screen/bank_details_component.dart';
-import 'package:frontend/components/home_screen/current_value_section.dart';
-import 'package:frontend/components/home_screen/holding_transaction_wrapper.dart';
+import 'package:frontend/components/home_screen/bank_card_component/bank_details_component.dart';
+import 'package:frontend/components/home_screen/current_balance_component/current_value_section.dart';
+import 'package:frontend/components/home_screen/holding_component/holding_transaction_wrapper.dart';
 import 'package:frontend/constants/index.dart';
-import 'kyc_component.dart';
+import 'kyc_component/kyc_component.dart';
 
 class ContentSection extends StatelessWidget {
   const ContentSection({Key? key}) : super(key: key);

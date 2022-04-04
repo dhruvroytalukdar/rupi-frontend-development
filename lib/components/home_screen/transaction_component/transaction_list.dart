@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/components/home_screen/transaction_item.dart';
+import 'package:frontend/components/home_screen/transaction_component/transaction_item.dart';
 import 'package:frontend/constants/index.dart';
 import 'package:frontend/models/transaction_model.dart';
 import 'package:frontend/providers/user_provider.dart';

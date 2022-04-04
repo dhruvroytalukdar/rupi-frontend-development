@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/components/home_screen/transaction_list.dart';
+import 'package:frontend/components/home_screen/transaction_component/transaction_list.dart';
 
 class TransactionSection extends StatelessWidget {
   const TransactionSection({Key? key}) : super(key: key);
