@@ -3,19 +3,24 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/components/home_screen/holding_section.dart';
 import 'package:frontend/components/home_screen/root_component.dart';
+import 'package:frontend/components/home_screen/transaction_item.dart';
+import 'package:frontend/components/home_screen/transaction_list.dart';
 import 'package:frontend/components/home_screen/transaction_section.dart';
 import 'package:frontend/constants/index.dart';
 import 'package:frontend/providers/user_provider.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'mock.dart';
 
 void main() {
+  // Mocks to use firebase in testing environemts
   setupCloudFirestoreMocks();
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
   });
 
+  // Utility function to load the screen in a material app
   _pumpWidget(WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -34,6 +39,7 @@ void main() {
         (WidgetTester tester) async {
       // Get the widget
       final currentValueText = find.byKey(const Key("user_current_value"));
+      final formatCurrency = NumberFormat.currency(locale: "en_US", symbol: "");
 
       // Build the app
       await _pumpWidget(tester);
@@ -41,7 +47,76 @@ void main() {
       // Test the app
       expect(currentValueText, findsOneWidget);
       Text currentBalance = tester.firstWidget(currentValueText);
-      expect(currentBalance.data, "6000");
+      expect(
+          currentBalance.data, formatCurrency.format(testUser.currentBalance));
+    });
+
+    testWidgets("Check if the total returns is showing correctly or not",
+        (WidgetTester tester) async {
+      // Get the widget/utility classes
+      final totalReturnsText = find.byKey(const Key("user_total_returns"));
+      final formatCurrency =
+          NumberFormat.currency(locale: "en_US", symbol: "₹");
+
+      // Build the app
+      await _pumpWidget(tester);
+
+      // Test the app
+      expect(totalReturnsText, findsOneWidget);
+      Text totalReturns = tester.firstWidget(totalReturnsText);
+      expect(totalReturns.data, formatCurrency.format(testUser.totalReturns));
+    });
+
+    testWidgets("Check if the invested amount is showing correctly or not",
+        (WidgetTester tester) async {
+      // Get the widget/utility classes
+      final investedAmountText = find.byKey(const Key("user_invested_money"));
+      final formatCurrency =
+          NumberFormat.currency(locale: "en_US", symbol: "₹");
+
+      // Build the app
+      await _pumpWidget(tester);
+
+      // Test the app
+      expect(investedAmountText, findsOneWidget);
+      Text investedAmount = tester.firstWidget(investedAmountText);
+      expect(
+          investedAmount.data, formatCurrency.format(testUser.investedAmount));
+    });
+
+    testWidgets("Check if the current date is showing correctly or not.",
+        (WidgetTester tester) async {
+      // Get the widget
+      final currentDateWidget = find.byKey(const Key("current_date"));
+
+      // Build the app
+      await _pumpWidget(tester);
+
+      // Test the app
+      expect(currentDateWidget, findsOneWidget);
+      Text currentDate = tester.firstWidget(currentDateWidget);
+      expect(currentDate.data,
+          "as of ${DateFormat.yMMMMd('en_US').format(DateTime.now())}");
+    });
+
+    testWidgets("Check for the transaction history",
+        (WidgetTester tester) async {
+      // Get the widget
+      // final currentDateWidget = find.byKey(const Key("current_date"));
+      final transactionList =
+          const TransactionList().convertToMap(testUser.transactionList);
+
+      // Build the app
+      await _pumpWidget(tester);
+
+      // Test the app
+      // Check if number of transactions equals to number of TransactionItem components.
+      expect(find.byType(TransactionItem),
+          findsNWidgets(testUser.transactionList.length));
+      // Check if convertToMap function works correctly or not.
+      // The test user made all transactions on two days so there should be two date fields
+      expect(find.byKey(const Key("transaction_dates")),
+          findsNWidgets(transactionList.keys.length));
     });
   });
 

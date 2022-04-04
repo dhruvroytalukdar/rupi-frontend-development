@@ -25,6 +25,7 @@ class TransactionSection extends StatelessWidget {
                   ),
                 ),
                 IconButton(
+                  key: const Key("transaction_filter_button"),
                   onPressed: () {},
                   icon: const Icon(
                     Icons.filter_alt_sharp,
