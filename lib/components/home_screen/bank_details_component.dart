@@ -67,7 +67,8 @@ class _BankDetailsComponentState extends State<BankDetailsComponent> {
                     child: Column(
                       children: [
                         TextFormField(
-                            decoration: const InputDecoration(
+                              key: const Key('name'),
+                              decoration: const InputDecoration(
                               contentPadding: EdgeInsets.all(0),
                               icon: Icon(Icons.person),
                               hintText: 'Enter your name',
@@ -75,6 +76,7 @@ class _BankDetailsComponentState extends State<BankDetailsComponent> {
                         ),
                         ),
                         TextFormField(
+                          key: const Key('accNo'),
                           decoration: const InputDecoration(
                             contentPadding: EdgeInsets.all(0),
                             icon: Icon(Icons.account_balance),
@@ -83,6 +85,7 @@ class _BankDetailsComponentState extends State<BankDetailsComponent> {
                           ),
                         ),
                         TextFormField(
+                          key: const Key('ifscCode'),
                           decoration: const InputDecoration(
                             contentPadding: EdgeInsets.all(0),
                             icon: Icon(Icons.approval_rounded),
@@ -91,9 +94,10 @@ class _BankDetailsComponentState extends State<BankDetailsComponent> {
                           ),
                         ),
                         TextFormField(
+                          key: const Key('upiCode'),
                           decoration: const InputDecoration(
                             contentPadding: EdgeInsets.only(bottom: 15),
-                            icon: Icon(Icons.approval_rounded),
+                            icon: Icon(Icons.payment_rounded),
                             hintText: 'Enter your UPI ID',
                             labelText: 'UPI',
                           ),

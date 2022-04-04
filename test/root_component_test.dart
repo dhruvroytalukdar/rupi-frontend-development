@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/components/home_screen/drawer_component/drawer_footer.dart';
 import 'package:frontend/components/home_screen/holding_section.dart';
 import 'package:frontend/components/home_screen/root_component.dart';
 import 'package:frontend/components/home_screen/transaction_item.dart';
@@ -135,6 +136,69 @@ void main() {
       await tester.pump();
 
       expect(find.byType(Drawer), findsOneWidget);
+    });
+
+    testWidgets("Check if the drawer component closing correctly or not.",
+        (WidgetTester tester) async {
+      // Step 1. Open the drawer and expect to find a component of Drawer type
+      // Step 2. Close the drawer and expect no component of Drawer type.
+
+      final drawerIcon = find.ancestor(
+          of: find.byIcon(Icons.menu),
+          matching: find.byWidgetPredicate((widget) => widget is IconButton));
+      final drawerCloseButton = find.byKey(const Key("drawer_close_button"));
+
+      await _pumpWidget(tester);
+
+      expect(drawerIcon, findsOneWidget);
+
+      await tester.tap(drawerIcon);
+      await tester.pumpAndSettle();
+
+      expect(find.byType(Drawer), findsOneWidget);
+
+      await tester.tap(drawerCloseButton);
+      await tester.pumpAndSettle();
+
+      expect(find.byType(Drawer), findsNothing);
+    });
+
+    testWidgets("Check if the four fields appears correctly in the drawer.",
+        (WidgetTester tester) async {
+      final drawerIcon = find.ancestor(
+          of: find.byIcon(Icons.menu),
+          matching: find.byWidgetPredicate((widget) => widget is IconButton));
+
+      await _pumpWidget(tester);
+
+      expect(drawerIcon, findsOneWidget);
+
+      await tester.tap(drawerIcon);
+      await tester.pumpAndSettle();
+
+      expect(find.byType(Drawer), findsOneWidget);
+      expect(find.byKey(const Key("drawer_list_items")), findsNWidgets(4));
+    });
+
+    testWidgets("Check if the drawer footer appears correctly or not.",
+        (WidgetTester tester) async {
+      final drawerIcon = find.ancestor(
+          of: find.byIcon(Icons.menu),
+          matching: find.byWidgetPredicate((widget) => widget is IconButton));
+
+      await _pumpWidget(tester);
+
+      expect(drawerIcon, findsOneWidget);
+
+      await tester.tap(drawerIcon);
+      await tester.pumpAndSettle();
+
+      expect(find.byType(DrawerFooter), findsOneWidget);
+
+      // Checking if the text button appears or not.
+      final textButton = find.descendant(
+          of: find.byType(DrawerFooter), matching: find.byType(TextButton));
+      expect(textButton, findsOneWidget);
     });
 
     testWidgets("Check if holdings card is showing correctly or not.",
