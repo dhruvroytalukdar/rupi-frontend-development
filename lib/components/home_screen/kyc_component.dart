@@ -31,7 +31,7 @@ class _KYC_ComponentState extends State<KYC_Component> {
         elevation: 0.1,
         child: SizedBox(
           width: double.infinity,
-          height: getDeviceHeight(context) * 0.28,
+          height: getDeviceHeight(context) * 0.3,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 5.0),
             child: (!isPANsubmitted)?Column(

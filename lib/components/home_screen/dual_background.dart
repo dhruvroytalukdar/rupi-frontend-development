@@ -6,22 +6,21 @@ class BackgroundComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: double.infinity,
-      child: Column(
-        children: [
-          Container(
-            height: getDeviceHeight(context) / 2,
-            color: AppColors.homeScreenUpperBackground,
-          ),
-          Expanded(
-            child: Container(
-              color: Colors.white,
+    return SingleChildScrollView(
+      child: Expanded(
+          flex: 1,
+          child: Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                Container(
+                  height: getDeviceHeight(context) / 2,
+                  color: AppColors.homeScreenUpperBackground,
+                ),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
     );
   }
 }

@@ -11,6 +11,7 @@ class ContentSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: const ClampingScrollPhysics(),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -19,8 +20,8 @@ class ContentSection extends StatelessWidget {
             child: const CurrentValueSection(),
           ),
           // const HoldingTransactionWrapper(),
-          // const KYC_Component(),
-          const BankDetailsComponent(),
+          const KYC_Component(),
+          // const BankDetailsComponent(),
         ],
       ),
     );
