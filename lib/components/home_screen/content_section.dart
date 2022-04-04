@@ -20,8 +20,8 @@ class ContentSection extends StatelessWidget {
             child: const CurrentValueSection(),
           ),
           // const HoldingTransactionWrapper(),
-          const KYC_Component(),
-          // const BankDetailsComponent(),
+          // const KYC_Component(),
+          const BankDetailsComponent(),
         ],
       ),
     );
