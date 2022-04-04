@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/components/home_screen/content_section.dart';
+import 'package:frontend/components/home_screen/drawer_component/drawer_component.dart';
 import 'package:frontend/components/home_screen/dual_background.dart';
 import 'package:frontend/constants/index.dart';
 
@@ -29,34 +30,7 @@ class RootComponent extends StatelessWidget {
             backgroundColor: AppColors.homeScreenUpperBackground,
             elevation: 0.0,
           ),
-          endDrawer: Drawer(
-            backgroundColor: Colors.white,
-            child: ListView(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 18.0, horizontal: 10.0),
-              children: [
-                // Add a drawer header here and add functionality
-
-                // Increase the spacing between the widgets in currentvaluesection
-                ListTile(
-                  title: const Text('Item 1'),
-                  onTap: () {
-                    // Update the state of the app.
-                    // ...
-                    Navigator.pop(context);
-                  },
-                ),
-                ListTile(
-                  title: const Text('Item 2'),
-                  onTap: () {
-                    // Update the state of the app.
-                    // ...
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ),
-          ),
+          endDrawer: const DrawerComponent(),
           body: Stack(
             children: const [
               BackgroundComponent(),

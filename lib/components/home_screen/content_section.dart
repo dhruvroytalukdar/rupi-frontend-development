@@ -19,8 +19,10 @@ class ContentSection extends StatelessWidget {
             height: getDeviceHeight(context) * 0.21,
             child: const CurrentValueSection(),
           ),
-          // const HoldingTransactionWrapper(),
-          const KYC_Component(),
+
+          // Do some conditional redering here about what to show among the three screens based on the app state
+          const HoldingTransactionWrapper(),
+          // const KYC_Component(),
           // const BankDetailsComponent(),
         ],
       ),
