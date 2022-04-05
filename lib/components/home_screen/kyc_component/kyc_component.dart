@@ -32,7 +32,7 @@ class _KYC_ComponentState extends State<KYC_Component> {
                 elevation: 0.1,
                 child: SizedBox(
                   width: double.infinity,
-                  height: getDeviceHeight(context) * 0.3,
+                  height: getDeviceHeight(context) * 0.31,
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 5.0),
                     child: (!isPANsubmitted)
@@ -92,7 +92,7 @@ class _KYC_ComponentState extends State<KYC_Component> {
                                       size: 20,
                                     ),
                                     Text(
-                                      ' 100 % Secure ',
+                                      ' 100% Secure ',
                                       style: TextStyle(fontSize: 14),
                                     ),
                                   ],

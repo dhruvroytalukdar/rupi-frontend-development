@@ -1,14 +1,18 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/components/home_screen/bank_card_component/bank_details_component.dart';
 import 'package:frontend/components/home_screen/drawer_component/drawer_footer.dart';
 import 'package:frontend/components/home_screen/holding_component/holding_section.dart';
+import 'package:frontend/components/home_screen/holding_component/holding_transaction_wrapper.dart';
+import 'package:frontend/components/home_screen/kyc_component/kyc_component.dart';
 import 'package:frontend/components/home_screen/root_component.dart';
 import 'package:frontend/components/home_screen/transaction_component/transaction_item.dart';
 import 'package:frontend/components/home_screen/transaction_component/transaction_list.dart';
 import 'package:frontend/components/home_screen/transaction_component/transaction_section.dart';
 import 'package:frontend/constants/index.dart';
 import 'package:frontend/providers/user_provider.dart';
+import 'package:frontend/providers/user_status_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'mock.dart';
@@ -26,8 +30,12 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         title: 'Flutter Demo',
-        home: ChangeNotifierProvider<UserProvider>(
-          create: (_) => UserProvider(testUser),
+        home: MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => UserProvider(testUser)),
+            ChangeNotifierProvider(
+                create: (_) => UserStatusProvider(true, false, false, false)),
+          ],
           child: const RootComponent(),
         ),
       ),
@@ -224,6 +232,68 @@ void main() {
       await _pumpWidget(tester);
 
       expect(transactionCard, findsOneWidget);
+    });
+
+    testWidgets(
+        "Check if holdings and transaction cards are the first thing rendered in the home screen.",
+        (WidgetTester tester) async {
+      final wrapperWidget = find.byType(HoldingTransactionWrapper);
+
+      await _pumpWidget(tester);
+
+      expect(wrapperWidget, findsOneWidget);
+    });
+
+    // If user hasn't done kyc
+    testWidgets(
+        "Check if kyc screen is showing if the user taps the deposit button without having all user details filled up",
+        (WidgetTester tester) async {
+      final wrapperWidget = find.byType(HoldingTransactionWrapper);
+      final kycWidget = find.byType(KYC_Component);
+
+      await _pumpWidget(tester);
+
+      expect(wrapperWidget, findsOneWidget);
+
+      await tester.tap(find.byType(FloatingActionButton));
+      await tester.pumpAndSettle();
+
+      expect(wrapperWidget, findsNothing);
+      expect(kycWidget, findsOneWidget);
+    });
+    // If user has completed kyc but not given bank details
+    testWidgets(
+        "Check if bank details component is showing if the user taps the deposit button having kyc done",
+        (WidgetTester tester) async {
+      final wrapperWidget = find.byType(HoldingTransactionWrapper);
+      final bankWidget = find.byType(BankDetailsComponent);
+
+      await _pumpWidget(tester);
+
+      expect(wrapperWidget, findsOneWidget);
+
+      await tester.tap(find.byType(FloatingActionButton));
+      await tester.pumpAndSettle();
+
+      expect(wrapperWidget, findsNothing);
+      expect(bankWidget, findsOneWidget);
+    });
+
+    // If all user details are filled up then show deposit money component
+    testWidgets(
+        "Check if deposit money component is showing if the user taps the deposit button.",
+        (WidgetTester tester) async {
+      final wrapperWidget = find.byType(HoldingTransactionWrapper);
+
+      await _pumpWidget(tester);
+
+      expect(wrapperWidget, findsOneWidget);
+
+      await tester.tap(find.byType(FloatingActionButton));
+      await tester.pumpAndSettle();
+
+      expect(wrapperWidget, findsNothing);
+      expect(find.text("Depositing Money don't rush me.:)"), findsOneWidget);
     });
   });
 }

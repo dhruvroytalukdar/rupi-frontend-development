@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/components/home_screen/root_component.dart';
 import 'package:frontend/providers/user_provider.dart';
+import 'package:frontend/providers/user_status_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:frontend/constants/index.dart';
 
@@ -23,6 +24,14 @@ class _HomeScreenState extends State<HomeScreen> {
         // Setting the user values temporarily according to the firebase user values
         // Do API calls here
         context.read<UserProvider>().setUserFromUserObject(testUser);
+        // TestUser doesn't have bank details
+        context.read<UserStatusProvider>().setAllUserDetails(false);
+        // TestUser haven't verified kyc
+        context.read<UserStatusProvider>().setKYC(false);
+        // TestUser haven't verified bank details
+        context.read<UserStatusProvider>().setBankDetails(false);
+        // The user is not depositing money
+        context.read<UserStatusProvider>().setDepositingMoney(false);
         return "Data Loaded";
       },
     );

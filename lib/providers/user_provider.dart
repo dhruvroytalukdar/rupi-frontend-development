@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/user_model.dart';
+import 'package:frontend/models/user_model.dart';
 
 class UserProvider extends ChangeNotifier {
   User? _user;
