@@ -16,6 +16,9 @@ class RootComponent extends StatelessWidget {
     final FirebaseAuth auth = FirebaseAuth.instance;
     bool showFloatingActionButton =
         !Provider.of<UserStatusProvider>(context).getIfDepositingMoney;
+
+    showFloatingActionButton = false; //TODO: Remove this line @Dhruv to make deposit button reappear
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
         statusBarColor: AppColors.homeScreenUpperBackground,
