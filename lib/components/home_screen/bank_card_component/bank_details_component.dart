@@ -14,6 +14,7 @@ class _BankDetailsComponentState extends State<BankDetailsComponent> {
   bool showBankDetailsCard = true;
   bool bankDetailsSubmitted = false;
   bool bankDetailsVerified = false;
+  TextEditingController usernameAsPerBank = TextEditingController();
   double setComponentHeightRatio = 0.53;
   double heightRatioIncrementInCaseOfErrorText = 0.04;
 
@@ -75,6 +76,10 @@ class _BankDetailsComponentState extends State<BankDetailsComponent> {
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: TextFormField(
                             key: const Key('name'),
+                            enableSuggestions: false,
+                            controller: usernameAsPerBank,
+                            keyboardType: TextInputType.name,
+                            textCapitalization: TextCapitalization.characters,
                             validator: (String? value) {
                               if (value == null || value.isEmpty) {
                                 setState(() {
@@ -97,6 +102,7 @@ class _BankDetailsComponentState extends State<BankDetailsComponent> {
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: TextFormField(
                             key: const Key('accNo'),
+                            toolbarOptions: const ToolbarOptions(paste: true),
                             validator: (String? value) {
                               if (value == null || value.isEmpty) {
                                 setState(() {
@@ -119,6 +125,7 @@ class _BankDetailsComponentState extends State<BankDetailsComponent> {
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: TextFormField(
                             key: const Key('ifscCode'),
+                            toolbarOptions: const ToolbarOptions(paste: true),
                             validator: (String? value) {
                               if (value == null || value.isEmpty) {
                                 setState(() {
@@ -141,6 +148,7 @@ class _BankDetailsComponentState extends State<BankDetailsComponent> {
                           padding: const EdgeInsets.only(bottom: 3.0),
                           child: TextFormField(
                             key: const Key('upiCode'),
+                            toolbarOptions: const ToolbarOptions(paste: true),
                             validator: (String? value) {
                               if (value == null || value.isEmpty) {
                                 setState(() {
@@ -174,13 +182,9 @@ class _BankDetailsComponentState extends State<BankDetailsComponent> {
                         setState(() {
                           if (bankDetailsVerified){
                             bankDetailsSubmitted = true;
+                            setComponentHeightRatio = 0.55;
                           }
                           bankDetailsVerified = true;
-                        });
-                      }
-                      else{
-                        setState(() {
-                          // setComponentHeightRatio = 0.62;
                         });
                       }
                     },
@@ -209,29 +213,30 @@ class _BankDetailsComponentState extends State<BankDetailsComponent> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20.0),
+                      padding: const EdgeInsets.only(top: 10.0),
                       child: Icon(
                         Icons.check_circle,
                         color: Colors.green[700],
                         size: 45,
                       ),
                     ),
-                    const Text('User Name',
-                      style: TextStyle(
-                        fontSize: 20,
+                    const SizedBox(height: 30,),
+                     Text(usernameAsPerBank.text,
+                      style: const TextStyle(
+                        fontSize: 25,
                         backgroundColor: Colors.white,
                       ),
                     ),
-                    const SizedBox(height: 40,),
+                    const SizedBox(height: 45,),
                     Container(
                       alignment: Alignment.center,
-                      height: 28,
+                      height: 35,
                       child: ElevatedButton(
                         key: const Key('deposit'),
                         onPressed: () {
                           //continue to deposit
                         },
-                        child: const Text('Deposit',style: TextStyle(fontSize: 20),),
+                        child: const Text('Deposit',style: TextStyle(fontSize: 22),),
                       ),
                     ),
                   ],
