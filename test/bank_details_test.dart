@@ -106,11 +106,14 @@ void main(){
       await tester.enterText(upiCodeField, 'someuser@apl');
 
       await tester.tap(bankDetailsContinueState1Button);
-      await tester.pump(const Duration(milliseconds: 1000));
+      await _pumpWidget(tester);
+      await tester.pumpAndSettle();
       await tester.tap(bankDetailsContinueState1Button);
+      // await _pumpWidget(tester);
+      // await tester.pumpAndSettle();
 
       // Test Results
-      expect(find.byType(String), 'User Name');
-      // expect(depositButton, findsOneWidget);
+      // expect(find.byType(String), 'User Name');
+      expect(depositButton, findsOneWidget);
     });
   }
