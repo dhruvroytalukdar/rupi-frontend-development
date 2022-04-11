@@ -90,7 +90,7 @@ void main(){
       // Get the widget
       final depositButton = find.byKey(
           const Key('deposit'));
-      final bankDetailsContinueState1Button = find.byKey(const Key('bankDetailsContinueState1'));
+      var bankDetailsContinueState1Button = find.byKey(const Key('bankDetailsContinueState1'));
       final name = find.byKey(const Key('name'));
       final accountNumber = find.byKey(const Key('accNo'));
       final ifscCodeField = find.byKey(const Key('ifscCode'));
@@ -98,22 +98,29 @@ void main(){
 
       // Build the app
       await _pumpWidget(tester);
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       await tester.enterText(name, 'User Name');
       await tester.enterText(accountNumber, 'LDPE123456');
       await tester.enterText(ifscCodeField, '12340567890');
       await tester.enterText(upiCodeField, 'someuser@apl');
 
+
+      expect(bankDetailsContinueState1Button,findsOneWidget);
+
       await tester.tap(bankDetailsContinueState1Button);
-      await _pumpWidget(tester);
-      await tester.pumpAndSettle();
-      await tester.tap(bankDetailsContinueState1Button);
-      // await _pumpWidget(tester);
+      await tester.pump(const Duration(seconds: 1));
+
+      bankDetailsContinueState1Button = find.byKey(const Key('bankDetailsContinueState1'));
+
+      // Expect 4 check icons as suffix after 4 textfields
+      expect(bankDetailsContinueState1Button,findsOneWidget);
+      // await tester.tap(bankDetailsContinueState1Button);
+      // // await _pumpWidget(tester);
       // await tester.pumpAndSettle();
 
       // Test Results
       // expect(find.byType(String), 'User Name');
-      expect(depositButton, findsOneWidget);
+      // expect(bankDetailsContinueState1Button, findsOneWidget);
     });
   }
