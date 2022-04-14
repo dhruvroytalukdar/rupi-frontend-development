@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/components/home_screen/bank_card_component/bank_details_component.dart';
 import 'package:frontend/components/home_screen/drawer_component/drawer_footer.dart';
 import 'package:frontend/components/home_screen/holding_component/holding_section.dart';
 import 'package:frontend/components/home_screen/holding_component/holding_transaction_wrapper.dart';
@@ -33,7 +32,8 @@ void main() {
           providers: [
             ChangeNotifierProvider(create: (_) => UserProvider(testUser)),
             ChangeNotifierProvider(
-                create: (_) => UserStatusProvider(true, false, false, false)),
+              create: (_) => UserStatusProvider(true, false, false, false),
+            ),
           ],
           child: const RootComponent(),
         ),
@@ -241,24 +241,6 @@ void main() {
       await _pumpWidget(tester);
 
       expect(wrapperWidget, findsOneWidget);
-    });
-
-    // If user has completed kyc but not given bank details
-    testWidgets(
-        "Check if bank details component is showing if the user taps the deposit button having kyc done",
-        (WidgetTester tester) async {
-      final wrapperWidget = find.byType(HoldingTransactionWrapper);
-      final bankWidget = find.byType(BankDetailsComponent);
-
-      await _pumpWidget(tester);
-
-      expect(wrapperWidget, findsOneWidget);
-
-      await tester.tap(find.byType(FloatingActionButton));
-      await tester.pumpAndSettle();
-
-      expect(wrapperWidget, findsNothing);
-      expect(bankWidget, findsOneWidget);
     });
   });
 }
