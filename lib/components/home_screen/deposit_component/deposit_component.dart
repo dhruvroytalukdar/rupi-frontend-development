@@ -18,6 +18,8 @@ class _DepositComponentState extends State<DepositComponent> {
   double setComponentHeightRatio = 0.46;
   double heightRatioIncrementInCaseOfErrorText = 0.04;
 
+  String errorMessageDeposit = "";
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -68,15 +70,23 @@ class _DepositComponentState extends State<DepositComponent> {
                 child: TextField(
                   key: const Key('depositAmount'),
                   controller: depositAmount,
-                  decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.all(0),
-                    icon: Icon(Icons.currency_rupee),
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.all(0),
+                    icon: const Icon(Icons.currency_rupee),
                     hintText: 'Enter Deposit Amount',
                     labelText: 'Amount',
+                    errorText: errorMessageDeposit,
                   ),
+                  onChanged: (text){
+                    if (text!=""){
+                      setState(() {
+                        errorMessageDeposit = "";
+                      });
+                    }
+                  },
                 ),
               ),
-              const SizedBox(height: 30,),
+              const SizedBox(height: 25,),
               Container(
                 alignment: Alignment.center,
                 height: 30,
@@ -84,9 +94,16 @@ class _DepositComponentState extends State<DepositComponent> {
                   key: const Key('deposit'),
                   onPressed: () {
                     //continue to deposit
-                    setState(() {
-                      amountEntered = true;
-                    });
+                    if (depositAmount.text != "") {
+                      setState(() {
+                        amountEntered = true;
+                      });
+                    }
+                    else{
+                      setState(() {
+                        errorMessageDeposit = 'Enter valid deposit amount!';
+                      });
+                    }
                   },
                   child: const Text('Deposit',style: TextStyle(fontSize: 18),),
                 ),
@@ -159,6 +176,10 @@ class _DepositComponentState extends State<DepositComponent> {
                   key: const Key('continueDepositState2'),
                   onPressed: () {
                     //continue to deposit
+                    setState(() {
+                      accountDetailsConfirmed = true;
+                      setComponentHeightRatio = 0.34;
+                     });
                   },
                   child: const Text('Continue',style: TextStyle(fontSize: 22),),
                 ),
@@ -186,8 +207,9 @@ class _DepositComponentState extends State<DepositComponent> {
                   backgroundColor: Colors.white,
                 ),
               ),
+               const SizedBox(height: 28,),
                Padding(
-                padding: const EdgeInsets.symmetric(vertical: 22.0),
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
                 child: Text(
                   'Rs. ${depositAmount.text} Deposit Successful',
                   style: const TextStyle(

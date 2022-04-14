@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/components/home_screen/content_section.dart';
+import 'package:frontend/components/home_screen/deposit_component/deposit_component.dart';
 import 'package:frontend/components/home_screen/drawer_component/drawer_component.dart';
 import 'package:frontend/components/home_screen/background_component/dual_background.dart';
 import 'package:frontend/constants/index.dart';

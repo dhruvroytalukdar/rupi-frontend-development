@@ -182,9 +182,10 @@ class _BankDetailsComponentState extends State<BankDetailsComponent> {
                         setState(() {
                           if (bankDetailsVerified){
                             bankDetailsSubmitted = true;
-                            setComponentHeightRatio = 0.55;
+                            setComponentHeightRatio = 0.54;
                           }
                           bankDetailsVerified = true;
+                          setComponentHeightRatio = 0.54;
                         });
                       }
                     },
