@@ -14,8 +14,7 @@ import 'mock.dart';
 class MockAuthResult extends Mock implements UserCredential {}
 
 @GenerateMocks([FirebaseAuth])
-void main(){
-
+void main() {
   setupCloudFirestoreMocks();
 
   setUpAll(() async {
@@ -23,95 +22,95 @@ void main(){
     await Firebase.initializeApp();
   });
 
-  testWidgets('Get Started button is showing correctly or not.', (WidgetTester tester) async {
+  testWidgets('Get Started button is showing correctly or not.',
+      (WidgetTester tester) async {
     // Get the widget
     final getStartedButton = find.byKey(const Key('getStarted_test'));
 
     // Start the app for testing
-    await tester.pumpWidget(const MaterialApp(home:SignupScreen()));
+    await tester.pumpWidget(const MaterialApp(home: SignupScreen()));
 
     // Test Results
-    expect(getStartedButton,findsOneWidget);
+    expect(getStartedButton, findsOneWidget);
   });
 
-  testWidgets('Email Text field is showing correctly or not.', (WidgetTester tester) async {
+  testWidgets('Email Text field is showing correctly or not.',
+      (WidgetTester tester) async {
     // Get the widget
     final textfieldEmail = find.byKey(const Key('email'));
 
     // Start the app for testing
-    await tester.pumpWidget(const MaterialApp(home:SignupScreen()));
+    await tester.pumpWidget(const MaterialApp(home: SignupScreen()));
     await tester.enterText(textfieldEmail, 'abc@xyz.com');
 
     // Test Results
-    expect(textfieldEmail,findsOneWidget);
+    expect(textfieldEmail, findsOneWidget);
   });
 
-  testWidgets('Password Text field is showing correctly or not.', (WidgetTester tester) async {
+  testWidgets('Password Text field is showing correctly or not.',
+      (WidgetTester tester) async {
     // Get the widget
     final textfieldPassword = find.byKey(const Key('password'));
 
     // Start the app for testing
-    await tester.pumpWidget(const MaterialApp(home:SignupScreen()));
+    await tester.pumpWidget(const MaterialApp(home: SignupScreen()));
     await tester.enterText(textfieldPassword, 'password123');
 
     // Test Results
-    expect(textfieldPassword,findsOneWidget);
+    expect(textfieldPassword, findsOneWidget);
   });
 
-  testWidgets('Confirm Password Text field is showing correctly or not.', (WidgetTester tester) async {
+  testWidgets('Confirm Password Text field is showing correctly or not.',
+      (WidgetTester tester) async {
     // Get the widget
     final textfieldConfirmPassword = find.byKey(const Key('confirm_password'));
 
     // Start the app for testing
-    await tester.pumpWidget(const MaterialApp(home:SignupScreen()));
+    await tester.pumpWidget(const MaterialApp(home: SignupScreen()));
     await tester.enterText(textfieldConfirmPassword, 'password123');
 
     // Test Results
-    expect(textfieldConfirmPassword,findsOneWidget);
+    expect(textfieldConfirmPassword, findsOneWidget);
   });
 
-  testWidgets('Mobile Number Text field is showing correctly or not.', (WidgetTester tester) async {
-    // Get the widget
-    final textfieldMobile = find.byKey(const Key('mobile'));
-
-    // Start the app for testing
-    await tester.pumpWidget(const MaterialApp(home:SignupScreen()));
-    await tester.enterText(textfieldMobile, '9876543210');
-
-    // Test Results
-    expect(textfieldMobile,findsOneWidget);
-  });
-
-  testWidgets('Error Text is showing correctly or not.', (WidgetTester tester) async {
+  testWidgets('Error Text is showing correctly or not.',
+      (WidgetTester tester) async {
     // Get the widget
     final textfieldPassword = find.byKey(const Key('password'));
     final textfieldConfirmPassword = find.byKey(const Key('confirm_password'));
 
     // Start the app for testing
-    await tester.pumpWidget(const MaterialApp(home:SignupScreen()));
+    await tester.pumpWidget(const MaterialApp(home: SignupScreen()));
     await tester.enterText(textfieldPassword, '123abc');
     await tester.enterText(textfieldConfirmPassword, '123xyz');
     await tester.pump(const Duration(seconds: 2));
 
     // Test Results
-    expect(find.text('Both passwords must be same.'),findsOneWidget);
+    expect(find.text('Both passwords must be same.'), findsOneWidget);
   });
 
-  group("SignUp Auth tests", (){
+  group("SignUp Auth tests", () {
     final MockFirebaseAuth mockFirebaseAuth = MockFirebaseAuth();
     final MockAuthResult mockAuthResult = MockAuthResult();
     final Auth auth = Auth(authInstance: mockFirebaseAuth);
     const email = "pratyay2sarkar@gmail.com";
     const password = "abc1234";
 
-    test("Testing correct sign up with email",() async {
-      when(mockFirebaseAuth.createUserWithEmailAndPassword(email: email, password: password)).thenAnswer((realInvocation) => Future<MockAuthResult>.value(mockAuthResult));
-      expect(await auth.signUpWithEmail(email, password),"Success");
+    test("Testing correct sign up with email", () async {
+      when(mockFirebaseAuth.createUserWithEmailAndPassword(
+              email: email, password: password))
+          .thenAnswer(
+              (realInvocation) => Future<MockAuthResult>.value(mockAuthResult));
+      expect(await auth.signUpWithEmail(email, password), "Success");
     });
 
-    test("Testing if account already exists",() async {
-      when(mockFirebaseAuth.createUserWithEmailAndPassword(email: email, password: password)).thenAnswer((realInvocation) => throw FirebaseAuthException(code: 'email-already-in-use'));
-      expect(await auth.signUpWithEmail(email, password),"email-already-in-use");
+    test("Testing if account already exists", () async {
+      when(mockFirebaseAuth.createUserWithEmailAndPassword(
+              email: email, password: password))
+          .thenAnswer((realInvocation) =>
+              throw FirebaseAuthException(code: 'email-already-in-use'));
+      expect(
+          await auth.signUpWithEmail(email, password), "email-already-in-use");
     });
   });
 }

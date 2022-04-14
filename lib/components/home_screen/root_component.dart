@@ -17,7 +17,8 @@ class RootComponent extends StatelessWidget {
     bool showFloatingActionButton =
         !Provider.of<UserStatusProvider>(context).getIfDepositingMoney;
 
-    showFloatingActionButton = false; //TODO: Remove this line @Dhruv to make deposit button reappear
+    showFloatingActionButton =
+        true; //TODO: Remove this line @Dhruv to make deposit button reappear
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
