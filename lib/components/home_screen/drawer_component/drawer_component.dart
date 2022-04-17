@@ -43,7 +43,7 @@ class DrawerComponent extends StatelessWidget {
               DrawerListComponent(
                 title: "Withdraw",
                 onClick: () {
-                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/withdrawfunds');
                 },
               ),
               DrawerListComponent(

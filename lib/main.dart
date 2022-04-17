@@ -10,6 +10,7 @@ import 'package:frontend/screens/verify_screen.dart';
 import 'package:frontend/screens/welcome_screen.dart';
 import 'package:frontend/screens/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:frontend/screens/withdraw_funds_screen.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
         '/create-account': (context) => const CreateAccountScreen(),
         '/verify': (context) => const VerifyScreen(),
         '/otpverify': (context) => const OTPScreen(),
+        '/withdrawfunds': (context) => const WithDrawFundsScreen(),
       },
     );
   }
