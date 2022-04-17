@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/components/withdrawfunds_screen/content_section.dart';
+import 'package:frontend/constants/index.dart';
 
 class WithDrawFundsScreen extends StatelessWidget {
   const WithDrawFundsScreen({Key? key}) : super(key: key);
@@ -8,20 +10,15 @@ class WithDrawFundsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.homeScreenUpperBackground,
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: const Icon(
             Icons.arrow_back,
-            color: Colors.black,
           ),
         ),
       ),
-      body: Column(
-        children: const [
-          Text("Withdraw Funds screen"),
-        ],
-      ),
+      body: const ContentSection(),
     );
   }
 }
