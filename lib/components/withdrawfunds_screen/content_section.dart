@@ -87,17 +87,18 @@ class _ContentSectionState extends State<ContentSection> {
             SizedBox(
               width: double.infinity,
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 18.0),
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
+                      width: getDeviceWidth(context) * 0.18,
                       color: AppColors.homeScreenUpperBackground,
                       child: const Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 15.0),
+                        padding: EdgeInsets.symmetric(vertical: 12.0),
                         child: Text(
                           "25%",
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 16.0,
                           ),
@@ -105,12 +106,13 @@ class _ContentSectionState extends State<ContentSection> {
                       ),
                     ),
                     Container(
+                      width: getDeviceWidth(context) * 0.18,
                       color: AppColors.homeScreenUpperBackground,
                       child: const Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 15.0),
+                        padding: EdgeInsets.symmetric(vertical: 12.0),
                         child: Text(
-                          "55%",
+                          "50%",
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 16.0,
                           ),
@@ -118,12 +120,13 @@ class _ContentSectionState extends State<ContentSection> {
                       ),
                     ),
                     Container(
+                      width: getDeviceWidth(context) * 0.18,
                       color: AppColors.homeScreenUpperBackground,
                       child: const Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 15.0),
+                        padding: EdgeInsets.symmetric(vertical: 12.0),
                         child: Text(
                           "75%",
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 16.0,
                           ),
@@ -131,12 +134,13 @@ class _ContentSectionState extends State<ContentSection> {
                       ),
                     ),
                     Container(
+                      width: getDeviceWidth(context) * 0.18,
                       color: AppColors.homeScreenUpperBackground,
                       child: const Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 15.0),
+                        padding: EdgeInsets.symmetric(vertical: 12.0),
                         child: Text(
                           "100%",
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 16.0,
                           ),
