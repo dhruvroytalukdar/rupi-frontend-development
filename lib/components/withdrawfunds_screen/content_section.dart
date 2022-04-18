@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/components/withdrawfunds_screen/analytics_section.dart';
+import 'package:frontend/components/withdrawfunds_screen/percentage_section.dart';
+import 'package:frontend/components/withdrawfunds_screen/withdraw_textfield.dart';
 import 'package:frontend/constants/index.dart';
 import 'package:frontend/providers/user_provider.dart';
 import 'package:intl/intl.dart';
@@ -17,12 +19,12 @@ class ContentSection extends StatefulWidget {
 class _ContentSectionState extends State<ContentSection> {
   final formatCurrency = NumberFormat.currency(locale: "en_US", symbol: "₹");
   AmountPrecentage _currPercentage = AmountPrecentage.percent25;
-
+  final TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        vertical: 30.0,
+        vertical: 25.0,
         horizontal: 18.0,
       ),
       child: SizedBox(
@@ -30,6 +32,7 @@ class _ContentSectionState extends State<ContentSection> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Main Title of the screen
             const Text(
               "Withdraw from Lazer",
               style: TextStyle(
@@ -38,6 +41,7 @@ class _ContentSectionState extends State<ContentSection> {
               ),
             ),
             const SizedBox(height: 15.0),
+            // Subtitle
             Text(
               "Current Balance",
               style: TextStyle(
@@ -45,7 +49,8 @@ class _ContentSectionState extends State<ContentSection> {
                 color: Colors.grey[600],
               ),
             ),
-            const SizedBox(height: 15.0),
+            const SizedBox(height: 10.0),
+            // Current Balance of the user.
             Text(
               formatCurrency.format(
                 Provider.of<UserProvider>(context).loggedInUser!.currentBalance,
@@ -55,96 +60,62 @@ class _ContentSectionState extends State<ContentSection> {
               ),
             ),
             const SizedBox(height: 15.0),
+            // Basic returns and withdrawl analytics
             const AnalyticSection(),
             const SizedBox(height: 20.0),
-            const TextField(
-              key: Key('withdrawfund_field'),
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              style: TextStyle(
-                fontSize: 24.0,
-              ),
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: AppColors.homeScreenUpperBackground,
-                    width: 1.0,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: AppColors.homeScreenUpperBackground,
-                    width: 1.0,
-                  ),
-                ),
-                hintText: '3000',
-                labelText: 'Amount to withdraw',
-                labelStyle: TextStyle(
-                  fontSize: 16.0,
-                  color: AppColors.homeScreenUpperBackground,
-                ),
-              ),
-            ),
+            // Textfield to take the withdraw amount.
+            WithdrawTextfield(controller: _controller),
+            // The Radio buttons
             SizedBox(
               width: double.infinity,
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                padding: const EdgeInsets.symmetric(vertical: 25.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      width: getDeviceWidth(context) * 0.18,
-                      color: AppColors.homeScreenUpperBackground,
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12.0),
-                        child: Text(
-                          "25%",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
-                        ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _currPercentage = AmountPrecentage.percent25;
+                        });
+                      },
+                      child: PercentageSection(
+                        percentage: "25%",
+                        isActive: _currPercentage == AmountPrecentage.percent25,
                       ),
                     ),
-                    Container(
-                      width: getDeviceWidth(context) * 0.18,
-                      color: AppColors.homeScreenUpperBackground,
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12.0),
-                        child: Text(
-                          "50%",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
-                        ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _currPercentage = AmountPrecentage.percent50;
+                        });
+                      },
+                      child: PercentageSection(
+                        percentage: "50%",
+                        isActive: _currPercentage == AmountPrecentage.percent50,
                       ),
                     ),
-                    Container(
-                      width: getDeviceWidth(context) * 0.18,
-                      color: AppColors.homeScreenUpperBackground,
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12.0),
-                        child: Text(
-                          "75%",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
-                        ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _currPercentage = AmountPrecentage.percent75;
+                        });
+                      },
+                      child: PercentageSection(
+                        percentage: "75%",
+                        isActive: _currPercentage == AmountPrecentage.percent75,
                       ),
                     ),
-                    Container(
-                      width: getDeviceWidth(context) * 0.18,
-                      color: AppColors.homeScreenUpperBackground,
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12.0),
-                        child: Text(
-                          "100%",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
-                        ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _currPercentage = AmountPrecentage.percent100;
+                        });
+                      },
+                      child: PercentageSection(
+                        percentage: "100%",
+                        isActive:
+                            _currPercentage == AmountPrecentage.percent100,
                       ),
                     ),
                   ],
