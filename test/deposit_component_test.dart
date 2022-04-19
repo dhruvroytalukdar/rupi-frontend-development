@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/components/home_screen/deposit_component/deposit_component.dart';
-import 'package:frontend/components/home_screen/kyc_component/kyc_component.dart';
 
 void main() {
   testWidgets('Deposit button is showing correctly or not.',

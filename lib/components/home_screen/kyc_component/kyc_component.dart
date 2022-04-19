@@ -10,11 +10,24 @@ class KYC_Component extends StatefulWidget {
 
 class _KYC_ComponentState extends State<KYC_Component> {
   bool isPANsubmitted = false;
+  bool isNameConfirmed = false;
   bool showKYCcard = true;
+  bool isPANValid = true;
   TextEditingController panNumber = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    var errorSnack = SnackBar(
+      content: const Text('Enter a valid PAN Number!'),
+      action: SnackBarAction(
+        label: 'OK',
+        onPressed: () {
+          setState(() {
+            panNumber.text = "";
+          });
+        },
+      ),
+    );
     return Padding(
       padding: const EdgeInsets.only(top: 55.0, bottom: 15.0),
       child: Container(
@@ -47,7 +60,7 @@ class _KYC_ComponentState extends State<KYC_Component> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      'KYC',
+                                      'KYC : PAN Number',
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.normal),
@@ -83,10 +96,18 @@ class _KYC_ComponentState extends State<KYC_Component> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(top: 7.0),
+                                padding: const EdgeInsets.symmetric(vertical: 11.5),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: const [
+                                    Icon(
+                                      Icons.insert_drive_file,
+                                      size: 20,
+                                    ),
+                                    Text(
+                                      ' No Documents ',
+                                      style: TextStyle(fontSize: 14),
+                                    ),
                                     Icon(
                                       Icons.lock_rounded,
                                       size: 20,
@@ -100,26 +121,31 @@ class _KYC_ComponentState extends State<KYC_Component> {
                               ),
                               Container(
                                 alignment: Alignment.center,
-                                height: 24,
+                                height: 28,
                                 child: ElevatedButton(
                                   key: const Key('kycContinueState1'),
                                   onPressed: () {
-                                    setState(() {
-                                      isPANsubmitted = true;
-                                    });
+                                    if(panNumber.text == "" || (!isPANValid)){
+                                      ScaffoldMessenger.of(context).showSnackBar(errorSnack);
+                                    }
+                                    else{
+                                      setState(() {
+                                        isPANsubmitted = true;
+                                      });
+                                    }
                                   },
                                   child: const Text('Continue'),
                                 ),
                               ),
                             ],
                           )
-                        : Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                        : (isNameConfirmed)?Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 18.0),
+                                    const EdgeInsets.symmetric(vertical: 10.0),
                                 child: Icon(
                                   Icons.check_circle,
                                   color: Colors.green[700],
@@ -144,17 +170,58 @@ class _KYC_ComponentState extends State<KYC_Component> {
                               ),
                               Container(
                                 alignment: Alignment.center,
-                                height: 25,
+                                height: 28,
                                 child: ElevatedButton(
                                   key: const Key('kycContinueState2'),
                                   onPressed: () {
                                     //continue to next step
                                   },
-                                  child: const Text('Continue'),
+                                  child: const Text('Continue',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                    ),),
                                 ),
                               ),
                             ],
+                          ):
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                          child: Text(
+                              "Please confirm your name:",
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
                           ),
+                        ),
+                        const Text(
+                          "thisName asPerPAN",
+                          style: TextStyle(
+                            fontSize: 20,
+                            backgroundColor: Colors.white,
+                          ),
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          height: 28,
+                          child: ElevatedButton(
+                            key: const Key('kycNameConfirm'),
+                            onPressed: () {
+                              setState(() {
+                                isNameConfirmed = true;
+                              });
+                            },
+                            child: const Text('Confirm',
+                              style: TextStyle(
+                                fontSize: 20),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               )
