@@ -6,6 +6,7 @@ import 'package:frontend/components/home_screen/holding_component/holding_transa
 import 'package:frontend/constants/index.dart';
 import 'package:frontend/providers/user_status_provider.dart';
 import 'package:provider/provider.dart';
+import 'deposit_component/upiComponent.dart';
 import 'kyc_component/kyc_component.dart';
 
 class ContentSection extends StatelessWidget {
@@ -49,7 +50,8 @@ class ContentSection extends StatelessWidget {
           // Do some conditional redering here about what to show among the three screens based on the app state
           // renderWidget(context),
           // const BankDetailsComponent(),
-          const KYC_Component(),
+          // const KYC_Component(),
+          const UPIComponent(),
         ],
       ),
     );
