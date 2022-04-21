@@ -3,7 +3,9 @@ import 'package:frontend/constants/index.dart';
 
 class WithdrawTextfield extends StatefulWidget {
   final TextEditingController controller;
-  const WithdrawTextfield({Key? key, required this.controller})
+  final Function disableTabs;
+  const WithdrawTextfield(
+      {Key? key, required this.controller, required this.disableTabs})
       : super(key: key);
 
   @override
@@ -11,6 +13,25 @@ class WithdrawTextfield extends StatefulWidget {
 }
 
 class _WithdrawTextfieldState extends State<WithdrawTextfield> {
+  FocusNode _focus = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _focus.addListener(_onFocusChange);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _focus.removeListener(_onFocusChange);
+    _focus.dispose();
+  }
+
+  void _onFocusChange() {
+    widget.disableTabs();
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextField(
@@ -20,6 +41,7 @@ class _WithdrawTextfieldState extends State<WithdrawTextfield> {
       style: const TextStyle(
         fontSize: 24.0,
       ),
+      focusNode: _focus,
       decoration: InputDecoration(
         border: const OutlineInputBorder(
           borderSide: BorderSide(
