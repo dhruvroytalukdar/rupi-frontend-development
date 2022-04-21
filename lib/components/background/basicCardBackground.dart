@@ -5,8 +5,9 @@ import 'package:frontend/components/home_screen/bank_card_component/bank_details
 class CardBackground extends StatefulWidget {
 
   final Widget contentWidget;
+  bool renderWidget; //renders a widget (true by default)
   double? setComponentHeightRatio;
-  CardBackground({Key? key, required this.contentWidget, this.setComponentHeightRatio})
+  CardBackground({Key? key, required this.contentWidget, this.setComponentHeightRatio,required this.renderWidget})
       : super(key: key);
   @override
   State<CardBackground> createState() => _CardBackgroundState();
@@ -33,13 +34,13 @@ class _CardBackgroundState extends State<CardBackground> {
             height: getDeviceHeight(context) * (widget.setComponentHeightRatio ?? 0.53) ,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Column(
+              child: (widget.renderWidget)?Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   widget.contentWidget,
                 ],
-              ),
+              ):null,
             ),
         ),
     ),
