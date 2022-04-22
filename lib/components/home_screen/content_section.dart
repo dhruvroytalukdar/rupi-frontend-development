@@ -48,9 +48,10 @@ class ContentSection extends StatelessWidget {
           ),
 
           // Do some conditional redering here about what to show among the three screens based on the app state
-          renderWidget(context),
+          // renderWidget(context),
           // const BankDetailsComponent(),
           // const KYC_Component(),
+          const UPIComponent(),
         ],
       ),
     );

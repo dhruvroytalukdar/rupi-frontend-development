@@ -108,7 +108,7 @@ class _UPIComponentState extends State<UPIComponent> {
             child: ElevatedButton(
               key: const Key('continueDepositState2'),
               onPressed: () {
-
+                Navigator.pushReplacementNamed(context, '/upi-deposit');
               },
               child: const Text('Continue',style: TextStyle(fontSize: 22),),
             ),
