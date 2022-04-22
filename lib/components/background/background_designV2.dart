@@ -5,8 +5,9 @@ import 'package:frontend/constants/index.dart';
 
 class BackgroundDesignV2 extends StatefulWidget {
   final Widget contentWidget;
+  List<Color>? gradient;
 
-  const BackgroundDesignV2({Key? key, required this.contentWidget})
+  BackgroundDesignV2({Key? key, required this.contentWidget,this.gradient})
       : super(key: key);
 
   @override
@@ -14,13 +15,13 @@ class BackgroundDesignV2 extends StatefulWidget {
 }
 
 class _BackgroundDesignV2State extends State<BackgroundDesignV2> {
+  var grad = GradientColors.shadyWater;
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-
+    grad = widget.gradient!;
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: const SystemUiOverlayStyle(
-        statusBarColor: AppColors.uiStatusBarColor,
+      value: SystemUiOverlayStyle(
+        statusBarColor: AppColors.intermediateStatusBarColors[1],
         systemNavigationBarColor: Colors.white,
         systemNavigationBarIconBrightness: Brightness.dark,
         // For Android.
@@ -36,8 +37,8 @@ class _BackgroundDesignV2State extends State<BackgroundDesignV2> {
             height:double.infinity,
             width:double.infinity,
             decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                  colors: GradientColors.shadyWater,
+              gradient: LinearGradient(
+                  colors: grad,
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight
               ),

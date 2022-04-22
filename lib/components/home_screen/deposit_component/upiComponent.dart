@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/components/background/basicCardBackground.dart';
+import '../../../screens/upiDepositScreen.dart';
 
 class UPIComponent extends StatefulWidget {
   const UPIComponent({Key? key}) : super(key: key);
@@ -108,7 +109,7 @@ class _UPIComponentState extends State<UPIComponent> {
             child: ElevatedButton(
               key: const Key('continueDepositState2'),
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/upi-deposit');
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const UPIDepositScreen()),);
               },
               child: const Text('Continue',style: TextStyle(fontSize: 22),),
             ),

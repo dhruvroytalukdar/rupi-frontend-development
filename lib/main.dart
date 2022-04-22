@@ -58,6 +58,7 @@ class MyApp extends StatelessWidget {
         '/otpverify': (context) => const OTPScreen(),
         '/withdrawfunds': (context) => const WithDrawFundsScreen(),
         '/upi-deposit': (context) => const UPIDepositScreen(),
+        '/upi-pay': (context) => const UPIDepositScreen(),
       },
     );
   }
