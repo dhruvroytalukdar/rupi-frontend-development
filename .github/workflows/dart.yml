@@ -25,7 +25,7 @@ jobs:
       #   with:
       #     flutter-version: "2.10.4"
       - run: flutter --version
-      - run: flutter pub get
-      - run: flutter test
-      - run: flutter build apk
-      - run: flutter build appbundle
+      - run: flutter pub get --verbose
+      - run: flutter test --verbose
+      - run: flutter build apk --verbose
+      - run: flutter build appbundle --verbose
