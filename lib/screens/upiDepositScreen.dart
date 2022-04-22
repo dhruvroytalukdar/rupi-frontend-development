@@ -48,7 +48,7 @@ class _UPIDepositScreenState extends State<UPIDepositScreen> {
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 0.0,vertical: 25),
                   child: Text('Investment Amount',
-                    style: TextStyle(fontSize: 28,fontWeight: FontWeight.w500),),
+                    style: TextStyle(fontSize: 26,fontWeight: FontWeight.w500),),
                 ),
               ]
           ),
@@ -73,7 +73,7 @@ class _UPIDepositScreenState extends State<UPIDepositScreen> {
                         children: [
                           const Text('USDT Exchange Rate',
                             style: TextStyle(
-                                fontSize: 21,
+                                fontSize: 20,
                                 color: Colors.blueGrey,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -90,7 +90,7 @@ class _UPIDepositScreenState extends State<UPIDepositScreen> {
                         children: [
                           const Text('USDT to be invested',
                             style: TextStyle(
-                                fontSize: 21,
+                                fontSize: 20,
                                 color: Colors.blueGrey,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -107,7 +107,7 @@ class _UPIDepositScreenState extends State<UPIDepositScreen> {
                         children: [
                           const Text('Fees',
                             style: TextStyle(
-                                fontSize: 21,
+                                fontSize: 20,
                                 color: Colors.blueGrey,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -122,7 +122,7 @@ class _UPIDepositScreenState extends State<UPIDepositScreen> {
                        const SizedBox(height: 30,),
                        Text('You will earn $interestRate % per annum on $USDTInvestmentAmount USDT',
                         style: const TextStyle(
-                            fontSize: 20,
+                            fontSize: 18,
                             color: Colors.indigoAccent,
                             fontWeight: FontWeight.bold),
                       ),

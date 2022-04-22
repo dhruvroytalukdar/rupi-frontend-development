@@ -57,8 +57,6 @@ class AppColors {
   static const Color innerCircleDownGradient = Color(0xffd35e2a);
 
   static const Color uiStatusBarColor = Color(0xff68458b);
-  static const Color intermediateStatusBarColor1 = Colors.blueAccent;
-  static const Color intermediateStatusBarColor2 = Colors.deepPurpleAccent;
   static List<Color> intermediateStatusBarColors = [
     Colors.blueAccent,
     Colors.deepPurpleAccent,

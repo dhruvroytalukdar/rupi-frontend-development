@@ -114,7 +114,7 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
                 ),
                 const SizedBox(height: 30,),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(45,0,65,0),
+                  padding: const EdgeInsets.fromLTRB(45,0,52,0),
                   child: TextFormField(
                     maxLines: 7, //change this according to required height
                     style: const TextStyle(fontSize: 16, color: Colors.black54),
@@ -125,7 +125,7 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       ),
                       labelText: 'Note',
-                      labelStyle: const TextStyle(fontSize: 22, color: Colors.black87),
+                      labelStyle: TextStyle(fontSize: 22, color: Colors.black87),
                     ),
                     textAlign: TextAlign.justify,
                     readOnly: true,

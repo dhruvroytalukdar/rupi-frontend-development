@@ -14,7 +14,7 @@ class _UPIComponentState extends State<UPIComponent> {
   TextEditingController upiID = TextEditingController();
   bool showUPICard = true;
   bool UPISubmitted = false;
-  double heightConstant = 0.4;
+  double heightConstant = 0.42;
   @override
   Widget build(BuildContext context) {
     return CardBackground(
@@ -65,17 +65,20 @@ class _UPIComponentState extends State<UPIComponent> {
                 ),
               ),
             ),
-          const SizedBox(height: 20,),
+          const SizedBox(height: 12,),
           Container(
             alignment: Alignment.center,
-            height: 32,
+            height: 30,
             child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.blueGrey,
+              ),
               key: const Key('submit'),
               onPressed: () {
                 //continue to deposit
                 setState(() {
                   UPISubmitted = true;
-                  heightConstant = 0.33;
+                  heightConstant = 0.35;
                 });
               },
               child: const Text('Submit',style: TextStyle(fontSize: 18),),
@@ -109,6 +112,9 @@ class _UPIComponentState extends State<UPIComponent> {
             alignment: Alignment.center,
             height: 30,
             child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.blueGrey,
+              ),
               key: const Key('continueDepositState2'),
               onPressed: () {
                 Navigator.push(
@@ -116,7 +122,7 @@ class _UPIComponentState extends State<UPIComponent> {
                   MaterialPageRoute(builder: (context) => const UPIDepositScreen()),
                 );
               },
-              child: const Text('Continue',style: TextStyle(fontSize: 22),),
+              child: const Text('Continue',style: TextStyle(fontSize: 19),),
             ),
           ),
         ],

@@ -20,7 +20,7 @@ class _UPIListState extends State<UPIList> {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 0.0,vertical: 2),
             child: Text('UPI',
-              style: TextStyle(fontSize: 28,fontWeight: FontWeight.w500),),
+              style: TextStyle(fontSize: 26,fontWeight: FontWeight.w500),),
           ),
           const Divider(
               thickness: 2,
@@ -31,7 +31,7 @@ class _UPIListState extends State<UPIList> {
             children: [
               const Text('PhonePe',
                 style: TextStyle(
-                    fontSize: 21,
+                    fontSize: 20,
                     color: Colors.black54,
                     fontWeight: FontWeight.bold),
               ),
@@ -54,7 +54,7 @@ class _UPIListState extends State<UPIList> {
             children: [
               const Text('GooglePay',
                 style: TextStyle(
-                    fontSize: 21,
+                    fontSize: 20,
                     color: Colors.black54,
                     fontWeight: FontWeight.bold),
               ),
@@ -77,7 +77,7 @@ class _UPIListState extends State<UPIList> {
             children: [
               const Text('PayTM',
                 style: TextStyle(
-                    fontSize: 21,
+                    fontSize: 20,
                     color: Colors.black54,
                     fontWeight: FontWeight.bold),
               ),

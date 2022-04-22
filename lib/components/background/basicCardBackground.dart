@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
 import 'package:frontend/constants/index.dart';
 import 'package:frontend/components/home_screen/bank_card_component/bank_details_component.dart';
 
@@ -19,6 +20,11 @@ class _CardBackgroundState extends State<CardBackground> {
   Widget build(BuildContext context) {
     return Container(
         decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              colors: GradientColors.cloudyKnoxville,
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+          ),
           boxShadow: [
             BoxShadow(
               color: Color.fromARGB(75, 74, 74, 74),
@@ -27,7 +33,8 @@ class _CardBackgroundState extends State<CardBackground> {
           ],
         ),
         child: Card(
-          color: Colors.amberAccent,
+          color: Colors.white70,
+          // color: Colors.transparent,
           elevation: 0.1,
           child: SizedBox(
             width: double.infinity,
