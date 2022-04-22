@@ -11,6 +11,7 @@ class UPIComponent extends StatefulWidget {
 
 class _UPIComponentState extends State<UPIComponent> {
 
+  TextEditingController upiID = TextEditingController();
   bool showUPICard = true;
   bool UPISubmitted = false;
   double heightConstant = 0.4;
@@ -51,11 +52,12 @@ class _UPIComponentState extends State<UPIComponent> {
             child: Text('What UPI handle do you want to use?',
               style: TextStyle(fontSize: 20),),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0,vertical: 20),
+           Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 20),
             child: TextField(
-                key: Key('depositAmount'),
-                decoration: InputDecoration(
+              controller: upiID,
+                key: const Key('upiHandle'),
+                decoration: const InputDecoration(
                   contentPadding: EdgeInsets.all(0),
                   icon: Icon(Icons.flash_on_outlined),
                   hintText: 'Enter UPI handle',
@@ -109,7 +111,10 @@ class _UPIComponentState extends State<UPIComponent> {
             child: ElevatedButton(
               key: const Key('continueDepositState2'),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const UPIDepositScreen()),);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const UPIDepositScreen()),
+                );
               },
               child: const Text('Continue',style: TextStyle(fontSize: 22),),
             ),

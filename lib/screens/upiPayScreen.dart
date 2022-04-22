@@ -12,6 +12,7 @@ class UPIPayScreen extends StatefulWidget {
 
 class _UPIPayScreenState extends State<UPIPayScreen> {
 
+  String UPI_ID = 'kingarthur@okicici';
   String onLazerUPI_ID = 'wegrowyourwealth@hdfcbank';
   final TextEditingController upiTextController = TextEditingController();
   double INRDepositAmount = 1000;
@@ -90,6 +91,79 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
                         onPressed: copyToClipboard,
                       ),
                     ),
+                  ),
+                ),
+                const SizedBox(height: 15,),
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(50,0,0,0),
+                  child: Text('FROM UPI ID',
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black54,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                const SizedBox(height: 15,),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(50,0,0,0),
+                  child: Text(UPI_ID,
+                    style: const TextStyle(
+                        color: Colors.indigo,fontSize: 18,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
+                const SizedBox(height: 30,),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(45,0,65,0),
+                  child: TextFormField(
+                    maxLines: 7, //change this according to required height
+                    style: const TextStyle(fontSize: 16, color: Colors.black54),
+                    decoration: const InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white70,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                      ),
+                      labelText: 'Note',
+                      labelStyle: const TextStyle(fontSize: 22, color: Colors.black87),
+                    ),
+                    textAlign: TextAlign.justify,
+                    readOnly: true,
+                    initialValue: "1. Transaction Amount should exactly be Rs. 1000\n"
+                    "2. Only Transactions made from $UPI_ID UPI ID will be accepted\n"
+                        "3. It will take 48 hrs for your investment to reflect on your app",
+                  ),
+                ),
+                const SizedBox(height: 40,),
+                Container(
+                  alignment: Alignment.center,
+                  height: 30,
+                  child: ElevatedButton(
+                    key: const Key('madePayment'),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.indigo,
+                    ),
+                    onPressed: () {
+                      //next step
+                    },
+                    child: const Text('I\'ve made the payment' ,
+                      style: TextStyle(fontSize: 18),),
+                  ),
+                ),
+                const SizedBox(height: 20,),
+                Container(
+                  alignment: Alignment.center,
+                  height: 30,
+                  child: ElevatedButton(
+                    key: const Key('cancelPayment'),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.blueGrey,
+                    ),
+                    onPressed: () {
+                      //cancel
+                    },
+                    child: const Text('Cancel' ,
+                      style: TextStyle(fontSize: 18),),
                   ),
                 ),
               ],
