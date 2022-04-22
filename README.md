@@ -1,6 +1,6 @@
 # flutterFrontEnd
 
-**Description**: Flutter frontend for LAZER
+**Description**: Flutter frontend for Lazer
 
 **Testcases**
 
