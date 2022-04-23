@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/providers/user_status_provider.dart';
 import 'package:frontend/providers/user_provider.dart';
+import 'package:frontend/providers/withdraw_state_provider.dart';
 import 'package:frontend/screens/create_account_screen.dart';
 import 'package:frontend/screens/home_screen.dart';
 import 'package:frontend/screens/otp_screen.dart';
@@ -23,9 +24,15 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => UserProvider(null)),
         ChangeNotifierProvider(
-            create: (_) => UserStatusProvider(false, false, false, false)),
+          create: (_) => UserProvider(null),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => UserStatusProvider(false, false, false, false),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => WithdrawStatusProvider(false, false),
+        ),
       ],
       child: const MyApp(),
     ),

@@ -1,11 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:frontend/components/withdrawfunds_screen/analytics_section.dart';
 import 'package:frontend/components/withdrawfunds_screen/percentage_section.dart';
 import 'package:frontend/components/withdrawfunds_screen/withdraw_textfield.dart';
 import 'package:frontend/constants/index.dart';
 import 'package:frontend/providers/user_provider.dart';
+import 'package:frontend/screens/withdraw_summary_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +29,7 @@ class _ContentSectionState extends State<ContentSection> {
   final formatCurrency = NumberFormat.currency(locale: "en_US", symbol: "₹");
   AmountPrecentage _currPercentage = AmountPrecentage.noneSelected;
   final TextEditingController _controller = TextEditingController();
-  String currentValue = upiIds[0];
+  String currentUPIValue = upiIds[0];
 
   disableTabs() {
     setState(() {
@@ -180,9 +179,9 @@ class _ContentSectionState extends State<ContentSection> {
                   fontSize: 24.0,
                 ),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               DropdownButton<String>(
-                value: currentValue,
+                value: currentUPIValue,
                 icon: const Icon(
                   Icons.arrow_drop_down,
                   size: 36,
@@ -191,7 +190,7 @@ class _ContentSectionState extends State<ContentSection> {
                 style: TextStyle(color: Colors.blueGrey[700], fontSize: 20),
                 onChanged: (String? newValue) {
                   setState(() {
-                    currentValue = newValue!;
+                    currentUPIValue = newValue!;
                   });
                 },
                 items: upiIds.map<DropdownMenuItem<String>>((String value) {
@@ -210,26 +209,42 @@ class _ContentSectionState extends State<ContentSection> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(50.0),
+                    padding: const EdgeInsets.all(40.0),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WithdrawSummaryScreen(
+                              amount: _controller.text,
+                              upiId: currentUPIValue,
+                            ),
+                          ),
+                        );
+                      },
                       child: const Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: 5.0,
-                          vertical: 8.0,
+                          vertical: 10.0,
                         ),
                         child: Text(
-                          "Continue",
+                          "💸 Continue",
                           style: TextStyle(
-                            fontSize: 22.0,
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.black,
                           ),
                         ),
                       ),
                       style: ElevatedButton.styleFrom(
                         elevation: 0,
-                        primary: AppColors.homeScreenUpperBackground,
+                        primary: Colors.greenAccent[100],
+                        side: const BorderSide(
+                          width: 2,
+                          color: AppColors.homeScreenUpperBackground,
+                        ),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
+                          borderRadius: BorderRadius.circular(7.0),
                         ),
                       ),
                     ),
