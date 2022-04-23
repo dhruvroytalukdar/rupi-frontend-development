@@ -40,6 +40,7 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 10, 0, 5),
                     child: IconButton(
+                      key: const Key('back'),
                       visualDensity:
                           const VisualDensity(horizontal: 2, vertical: 2),
                       onPressed: () {
@@ -90,6 +91,7 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(50, 0, 40, 0),
                   child: TextField(
+                    key: const Key('onLazerUPI'),
                     controller: upiTextController,
                     style: const TextStyle(
                         color: Colors.indigo,
@@ -137,12 +139,9 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
                   height: 30,
                 ),
                 Padding(
-<<<<<<< HEAD
                   padding: const EdgeInsets.fromLTRB(45,0,52,0),
-=======
-                  padding: const EdgeInsets.fromLTRB(45, 0, 65, 0),
->>>>>>> 75296f66285c34520a147e7c6b26a67ac42748c5
                   child: TextFormField(
+                    key: const Key('noteText'),
                     maxLines: 7, //change this according to required height
                     style: const TextStyle(fontSize: 16, color: Colors.black54),
                     decoration: const InputDecoration(
@@ -152,12 +151,7 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       ),
                       labelText: 'Note',
-<<<<<<< HEAD
                       labelStyle: TextStyle(fontSize: 22, color: Colors.black87),
-=======
-                      labelStyle:
-                          const TextStyle(fontSize: 22, color: Colors.black87),
->>>>>>> 75296f66285c34520a147e7c6b26a67ac42748c5
                     ),
                     textAlign: TextAlign.justify,
                     readOnly: true,

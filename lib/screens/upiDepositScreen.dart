@@ -35,6 +35,7 @@ class _UPIDepositScreenState extends State<UPIDepositScreen> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0,10,0,5),
                   child: IconButton(
+                    key: const Key('back'),
                     visualDensity: const VisualDensity(horizontal: 2,vertical: 2),
                     onPressed: () {
                       Navigator.pop(context);

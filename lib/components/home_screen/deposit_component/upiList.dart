@@ -36,6 +36,7 @@ class _UPIListState extends State<UPIList> {
                     fontWeight: FontWeight.bold),
               ),
               IconButton(
+                key: const Key('toPhonePe'),
                 onPressed: () {
                   setState(() {
                     //to PhonePe
@@ -59,6 +60,7 @@ class _UPIListState extends State<UPIList> {
                     fontWeight: FontWeight.bold),
               ),
               IconButton(
+                key: const Key('toGooglePay'),
                 onPressed: () {
                   setState(() {
                     //to GooglePay
@@ -82,6 +84,7 @@ class _UPIListState extends State<UPIList> {
                     fontWeight: FontWeight.bold),
               ),
               IconButton(
+                key: const Key('toPayTM'),
                 onPressed: () {
                   setState(() {
                     //to PayTM
