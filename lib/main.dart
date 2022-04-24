@@ -31,7 +31,7 @@ void main() async {
           create: (_) => UserStatusProvider(false, false, false, false),
         ),
         ChangeNotifierProvider(
-          create: (_) => WithdrawStatusProvider(false, false),
+          create: (_) => WithdrawStatusProvider(false, false, false),
         ),
       ],
       child: const MyApp(),

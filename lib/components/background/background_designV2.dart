@@ -7,7 +7,7 @@ class BackgroundDesignV2 extends StatefulWidget {
   final Widget contentWidget;
   List<Color>? gradient;
 
-  BackgroundDesignV2({Key? key, required this.contentWidget,this.gradient})
+  BackgroundDesignV2({Key? key, required this.contentWidget, this.gradient})
       : super(key: key);
 
   @override
@@ -34,14 +34,13 @@ class _BackgroundDesignV2State extends State<BackgroundDesignV2> {
       child: Scaffold(
         body: SafeArea(
           child: Container(
-            height:double.infinity,
-            width:double.infinity,
+            height: double.infinity,
+            width: double.infinity,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                   colors: grad,
                   begin: Alignment.topLeft,
-                  end: Alignment.bottomRight
-              ),
+                  end: Alignment.bottomRight),
               borderRadius: BorderRadius.circular(7),
             ),
             child: widget.contentWidget,

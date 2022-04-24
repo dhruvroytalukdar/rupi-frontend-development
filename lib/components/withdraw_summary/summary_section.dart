@@ -84,7 +84,7 @@ class _SummarySectionState extends State<SummarySection> {
                       fontSize: 20.0,
                       color: Colors.black,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -97,6 +97,7 @@ class _SummarySectionState extends State<SummarySection> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ElevatedButton(
+                key: const Key("withdraw_cancel_button"),
                 onPressed: () => Navigator.pop(context),
                 child: const Padding(
                   padding: EdgeInsets.symmetric(
@@ -125,6 +126,7 @@ class _SummarySectionState extends State<SummarySection> {
                 ),
               ),
               ElevatedButton(
+                key: const Key("withdraw_confirm_button"),
                 onPressed: () {
                   Provider.of<WithdrawStatusProvider>(context, listen: false)
                       .setDoingPayment(true);
