@@ -50,7 +50,7 @@ class _KYC_ComponentState extends State<KYC_Component> with ScreenLoader {
                   elevation: 0.1,
                   child: SizedBox(
                     width: double.infinity,
-                    height: getDeviceHeight(context) * 0.37,
+                    height: getDeviceHeight(context) * 0.42,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 5.0),
                       child: (!isPANsubmitted)
