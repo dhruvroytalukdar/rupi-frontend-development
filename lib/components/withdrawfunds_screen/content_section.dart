@@ -85,7 +85,9 @@ class _ContentSectionState extends State<ContentSection> {
               const SizedBox(height: 20.0),
               // Textfield to take the withdraw amount.
               WithdrawTextfield(
-                  controller: _controller, disableTabs: disableTabs),
+                controller: _controller,
+                disableTabs: disableTabs,
+              ),
               // The Radio buttons
               SizedBox(
                 width: double.infinity,
@@ -95,6 +97,7 @@ class _ContentSectionState extends State<ContentSection> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       GestureDetector(
+                        key: const Key("25%_key"),
                         onTap: () {
                           setState(() {
                             _currPercentage = AmountPrecentage.percent25;
@@ -114,6 +117,7 @@ class _ContentSectionState extends State<ContentSection> {
                         ),
                       ),
                       GestureDetector(
+                        key: const Key("50%_key"),
                         onTap: () {
                           setState(() {
                             _currPercentage = AmountPrecentage.percent50;
@@ -133,6 +137,7 @@ class _ContentSectionState extends State<ContentSection> {
                         ),
                       ),
                       GestureDetector(
+                        key: const Key("75%_key"),
                         onTap: () {
                           setState(() {
                             _currPercentage = AmountPrecentage.percent75;
@@ -152,6 +157,7 @@ class _ContentSectionState extends State<ContentSection> {
                         ),
                       ),
                       GestureDetector(
+                        key: const Key("100%_key"),
                         onTap: () {
                           setState(() {
                             _currPercentage = AmountPrecentage.percent100;
@@ -181,6 +187,7 @@ class _ContentSectionState extends State<ContentSection> {
               ),
               const SizedBox(height: 10.0),
               DropdownButton<String>(
+                key: const Key("withdraw_upi_drop_down"),
                 value: currentUPIValue,
                 icon: const Icon(
                   Icons.arrow_drop_down,
@@ -211,16 +218,19 @@ class _ContentSectionState extends State<ContentSection> {
                   Padding(
                     padding: const EdgeInsets.all(40.0),
                     child: ElevatedButton(
+                      key: const Key("withdraw_money_continue_button"),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => WithdrawSummaryScreen(
-                              amount: _controller.text,
-                              upiId: currentUPIValue,
+                        if (_controller.text.isNotEmpty) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => WithdrawSummaryScreen(
+                                amount: _controller.text,
+                                upiId: currentUPIValue,
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                        }
                       },
                       child: const Padding(
                         padding: EdgeInsets.symmetric(

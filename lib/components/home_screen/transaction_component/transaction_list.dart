@@ -59,7 +59,7 @@ class TransactionList extends StatelessWidget {
         convertToMap(transactionData.take(5).toList());
 
     return SizedBox(
-      height: getDeviceHeight(context) * 0.25,
+      height: getDeviceHeight(context) * 0.22,
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5.0),

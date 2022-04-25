@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:frontend/constants/index.dart';
 
 class WithdrawTextfield extends StatefulWidget {
@@ -13,7 +14,7 @@ class WithdrawTextfield extends StatefulWidget {
 }
 
 class _WithdrawTextfieldState extends State<WithdrawTextfield> {
-  FocusNode _focus = FocusNode();
+  final FocusNode _focus = FocusNode();
 
   @override
   void initState() {
@@ -36,7 +37,12 @@ class _WithdrawTextfieldState extends State<WithdrawTextfield> {
   Widget build(BuildContext context) {
     return TextField(
       key: const Key('withdrawfund_field'),
-      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+      keyboardType: const TextInputType.numberWithOptions(
+        decimal: true,
+      ),
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp(r'(^\-?\d*\.?\d*)')),
+      ],
       controller: widget.controller,
       style: const TextStyle(
         fontSize: 24.0,

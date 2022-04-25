@@ -54,7 +54,7 @@ void main() async {
           create: (_) => UserStatusProvider(false, false, false, false),
         ),
         ChangeNotifierProvider(
-          create: (_) => WithdrawStatusProvider(false, false),
+          create: (_) => WithdrawStatusProvider(false, false, false),
         ),
       ],
       child: const MyApp(),
@@ -90,6 +90,9 @@ class MyApp extends StatelessWidget {
         '/upi-deposit': (context) => const UPIDepositScreen(),
         '/upi-pay': (context) => const UPIDepositScreen(),
       },
+      navigatorObservers: [
+        DatadogObserver(),
+      ],
     );
   }
 }
