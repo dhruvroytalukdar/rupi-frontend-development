@@ -14,12 +14,19 @@ import 'package:frontend/screens/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:frontend/screens/withdraw_funds_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:screen_loader/screen_loader.dart';
 import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
+  );
+  configScreenLoader(
+    loader: const AlertDialog(
+      title: Text('Verifying Details..'),
+    ),
+    bgBlur: 1.0,
   );
   runApp(
     MultiProvider(
