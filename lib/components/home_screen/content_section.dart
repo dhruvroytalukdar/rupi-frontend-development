@@ -18,21 +18,14 @@ class ContentSection extends StatelessWidget {
       return const HoldingTransactionWrapper();
     }
 
-    // If all the user details are not updated send any one of the below components
-    if (!Provider.of<UserStatusProvider>(context).getIfUserDetailsUpdated) {
-      // If KYC is not done send kyc component first
-      if (!Provider.of<UserStatusProvider>(context).getKYCStatus) {
-        return const KYC_Component();
-      }
-      // If bank details is not updated send bank details component
-      if (!Provider.of<UserStatusProvider>(context).getBankDetailsStatus) {
-        return const BankDetailsComponent();
-      }
+    // If KYC is not done send kyc component first
+    if (!Provider.of<UserStatusProvider>(context).getKYCStatus) {
+      return const KYC_Component();
     }
 
     // Send the deposit money component if all user details are updated and user want to deposit money
     // return const DepositMoneyComponent();
-    return const Text("Depositing Money don't rush me.:)");
+    return const UPIComponent();
   }
 
   @override
@@ -43,7 +36,7 @@ class ContentSection extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           SizedBox(
-            height: getDeviceHeight(context) * 0.21,
+            height: getDeviceHeight(context) * 0.17,
             child: const CurrentValueSection(),
           ),
 

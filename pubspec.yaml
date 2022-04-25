@@ -45,6 +45,7 @@ dependencies:
   provider:
   otp_text_field:
   datadog_flutter: ^1.7.1
+  logger: ^1.1.0
 
 dev_dependencies:
   flutter_test:

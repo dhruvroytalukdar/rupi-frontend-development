@@ -11,7 +11,7 @@ class TransactionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final formatCurrency = NumberFormat.currency(locale: "en_US", symbol: "₹");
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 18.0),
+      padding: const EdgeInsets.only(top: 5.0, bottom: 5.0, left: 18.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

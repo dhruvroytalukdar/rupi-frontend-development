@@ -3,27 +3,39 @@ import 'package:flutter/material.dart';
 class UserStatusProvider extends ChangeNotifier {
   bool _isKYCDone = false;
   bool _isBankDetailsUpdated = false;
-  bool _isAllUserDetailsUpdated = false;
   bool _isDepositingMoney = false;
+  bool _showCrypto = false;
+  bool? _useHolding;
 
   // Getters
   bool get getKYCStatus => _isKYCDone;
   bool get getBankDetailsStatus => _isBankDetailsUpdated;
-  bool get getIfUserDetailsUpdated => _isAllUserDetailsUpdated;
   bool get getIfDepositingMoney => _isDepositingMoney;
+  bool get getIfShowingCrypto => _showCrypto;
+  bool? get getHoldingStatus => _useHolding;
 
   // Setters
-  UserStatusProvider(bool kycStatus, bool bankDetailsStatus,
-      bool allUserDetailsUpdated, bool depositMoney)
+  UserStatusProvider(bool kycStatus, bool bankDetailsStatus, bool depositMoney,
+      bool showCrypto)
       : super() {
     _isKYCDone = kycStatus;
     _isBankDetailsUpdated = bankDetailsStatus;
-    _isAllUserDetailsUpdated = allUserDetailsUpdated;
     _isDepositingMoney = depositMoney;
+    _showCrypto = showCrypto;
   }
 
   void toggleDepositingMoney() {
     _isDepositingMoney = !_isDepositingMoney;
+    notifyListeners();
+  }
+
+  void toggleShowCrypto() {
+    _showCrypto = !_showCrypto;
+    notifyListeners();
+  }
+
+  void setHoldingStatus(bool? setter) {
+    _useHolding = setter;
     notifyListeners();
   }
 
@@ -39,16 +51,6 @@ class UserStatusProvider extends ChangeNotifier {
 
   void setDepositingMoney(bool setter) {
     _isDepositingMoney = setter;
-    notifyListeners();
-  }
-
-  void setAllUserDetails(bool setter) {
-    _isAllUserDetailsUpdated = setter;
-    notifyListeners();
-  }
-
-  void allUserDetailsUpdated() {
-    _isAllUserDetailsUpdated = true;
     notifyListeners();
   }
 

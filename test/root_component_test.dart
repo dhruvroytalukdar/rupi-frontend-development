@@ -47,7 +47,8 @@ void main() {
         (WidgetTester tester) async {
       // Get the widget
       final currentValueText = find.byKey(const Key("user_current_value"));
-      final formatCurrency = NumberFormat.currency(locale: "en_US", symbol: "");
+      final formatCurrency =
+          NumberFormat.currency(locale: "en_US", symbol: "₹");
 
       // Build the app
       await _pumpWidget(tester);

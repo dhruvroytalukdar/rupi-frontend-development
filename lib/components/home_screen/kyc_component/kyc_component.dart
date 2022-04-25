@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/constants/index.dart';
+import 'package:frontend/providers/user_status_provider.dart';
+import 'package:provider/provider.dart';
 
 class KYC_Component extends StatefulWidget {
   const KYC_Component({Key? key}) : super(key: key);
@@ -41,7 +43,7 @@ class _KYC_ComponentState extends State<KYC_Component> {
         ),
         child: (showKYCcard)
             ? Card(
-                color: Colors.amberAccent,
+                color: Colors.blueGrey[50],
                 elevation: 0.1,
                 child: SizedBox(
                   width: double.infinity,
@@ -96,7 +98,8 @@ class _KYC_ComponentState extends State<KYC_Component> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 11.5),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 11.5),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: const [
@@ -125,10 +128,10 @@ class _KYC_ComponentState extends State<KYC_Component> {
                                 child: ElevatedButton(
                                   key: const Key('kycContinueState1'),
                                   onPressed: () {
-                                    if(panNumber.text == "" || (!isPANValid)){
-                                      ScaffoldMessenger.of(context).showSnackBar(errorSnack);
-                                    }
-                                    else{
+                                    if (panNumber.text == "" || (!isPANValid)) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(errorSnack);
+                                    } else {
                                       setState(() {
                                         isPANsubmitted = true;
                                       });
@@ -139,89 +142,99 @@ class _KYC_ComponentState extends State<KYC_Component> {
                               ),
                             ],
                           )
-                        : (isNameConfirmed)?Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 10.0),
-                                child: Icon(
-                                  Icons.check_circle,
-                                  color: Colors.green[700],
-                                  size: 45,
-                                ),
-                              ),
-                              Text(
-                                panNumber.text,
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                  backgroundColor: Colors.white,
-                                ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 12.0),
-                                child: Text(
-                                  'Successfully Verified',
-                                  style: TextStyle(
-                                    fontSize: 16,
+                        : (isNameConfirmed)
+                            ? Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10.0),
+                                    child: Icon(
+                                      Icons.check_circle,
+                                      color: Colors.green[700],
+                                      size: 45,
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Container(
-                                alignment: Alignment.center,
-                                height: 28,
-                                child: ElevatedButton(
-                                  key: const Key('kycContinueState2'),
-                                  onPressed: () {
-                                    //continue to next step
-                                  },
-                                  child: const Text('Continue',
+                                  Text(
+                                    panNumber.text,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      backgroundColor: Colors.white,
+                                    ),
+                                  ),
+                                  const Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 12.0),
+                                    child: Text(
+                                      'Successfully Verified',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    height: 28,
+                                    child: ElevatedButton(
+                                      key: const Key('kycContinueState2'),
+                                      onPressed: () {
+                                        //continue to next step
+                                        Provider.of<UserStatusProvider>(context,
+                                                listen: false)
+                                            .setKYC(true);
+                                      },
+                                      child: const Text(
+                                        'Continue',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 8.0),
+                                    child: Text(
+                                      "Please confirm your name:",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                  const Text(
+                                    "thisName asPerPAN",
                                     style: TextStyle(
-                                      fontSize: 16,
-                                    ),),
-                                ),
+                                      fontSize: 20,
+                                      backgroundColor: Colors.white,
+                                    ),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    height: 28,
+                                    child: ElevatedButton(
+                                      key: const Key('kycNameConfirm'),
+                                      onPressed: () {
+                                        setState(() {
+                                          isNameConfirmed = true;
+                                        });
+                                      },
+                                      child: const Text(
+                                        'Confirm',
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ):
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8.0),
-                          child: Text(
-                              "Please confirm your name:",
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                        ),
-                        const Text(
-                          "thisName asPerPAN",
-                          style: TextStyle(
-                            fontSize: 20,
-                            backgroundColor: Colors.white,
-                          ),
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          height: 28,
-                          child: ElevatedButton(
-                            key: const Key('kycNameConfirm'),
-                            onPressed: () {
-                              setState(() {
-                                isNameConfirmed = true;
-                              });
-                            },
-                            child: const Text('Confirm',
-                              style: TextStyle(
-                                fontSize: 20),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
                 ),
               )

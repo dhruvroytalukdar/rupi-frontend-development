@@ -139,7 +139,7 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
                   height: 30,
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(45,0,52,0),
+                  padding: const EdgeInsets.fromLTRB(45, 0, 52, 0),
                   child: TextFormField(
                     key: const Key('noteText'),
                     maxLines: 7, //change this according to required height
@@ -151,7 +151,8 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       ),
                       labelText: 'Note',
-                      labelStyle: TextStyle(fontSize: 22, color: Colors.black87),
+                      labelStyle:
+                          TextStyle(fontSize: 22, color: Colors.black87),
                     ),
                     textAlign: TextAlign.justify,
                     readOnly: true,
@@ -174,6 +175,7 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
                     ),
                     onPressed: () {
                       //next step
+                      Navigator.pushReplacementNamed(context, '/home');
                     },
                     child: const Text(
                       'I\'ve made the payment',
@@ -194,6 +196,7 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
                     ),
                     onPressed: () {
                       //cancel
+                      Navigator.pushReplacementNamed(context, '/home');
                     },
                     child: const Text(
                       'Cancel',

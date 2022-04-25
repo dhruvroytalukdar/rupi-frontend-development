@@ -24,8 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
         // Setting the user values temporarily according to the firebase user values
         // Do API calls here
         context.read<UserProvider>().setUserFromUserObject(testUser);
-        // TestUser doesn't have bank details
-        context.read<UserStatusProvider>().setAllUserDetails(false);
         // TestUser haven't verified kyc
         context.read<UserStatusProvider>().setKYC(false);
         // TestUser haven't verified bank details
@@ -80,96 +78,3 @@ class ErrorComponent extends StatelessWidget {
     );
   }
 }
-
-// class RootComponent extends StatelessWidget {
-//   const RootComponent({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final FirebaseAuth auth = FirebaseAuth.instance;
-
-//     return AnnotatedRegion<SystemUiOverlayStyle>(
-//       value: const SystemUiOverlayStyle(
-//         statusBarColor: AppColors.uiStatusBarColor,
-//         systemNavigationBarColor: Colors.white,
-//         systemNavigationBarIconBrightness: Brightness.dark,
-//         // For Android.
-//         // Use [light] for white status bar and [dark] for black status bar.
-//         statusBarIconBrightness: Brightness.light,
-//         // For iOS.
-//         // Use [dark] for white status bar and [light] for black status bar.
-//         statusBarBrightness: Brightness.dark,
-//       ),
-//       child: Scaffold(
-//         appBar: AppBar(
-//           flexibleSpace: Container(
-//             decoration: const BoxDecoration(
-//               gradient: LinearGradient(
-//                 colors: GradientColors.japanBlush,
-//               ),
-//             ),
-//             // decoration: const BoxDecoration(
-//             //   gradient: LinearGradient(
-//             //       begin: Alignment.bottomRight,
-//             //       end: Alignment.topLeft,
-//             //       colors: <Color>[Colors.white,Colors.white70,Colors.white60,Colors.white38, Colors.orangeAccent,Colors.deepOrangeAccent,Colors.deepOrange]),
-//             // ),
-//           ),
-//           backgroundColor: Colors.white70,
-//           toolbarOpacity: 0.8,
-//           elevation: 0,
-//           actions: [
-//             IconButton(
-//               onPressed: () async {
-//                 await Auth(authInstance: auth).logoutUser();
-//                 Navigator.pushReplacementNamed(context, '/welcome');
-//               },
-//               icon: const Icon(Icons.exit_to_app),
-//               color: Colors.black87,
-//               iconSize: 30,
-//               key: const Key('logoutButton'),
-//             ),
-//           ],
-//           leading: IconButton(
-//             onPressed: () {},
-//             icon: const Icon(Icons.menu),
-//             color: Colors.black87,
-//             iconSize: 30,
-//             key: const Key('menuButtonHomeScreen'),
-//           ),
-//           title:
-//               const Text('Home Screen', style: TextStyle(color: Colors.black)),
-//           centerTitle: true,
-//         ),
-//         body: SafeArea(
-//           child: Container(
-//             decoration: const BoxDecoration(
-//               gradient: LinearGradient(
-//                 colors: [
-//                   Colors.orangeAccent,
-//                   Color(0xFFCA436B),
-//                   Color(0xFF915FB5),
-//                   Colors.indigoAccent
-//                 ],
-//                 begin: FractionalOffset.topLeft,
-//                 end: FractionalOffset.bottomRight,
-//               ),
-//             ),
-//             child: SingleChildScrollView(
-//               child: Column(
-//                 mainAxisAlignment: MainAxisAlignment.start,
-//                 crossAxisAlignment: CrossAxisAlignment.center,
-//                 children: const [
-//                   Holdings(),
-//                   Support(),
-//                   More(),
-//                   // context.watch<UserProvider>().isUserLoggedIn ? Text("Home ${context.watch<UserProvider>().loggedInUser?.fullName}") : const Text("You are logged out"),
-//                 ],
-//               ),
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

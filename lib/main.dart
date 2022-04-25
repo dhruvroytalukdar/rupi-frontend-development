@@ -1,3 +1,6 @@
+import 'package:datadog_flutter/datadog_flutter.dart';
+import 'package:datadog_flutter/datadog_observer.dart';
+import 'package:datadog_flutter/datadog_rum.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/providers/user_status_provider.dart';
@@ -18,9 +21,21 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await DatadogFlutter.initialize(
+    clientToken: "puba62f55544838407a04f887c9806fdafe",
+    serviceName: 'lazer-frontend-app',
+    environment: 'development',
+    trackingConsent: TrackingConsent.granted,
+  );
+
+  FlutterError.onError = DatadogRum.instance.addFlutterError;
+  await DatadogFlutter.setUserInfo(id: "my-phone");
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(
     MultiProvider(
       providers: [
@@ -67,6 +82,9 @@ class MyApp extends StatelessWidget {
         '/upi-deposit': (context) => const UPIDepositScreen(),
         '/upi-pay': (context) => const UPIDepositScreen(),
       },
+      navigatorObservers: [
+        DatadogObserver(),
+      ],
     );
   }
 }
