@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/providers/user_status_provider.dart';
 import 'package:frontend/constants/index.dart';
 import 'package:frontend/utils/kycServices.dart';
+import 'package:provider/provider.dart';
 import 'package:screen_loader/screen_loader.dart';
 
 class KYC_Component extends StatefulWidget {
@@ -180,6 +182,9 @@ class _KYC_ComponentState extends State<KYC_Component> with ScreenLoader{
                                     key: const Key('kycContinueState2'),
                                     onPressed: () {
                                       //continue to next step
+                                      Provider.of<UserStatusProvider>(context,
+                                          listen: false)
+                                          .setKYC(true);
                                     },
                                     child: const Text('Continue',
                                       style: TextStyle(
