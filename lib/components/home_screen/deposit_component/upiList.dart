@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:frontend/screens/upiPayScreen.dart';
 
 class UPIList extends StatefulWidget {
-  const UPIList({Key? key}) : super(key: key);
+  final String? depositAmount;
+  final String? upiID;
+  const UPIList({Key? key, this.depositAmount, this.upiID}) : super(key: key);
 
   @override
-  State<UPIList> createState() => _UPIListState();
+  State<UPIList> createState() => _UPIListState(this.depositAmount,this.upiID);
 }
 
 class _UPIListState extends State<UPIList> {
+  String? depositAmount;
+  final String? upiID;
+  _UPIListState(this.depositAmount,this.upiID);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -40,7 +46,11 @@ class _UPIListState extends State<UPIList> {
                 onPressed: () {
                   setState(() {
                     //to PhonePe
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const UPIPayScreen()));
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => UPIPayScreen(
+                          depositAmount: depositAmount,
+                          upiID: upiID,
+                        )));
                   });
                 },
                 icon: const Icon(
@@ -64,8 +74,11 @@ class _UPIListState extends State<UPIList> {
                 onPressed: () {
                   setState(() {
                     //to GooglePay
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const UPIPayScreen()));
-                  });
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => UPIPayScreen(
+                          depositAmount: depositAmount,
+                          upiID: upiID,
+                        )));                  });
                 },
                 icon: const Icon(
                   Icons.send,
@@ -88,8 +101,11 @@ class _UPIListState extends State<UPIList> {
                 onPressed: () {
                   setState(() {
                     //to PayTM
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const UPIPayScreen()));
-                  });
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => UPIPayScreen(
+                          depositAmount: depositAmount,
+                          upiID: upiID,
+                        )));                  });
                 },
                 icon: const Icon(
                   Icons.send,

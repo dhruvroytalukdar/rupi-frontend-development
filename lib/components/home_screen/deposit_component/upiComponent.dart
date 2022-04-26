@@ -72,8 +72,8 @@ class _UPIComponentState extends State<UPIComponent> {
                     decoration: const InputDecoration(
                       contentPadding: EdgeInsets.all(0),
                       icon: Icon(Icons.flash_on_outlined),
-                      hintText: 'Enter UPI handle',
-                      labelText: 'UPI handle',
+                      hintText: 'Enter UPI Handle',
+                      labelText: 'UPI ID',
                     ),
                   ),
                 ),
@@ -122,7 +122,7 @@ class _UPIComponentState extends State<UPIComponent> {
                   ),
                 ),
                  Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
                   child: TextField(
                     controller: depositAmount,
                     key: const Key('depositAmount'),
@@ -143,11 +143,29 @@ class _UPIComponentState extends State<UPIComponent> {
                     ),
                     key: const Key('continueDepositState2'),
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => UPIDepositScreen(depositAmount: depositAmount.text,)),
-                      );
+                      if(double.parse(depositAmount.text)<100){
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: const Text('Please enter an amount of at least 100 INR.',
+                                        style: TextStyle(fontWeight: FontWeight.bold),),
+                          backgroundColor: Colors.redAccent,
+                          action: SnackBarAction(
+                            label: 'OK',
+                            textColor: Colors.amberAccent,
+                            onPressed: () {
+                              // Do Nothing, just an 'OK' button looks good
+                            },
+                          ),
+                        ));
+                      }
+                      else{
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UPIDepositScreen(
+                                depositAmount: depositAmount.text,
+                                upiID: upiID.text,)),
+                        );
+                      }
                     },
                     child: const Text(
                       'Continue',

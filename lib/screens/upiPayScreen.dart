@@ -4,10 +4,12 @@ import 'package:frontend/components/background/background_designV2.dart';
 import 'package:flutter/services.dart';
 
 class UPIPayScreen extends StatefulWidget {
-  const UPIPayScreen({Key? key}) : super(key: key);
+  final String? depositAmount;
+  final String? upiID;
+  const UPIPayScreen({Key? key, this.depositAmount, this.upiID}) : super(key: key);
 
   @override
-  State<UPIPayScreen> createState() => _UPIPayScreenState();
+  State<UPIPayScreen> createState() => _UPIPayScreenState(this.depositAmount,this.upiID);
 }
 
 class _UPIPayScreenState extends State<UPIPayScreen> {
@@ -15,6 +17,10 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
   String onLazerUPI_ID = 'wegrowyourwealth@hdfcbank';
   final TextEditingController upiTextController = TextEditingController();
   double INRDepositAmount = 1000;
+
+  String? depositAmount;
+  String? upiID;
+  _UPIPayScreenState(this.depositAmount, this.upiID);
 
   // This function is triggered when the copy icon is pressed
   Future<void> copyToClipboard() async {
@@ -27,6 +33,8 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
   @override
   Widget build(BuildContext context) {
     upiTextController.text = onLazerUPI_ID;
+    UPI_ID = upiID!;
+    INRDepositAmount = double.parse(depositAmount!);
     return BackgroundDesignV2(
         gradient: GradientColors.marbleWall,
         contentWidget: SizedBox(
@@ -157,7 +165,7 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
                     textAlign: TextAlign.justify,
                     readOnly: true,
                     initialValue:
-                        "1. Transaction Amount should exactly be Rs. 1000\n"
+                        "1. Transaction Amount should exactly be Rs. $INRDepositAmount\n"
                         "2. Only Transactions made from $UPI_ID UPI ID will be accepted\n"
                         "3. It will take 48 hrs for your investment to reflect on your app",
                   ),
@@ -175,7 +183,8 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
                     ),
                     onPressed: () {
                       //next step
-                      Navigator.pushReplacementNamed(context, '/home');
+                      // Navigator.pushReplacementNamed(context, '/home');
+                      Navigator.popUntil(context, ModalRoute.withName('/home'));
                     },
                     child: const Text(
                       'I\'ve made the payment',
@@ -196,7 +205,8 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
                     ),
                     onPressed: () {
                       //cancel
-                      Navigator.pushReplacementNamed(context, '/home');
+                      // Navigator.pushReplacementNamed(context, '/home');
+                      Navigator.popUntil(context, ModalRoute.withName('/home'));
                     },
                     child: const Text(
                       'Cancel',

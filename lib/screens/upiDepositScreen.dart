@@ -5,16 +5,18 @@ import '../components/home_screen/deposit_component/upiList.dart';
 
 class UPIDepositScreen extends StatefulWidget {
   final String? depositAmount;
-  const UPIDepositScreen({Key? key,this.depositAmount}) : super(key: key);
+  final String? upiID;
+  const UPIDepositScreen({Key? key,this.depositAmount, this.upiID}) : super(key: key);
 
   @override
-  State<UPIDepositScreen> createState() => _UPIDepositScreenState(this.depositAmount);
+  State<UPIDepositScreen> createState() => _UPIDepositScreenState(this.depositAmount,this.upiID);
 }
 
 class _UPIDepositScreenState extends State<UPIDepositScreen> {
 
   String? depositAmount;
-  _UPIDepositScreenState(this.depositAmount);
+  String? upiID;
+  _UPIDepositScreenState(this.depositAmount,this.upiID);
   double INRDepositAmount = 0;
   double USDTExchangeRate = 80.80;
   double USDTInvestmentAmount = 124.72;
@@ -135,7 +137,7 @@ class _UPIDepositScreenState extends State<UPIDepositScreen> {
                     ],
                   ),
                 ),
-                const UPIList(),
+                UPIList(depositAmount: depositAmount,upiID: upiID,),
           ],
           )
         )
