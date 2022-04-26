@@ -27,7 +27,7 @@ void main() async {
   await DatadogFlutter.initialize(
     clientToken: "puba62f55544838407a04f887c9806fdafe",
     serviceName: 'lazer-frontend-app',
-    environment: 'development',
+    environment: 'production',
     trackingConsent: TrackingConsent.granted,
   );
 

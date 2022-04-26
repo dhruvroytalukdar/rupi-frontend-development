@@ -65,7 +65,7 @@ class RootComponent extends StatelessWidget {
                   onPressed: () {
                     Provider.of<UserStatusProvider>(context, listen: false)
                         .toggleDepositingMoney();
-                    // logDatadog();
+                    logDatadog();
                   },
                   label: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
