@@ -28,7 +28,7 @@ class _CardBackgroundState extends State<CardBackground> {
           boxShadow: [
             BoxShadow(
               color: Color.fromARGB(75, 74, 74, 74),
-              blurRadius: 10.0,
+              blurRadius: 25.0,
             ),
           ],
         ),

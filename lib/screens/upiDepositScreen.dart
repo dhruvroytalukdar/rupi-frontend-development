@@ -4,15 +4,18 @@ import 'package:frontend/components/background/background_designV2.dart';
 import '../components/home_screen/deposit_component/upiList.dart';
 
 class UPIDepositScreen extends StatefulWidget {
-  const UPIDepositScreen({Key? key}) : super(key: key);
+  final String? depositAmount;
+  const UPIDepositScreen({Key? key,this.depositAmount}) : super(key: key);
 
   @override
-  State<UPIDepositScreen> createState() => _UPIDepositScreenState();
+  State<UPIDepositScreen> createState() => _UPIDepositScreenState(this.depositAmount);
 }
 
 class _UPIDepositScreenState extends State<UPIDepositScreen> {
 
-  double INRDepositAmount = 1000;
+  String? depositAmount;
+  _UPIDepositScreenState(this.depositAmount);
+  double INRDepositAmount = 0;
   double USDTExchangeRate = 80.80;
   double USDTInvestmentAmount = 124.72;
   double fees = 0.00;
@@ -20,6 +23,7 @@ class _UPIDepositScreenState extends State<UPIDepositScreen> {
 
   @override
   Widget build(BuildContext context) {
+    INRDepositAmount = double.parse(depositAmount!);
     return BackgroundDesignV2(
       gradient: GradientColors.marbleWall,
         contentWidget: SizedBox(

@@ -18,6 +18,7 @@ class _KYC_ComponentState extends State<KYC_Component> with ScreenLoader {
   bool showKYCcard = true;
   bool isPANValid = true;
   TextEditingController panNumber = TextEditingController();
+  TextEditingController panName = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +135,7 @@ class _KYC_ComponentState extends State<KYC_Component> with ScreenLoader {
                                   child: ElevatedButton(
                                     key: const Key('kycContinueState1'),
                                     onPressed: () async {
-                                      await performFuture(KYCService.verifyPAN);
+                                      panName.text = await performFuture(KYCService.verifyPAN);
                                       if (panNumber.text == "" ||
                                           (!isPANValid)) {
                                         ScaffoldMessenger.of(context)
@@ -196,6 +197,9 @@ class _KYC_ComponentState extends State<KYC_Component> with ScreenLoader {
                                                   context,
                                                   listen: false)
                                               .setKYC(true);
+                                          setState(() {
+                                            showKYCcard = false;
+                                          });
                                         },
                                         child: const Text(
                                           'Continue',
@@ -222,9 +226,9 @@ class _KYC_ComponentState extends State<KYC_Component> with ScreenLoader {
                                         ),
                                       ),
                                     ),
-                                    const Text(
-                                      "thisName asPerPAN",
-                                      style: TextStyle(
+                                     Text(
+                                      panName.text,
+                                      style: const TextStyle(
                                         fontSize: 20,
                                         backgroundColor: Colors.white,
                                       ),

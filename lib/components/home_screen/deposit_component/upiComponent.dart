@@ -3,6 +3,7 @@ import 'package:frontend/components/background/basicCardBackground.dart';
 import 'package:frontend/providers/user_status_provider.dart';
 import 'package:provider/provider.dart';
 import '../../../screens/upiDepositScreen.dart';
+import 'package:frontend/utils/upiServices.dart';
 
 class UPIComponent extends StatefulWidget {
   const UPIComponent({Key? key}) : super(key: key);
@@ -13,8 +14,10 @@ class UPIComponent extends StatefulWidget {
 
 class _UPIComponentState extends State<UPIComponent> {
   TextEditingController upiID = TextEditingController();
+  TextEditingController depositAmount = TextEditingController();
   bool showUPICard = true;
   double heightConstant = 0.42;
+
   @override
   Widget build(BuildContext context) {
     bool UPISubmitted =
@@ -86,14 +89,20 @@ class _UPIComponentState extends State<UPIComponent> {
                     ),
                     key: const Key('submit'),
                     onPressed: () {
-                      //continue to deposit
-                      setState(() {
-                        UPISubmitted = true;
-                        heightConstant = 0.35;
-                      });
-
-                      Provider.of<UserStatusProvider>(context, listen: false)
-                          .setBankDetails(true);
+                      if(UPIService.verifyUPI(upiID.text)){
+                        //continue to deposit
+                        setState(() {
+                          UPISubmitted = true;
+                          heightConstant = 0.35;
+                        });
+                        Provider.of<UserStatusProvider>(context, listen: false)
+                            .setBankDetails(true);
+                      }
+                      else{
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('UPI ID does not exist!'),
+                        ));
+                      }
                     },
                     child: const Text(
                       'Submit',
@@ -112,11 +121,12 @@ class _UPIComponentState extends State<UPIComponent> {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
                   ),
                 ),
-                const Padding(
+                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
                   child: TextField(
-                    key: Key('depositAmount'),
-                    decoration: InputDecoration(
+                    controller: depositAmount,
+                    key: const Key('depositAmount'),
+                    decoration: const InputDecoration(
                       contentPadding: EdgeInsets.all(0),
                       icon: Icon(Icons.currency_rupee),
                       hintText: 'Enter Deposit Amount',
@@ -136,7 +146,7 @@ class _UPIComponentState extends State<UPIComponent> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const UPIDepositScreen()),
+                            builder: (context) => UPIDepositScreen(depositAmount: depositAmount.text,)),
                       );
                     },
                     child: const Text(
