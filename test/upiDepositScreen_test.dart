@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend/components/home_screen/deposit_component/upiComponent.dart';
 import 'package:frontend/screens/upiDepositScreen.dart';
 import 'package:frontend/screens/upiPayScreen.dart';
 
@@ -124,15 +125,39 @@ void main() {
         expect(find.text('kingarthur@rtb'), findsOneWidget);
       });
 
+  // testWidgets('Snackbar is showing correctly or not for invalid User UPI ID (Pay Screen).',
+  //         (WidgetTester tester) async {
+  //
+  //       final snack = find.byKey(const Key('invalidUPI'));
+  //
+  //       // Start the app for testing
+  //       await tester.pumpWidget(MaterialApp(home: Scaffold(body: UPIComponent())));
+  //
+  //       // Test Results
+  //       expect(snack, findsOneWidget);
+  //     });
+
   testWidgets('Deposit Amount is showing correctly or not (Pay Screen).',
           (WidgetTester tester) async {
         Random random = Random();
-        String deposit = '\u{20B9} '+(random.nextDouble() + 100).toStringAsFixed(2);
+        String deposit = (random.nextDouble() + 100).toStringAsFixed(2);
 
         // Start the app for testing
         await tester.pumpWidget(MaterialApp(home: UPIPayScreen(depositAmount: deposit,upiID: 'kingarthur@rtb',)));
 
         // Test Results
-        expect(find.text(deposit), findsOneWidget);
+        expect(find.text('\u{20B9} $deposit'), findsOneWidget);
       });
+
+  // testWidgets('Snackbar is showing correctly or not for invalid Deposit Amount (Pay Screen).',
+  //         (WidgetTester tester) async {
+  //
+  //       final snack = find.byKey(const Key('invalidAmount'));
+  //
+  //       // Start the app for testing
+  //       await tester.pumpWidget(const MaterialApp(home: UPIComponent()));
+  //
+  //       // Test Results
+  //       expect(snack, findsOneWidget);
+  //     });
 }

@@ -101,6 +101,7 @@ class _UPIComponentState extends State<UPIComponent> {
                       else{
                         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text('UPI ID does not exist!'),
+                          key: Key('invalidUPI'),
                         ));
                       }
                     },
@@ -151,6 +152,7 @@ class _UPIComponentState extends State<UPIComponent> {
                     onPressed: () {
                       if(double.parse(depositAmount.text)<100){
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          key: const Key('invalidAmount'),
                           content: const Text('Please enter an amount of at least 100 INR.',
                                         style: TextStyle(fontWeight: FontWeight.bold),),
                           backgroundColor: Colors.redAccent,
