@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/upiDepositScreen.dart';
@@ -110,5 +112,27 @@ void main() {
 
         // Test Results
         expect(noteTextField, findsOneWidget);
+      });
+
+  testWidgets('User UPI ID is showing correctly or not (Pay Screen).',
+          (WidgetTester tester) async {
+
+        // Start the app for testing
+        await tester.pumpWidget(const MaterialApp(home: UPIPayScreen(depositAmount: '1000',upiID: 'kingarthur@rtb',)));
+
+        // Test Results
+        expect(find.text('kingarthur@rtb'), findsOneWidget);
+      });
+
+  testWidgets('Deposit Amount is showing correctly or not (Pay Screen).',
+          (WidgetTester tester) async {
+        Random random = Random();
+        String deposit = '\u{20B9} '+(random.nextDouble() + 100).toStringAsFixed(2);
+
+        // Start the app for testing
+        await tester.pumpWidget(MaterialApp(home: UPIPayScreen(depositAmount: deposit,upiID: 'kingarthur@rtb',)));
+
+        // Test Results
+        expect(find.text(deposit), findsOneWidget);
       });
 }

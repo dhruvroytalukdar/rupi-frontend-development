@@ -126,6 +126,12 @@ class _UPIComponentState extends State<UPIComponent> {
                   child: TextField(
                     controller: depositAmount,
                     key: const Key('depositAmount'),
+                    keyboardType: TextInputType.number,
+                    onEditingComplete: (){
+                      setState(() {
+                        depositAmount.text = (double.parse(depositAmount.text)).toStringAsFixed(2);
+                      });
+                    },
                     decoration: const InputDecoration(
                       contentPadding: EdgeInsets.all(0),
                       icon: Icon(Icons.currency_rupee),
@@ -158,6 +164,7 @@ class _UPIComponentState extends State<UPIComponent> {
                         ));
                       }
                       else{
+                        depositAmount.text = (double.parse(depositAmount.text)).toStringAsFixed(2);
                         Navigator.push(
                           context,
                           MaterialPageRoute(

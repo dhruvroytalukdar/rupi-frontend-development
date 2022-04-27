@@ -17,7 +17,6 @@ class _UPIDepositScreenState extends State<UPIDepositScreen> {
   String? depositAmount;
   String? upiID;
   _UPIDepositScreenState(this.depositAmount,this.upiID);
-  double INRDepositAmount = 0;
   double USDTExchangeRate = 80.80;
   double USDTInvestmentAmount = 124.72;
   double fees = 0.00;
@@ -25,7 +24,6 @@ class _UPIDepositScreenState extends State<UPIDepositScreen> {
 
   @override
   Widget build(BuildContext context) {
-    INRDepositAmount = double.parse(depositAmount!);
     return BackgroundDesignV2(
       gradient: GradientColors.marbleWall,
         contentWidget: SizedBox(
@@ -61,7 +59,7 @@ class _UPIDepositScreenState extends State<UPIDepositScreen> {
           ),
                  Padding(
                   padding: const EdgeInsets.fromLTRB(50,10,0,10),
-                  child: Text('\u{20B9} $INRDepositAmount',
+                  child: Text('\u{20B9} $depositAmount',
                     style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w500,
