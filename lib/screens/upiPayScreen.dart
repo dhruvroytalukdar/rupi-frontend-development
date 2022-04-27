@@ -16,7 +16,6 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
   String UPI_ID = 'kingarthur@okicici';
   String onLazerUPI_ID = 'wegrowyourwealth@hdfcbank';
   final TextEditingController upiTextController = TextEditingController();
-  double INRDepositAmount = 1000;
 
   String? depositAmount;
   String? upiID;
@@ -34,7 +33,6 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
   Widget build(BuildContext context) {
     upiTextController.text = onLazerUPI_ID;
     UPI_ID = upiID!;
-    INRDepositAmount = double.parse(depositAmount!);
     return BackgroundDesignV2(
         gradient: GradientColors.marbleWall,
         contentWidget: SizedBox(
@@ -73,7 +71,7 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(50, 10, 0, 10),
                   child: Text(
-                    '\u{20B9} $INRDepositAmount',
+                    '\u{20B9} $depositAmount',
                     style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w500,
@@ -165,7 +163,7 @@ class _UPIPayScreenState extends State<UPIPayScreen> {
                     textAlign: TextAlign.justify,
                     readOnly: true,
                     initialValue:
-                        "1. Transaction Amount should exactly be Rs. $INRDepositAmount\n"
+                        "1. Transaction Amount should exactly be Rs. $depositAmount\n"
                         "2. Only Transactions made from $UPI_ID UPI ID will be accepted\n"
                         "3. It will take 48 hrs for your investment to reflect on your app",
                   ),
