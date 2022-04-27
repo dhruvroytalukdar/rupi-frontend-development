@@ -10,7 +10,7 @@ void main() {
         final backButton = find.byKey(const Key('back'));
 
         // Start the app for testing
-        await tester.pumpWidget(const MaterialApp(home: UPIDepositScreen()));
+        await tester.pumpWidget(const MaterialApp(home: UPIDepositScreen(depositAmount: '1000',upiID: 'kingarthur@rtb',)));
 
         // Test Results
         expect(backButton, findsOneWidget);
@@ -22,7 +22,7 @@ void main() {
         final toPhonePeButton = find.byKey(const Key('toPhonePe'));
 
         // Start the app for testing
-        await tester.pumpWidget(const MaterialApp(home: UPIDepositScreen()));
+        await tester.pumpWidget(const MaterialApp(home: UPIDepositScreen(depositAmount: '1000',upiID: 'kingarthur@rtb',)));
 
         // Test Results
         expect(toPhonePeButton, findsOneWidget);
@@ -34,7 +34,7 @@ void main() {
         final toGooglePayButton = find.byKey(const Key('toGooglePay'));
 
         // Start the app for testing
-        await tester.pumpWidget(const MaterialApp(home: UPIDepositScreen()));
+        await tester.pumpWidget(const MaterialApp(home: UPIDepositScreen(depositAmount: '1000',upiID: 'kingarthur@rtb',)));
 
         // Test Results
         expect(toGooglePayButton, findsOneWidget);
@@ -46,7 +46,7 @@ void main() {
         final toPayTMButton = find.byKey(const Key('toPayTM'));
 
         // Start the app for testing
-        await tester.pumpWidget(const MaterialApp(home: UPIDepositScreen()));
+        await tester.pumpWidget(const MaterialApp(home: UPIDepositScreen(depositAmount: '1000',upiID: 'kingarthur@rtb',)));
 
         // Test Results
         expect(toPayTMButton, findsOneWidget);
@@ -58,7 +58,7 @@ void main() {
         final madePaymentButton = find.byKey(const Key('madePayment'));
 
         // Start the app for testing
-        await tester.pumpWidget(const MaterialApp(home: UPIPayScreen()));
+        await tester.pumpWidget(const MaterialApp(home: UPIPayScreen(depositAmount: '1000',upiID: 'kingarthur@rtb',)));
 
         // Test Results
         expect(madePaymentButton, findsOneWidget);
@@ -70,7 +70,7 @@ void main() {
         final cancelButton = find.byKey(const Key('cancelPayment'));
 
         // Start the app for testing
-        await tester.pumpWidget(const MaterialApp(home: UPIPayScreen()));
+        await tester.pumpWidget(const MaterialApp(home: UPIPayScreen(depositAmount: '1000',upiID: 'kingarthur@rtb',)));
 
         // Test Results
         expect(cancelButton, findsOneWidget);
@@ -82,7 +82,7 @@ void main() {
         final backButton = find.byKey(const Key('back'));
 
         // Start the app for testing
-        await tester.pumpWidget(const MaterialApp(home: UPIPayScreen()));
+        await tester.pumpWidget(const MaterialApp(home: UPIPayScreen(depositAmount: '1000',upiID: 'kingarthur@rtb',)));
 
         // Test Results
         expect(backButton, findsOneWidget);
@@ -94,7 +94,7 @@ void main() {
         final onLazerUPITextField = find.byKey(const Key('onLazerUPI'));
 
         // Start the app for testing
-        await tester.pumpWidget(const MaterialApp(home: UPIPayScreen()));
+        await tester.pumpWidget(const MaterialApp(home: UPIPayScreen(depositAmount: '1000',upiID: 'kingarthur@rtb',)));
 
         // Test Results
         expect(onLazerUPITextField, findsOneWidget);
@@ -106,7 +106,7 @@ void main() {
         final noteTextField = find.byKey(const Key('noteText'));
 
         // Start the app for testing
-        await tester.pumpWidget(const MaterialApp(home: UPIPayScreen()));
+        await tester.pumpWidget(const MaterialApp(home: UPIPayScreen(depositAmount: '1000',upiID: 'kingarthur@rtb',)));
 
         // Test Results
         expect(noteTextField, findsOneWidget);
