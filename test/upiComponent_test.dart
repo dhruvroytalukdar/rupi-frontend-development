@@ -52,13 +52,16 @@ void main() {
     // Get the widget
     final continueDepositState2Button =
         find.byKey(const Key('continueDepositState2'));
+    final upiHandleTextfield = find.byKey(const Key('upiHandle'));
     final submitButton = find.byKey(const Key('submit'));
 
     // Start the app for testing
     await _pumpWidget(tester);
+    //Enter upi id
+    await tester.enterText(upiHandleTextfield, 'awakeuser@sdkbank');
     await tester.tap(submitButton);
     // Rebuild the widget after the state has changed.
-    await tester.pump();
+    await tester.pump(const Duration(seconds: 2));
 
     // Test Results
     expect(continueDepositState2Button, findsOneWidget);
@@ -68,13 +71,16 @@ void main() {
       (WidgetTester tester) async {
     // Get the widget
     final depositAmountTextField = find.byKey(const Key('depositAmount'));
+    final upiHandleTextfield = find.byKey(const Key('upiHandle'));
     final submitButton = find.byKey(const Key('submit'));
 
     // Start the app for testing
     await _pumpWidget(tester);
+    //Enter upi id
+    await tester.enterText(upiHandleTextfield, 'awakeuser@sdkbank');
     await tester.tap(submitButton);
     // Rebuild the widget after the state has changed.
-    await tester.pump();
+    await tester.pump(const Duration(seconds: 2));
 
     // Test Results
     expect(depositAmountTextField, findsOneWidget);

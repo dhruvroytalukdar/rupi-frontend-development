@@ -20,8 +20,7 @@ class _UPIComponentState extends State<UPIComponent> {
 
   @override
   Widget build(BuildContext context) {
-    bool UPISubmitted =
-        Provider.of<UserStatusProvider>(context).getBankDetailsStatus;
+    bool UPISubmitted = Provider.of<UserStatusProvider>(context).getBankDetailsStatus;
     return CardBackground(
       renderWidget: true,
       setComponentHeightRatio: heightConstant,
