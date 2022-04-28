@@ -1,8 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/components/home_screen/transaction_component/transaction_list.dart';
+import 'package:multi_select_flutter/dialog/mult_select_dialog.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
 
-class TransactionSection extends StatelessWidget {
+class TransactionSection extends StatefulWidget {
   const TransactionSection({Key? key}) : super(key: key);
+
+  @override
+  State<TransactionSection> createState() => _TransactionSectionState();
+}
+
+class _TransactionSectionState extends State<TransactionSection> {
+  List<String> _selectedValues = [];
+  final List<String> _values = ["Withdraw", "Transfer", "Deposit", "Interest"];
+
+  void _showMultiSelect(BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (ctx) {
+        return MultiSelectDialog<String>(
+          items: _values.map((e) => MultiSelectItem<String>(e, e)).toList(),
+          initialValue: _selectedValues,
+          title: const Text("Show Only (default: All)"),
+          onConfirm: (values) {
+            if (values.length == _values.length) values = [];
+            setState(() {
+              _selectedValues = values;
+            });
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +55,9 @@ class TransactionSection extends StatelessWidget {
                 ),
                 IconButton(
                   key: const Key("transaction_filter_button"),
-                  onPressed: () {},
+                  onPressed: () {
+                    _showMultiSelect(context);
+                  },
                   icon: const Icon(
                     Icons.filter_alt_sharp,
                     size: 30.0,
@@ -35,7 +66,7 @@ class TransactionSection extends StatelessWidget {
               ],
             ),
           ),
-          const TransactionList(),
+          TransactionList(selectedList: _selectedValues),
         ],
       ),
     );

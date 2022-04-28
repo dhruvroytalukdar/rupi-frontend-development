@@ -6,11 +6,11 @@ import 'package:frontend/components/home_screen/holding_component/holding_sectio
 import 'package:frontend/components/home_screen/holding_component/holding_transaction_wrapper.dart';
 import 'package:frontend/components/home_screen/root_component.dart';
 import 'package:frontend/components/home_screen/transaction_component/transaction_item.dart';
-import 'package:frontend/components/home_screen/transaction_component/transaction_list.dart';
 import 'package:frontend/components/home_screen/transaction_component/transaction_section.dart';
 import 'package:frontend/constants/index.dart';
 import 'package:frontend/providers/user_provider.dart';
 import 'package:frontend/providers/user_status_provider.dart';
+import 'package:frontend/utils/transaction_list_utils.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'mock.dart';
@@ -112,8 +112,7 @@ void main() {
         (WidgetTester tester) async {
       // Get the widget
       // final currentDateWidget = find.byKey(const Key("current_date"));
-      final transactionList =
-          const TransactionList().convertToMap(testUser.transactionList);
+      final transactionList = convertToMap(testUser.transactionList, []);
 
       // Build the app
       await _pumpWidget(tester);

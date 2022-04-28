@@ -10,8 +10,6 @@ import 'package:frontend/screens/create_account_screen.dart';
 import 'package:frontend/screens/home_screen.dart';
 import 'package:frontend/screens/otp_screen.dart';
 import 'package:frontend/screens/signup_screen.dart';
-import 'package:frontend/screens/upiDepositScreen.dart';
-import 'package:frontend/screens/upiPayScreen.dart';
 import 'package:frontend/screens/verify_screen.dart';
 import 'package:frontend/screens/welcome_screen.dart';
 import 'package:frontend/screens/login_screen.dart';

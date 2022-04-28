@@ -1,51 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/components/home_screen/transaction_component/transaction_item.dart';
 import 'package:frontend/constants/index.dart';
 import 'package:frontend/models/transaction_model.dart';
 import 'package:frontend/providers/user_provider.dart';
-import 'package:intl/intl.dart';
+import 'package:frontend/utils/transaction_list_utils.dart';
 import 'package:provider/provider.dart';
 
-class TransactionList extends StatelessWidget {
-  const TransactionList({Key? key}) : super(key: key);
+class TransactionList extends StatefulWidget {
+  final List<String> selectedList;
+  const TransactionList({Key? key, required this.selectedList})
+      : super(key: key);
 
-  Map<DateTime, List<TransactionModel>> convertToMap(
-      List<TransactionModel> list) {
-    Map<DateTime, List<TransactionModel>> res =
-        <DateTime, List<TransactionModel>>{};
-    for (TransactionModel data in list) {
-      if (res.containsKey(data.dateTime)) {
-        res[data.dateTime]?.add(data);
-      } else {
-        res[data.dateTime] = [data];
-      }
-    }
-    return res;
-  }
+  @override
+  State<TransactionList> createState() => _TransactionListState();
+}
 
-  Widget getListOfWidget(
-      List<TransactionModel> transactionList, DateTime time) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 3.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            DateFormat.yMMMd('en_US').format(time),
-            key: const Key("transaction_dates"),
-            style: TextStyle(
-              fontSize: 15.0,
-              color: Colors.grey[700],
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          for (TransactionModel data in transactionList)
-            TransactionItem(transactionData: data),
-        ],
-      ),
-    );
-  }
-
+class _TransactionListState extends State<TransactionList> {
   @override
   Widget build(BuildContext context) {
     List<TransactionModel> transactionData =
@@ -56,7 +25,7 @@ class TransactionList extends StatelessWidget {
     });
 
     Map<DateTime, List<TransactionModel>> formattedList =
-        convertToMap(transactionData.take(5).toList());
+        convertToMap(transactionData.take(5).toList(), widget.selectedList);
 
     return SizedBox(
       height: getDeviceHeight(context) * 0.22,
